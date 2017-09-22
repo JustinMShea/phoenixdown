@@ -1,0 +1,19 @@
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
+language: R
+sudo: false
+cache: packages
+
+addons:
+   apt:
+     packages:
+       - fonts-ebgaramond # for font
+       - texlive-full # for full LaTeX
+
+script:
+- R CMD build .
+
+rmarkdown::draft("MyJSSArticle.Rmd", template = "jss_article", package = "rticles")
+
+
+warnings_are_errors: false
