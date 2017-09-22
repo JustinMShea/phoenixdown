@@ -1,3 +1,8 @@
+# huskydown 0.0.1
+
+- Replaced Reed College templates with UW templates, tested and debugged.
+- PDF version working for UW template
+
 # thesisdown 0.0.2
 
 - Changed default filename (in directions) to be `index` instead of `skeleton` to match with gitbook requirements

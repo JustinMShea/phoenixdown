@@ -1,48 +1,85 @@
-# thesisdown
+# huskydown
 
-This project was inspired by the [bookdown](http://github.com/rstudio/bookdown) package and is an updated version of my Senior Thesis template in the `reedtemplates` package [here](http://github.com/ismayc/reedtemplates).
+This project was inspired by the [thesisdown](https://github.com/ismayc/thesisdown) package and uses the [University of Washington Thesis class](http://staff.washington.edu/fox/tex/) to produce PDFs formatted ready for submission.  
 
-Currently, the PDF and gitbook versions are fully-functional.  The word and epub versions are developmental, have no templates behind them, and are essentially calls to the appropriate functions in bookdown.
+Currently, the PDF and gitbook versions are fully-functional. The word and epub versions are developmental, have no templates behind them, and are essentially calls to the appropriate functions in bookdown.
 
-If you are new to working with `bookdown`/`rmarkdown`, please read over the documentation available in the `gitbook` template at https://thesisdown.netlify.com/.  This is also available below at http://ismayc.github.io/thesisdown_book.
+If you are new to working with `bookdown` and `rmarkdown`, please read over the documentation available in the `gitbook` template at https://thesisdown.netlify.com/. This is also available below at http://ismayc.github.io/thesisdown_book.
 
-The current output for the four versions is here:
-- [PDF](https://github.com/ismayc/thesisdown_book/blob/gh-pages/thesis.pdf) (Generating LaTeX file is available [here](https://github.com/ismayc/thesisdown_book/blob/gh-pages/thesis.tex) with other files at in the [book directory](https://github.com/ismayc/thesisdown_book/tree/gh-pages).)
-- [Word](https://github.com/ismayc/thesisdown_book/blob/gh-pages/thesis.docx)
-- [ePub](https://github.com/ismayc/thesisdown_book/blob/gh-pages/thesis.epub)
-- [gitbook](http://ismayc.github.io/thesisdown_book)
+Under the hood, the [University of Washington Thesis LaTeX template](https://github.com/UWIT-IAM/UWThesis) is used to ensure that documents conform precisely to submission standards. At the same time, composition and formatting can be done using lightweight [markdown](http://rmarkdown.rstudio.com/authoring_basics.html) syntax, and **R** code and its output can be seamlessly included using [rmarkdown](http://rmarkdown.rstudio.com).
 
-Under the hood, the Reed College LaTeX template is used to ensure that documents conform precisely to submission standards. At the same time, composition and formatting can be done using lightweight [markdown](http://rmarkdown.rstudio.com/authoring_basics.html) syntax, and **R** code and its output can be seamlessly included using [rmarkdown](http://rmarkdown.rstudio.com).
+## Using huskydown to write your PhD thesis
 
-## Customizing thesisdown to your institution
+Using **huskydown** has some prerequisites which are described below. To compile PDF documents using **R**, you are going to need to have LaTeX installed.  It can be downloaded for Windows at <http://http://miktex.org/download> and for Mac at <http://tug.org/mactex/mactex-download.html>.  Follow the instructions to install the necessary packages after downloading the (somewhat large) installer files.  You may need to install a few extra LaTeX packages on your first attempt to knit as well.
 
-In an ideal world, this package would support a variety of different LaTeX templates from a wide range of institutions and we'd love to get it there at some point. Until that time, realize that this was designed to only work with the Reed College LaTeX template but others have adapted it to work with their institutions.  Here are a couple that have customized it to fit their needs.  It is recommended you review how they changed the files by comparing their repositories to this one and then make tweaks to yours as needed.  Feel free to file an issue on this repo if you have questions/troubles:
+To use **huskydown** from RStudio:
 
-- Mine Cetinkaya-Rundel at Duke University: [thesisdowndss](https://github.com/mine-cetinkaya-rundel/thesisdowndss)
-- Zhian Kamvar at Oregon State University: [beaverdown](https://github.com/zkamvar/beaverdown)
+1) Install the latest version of [RStudio](http://www.rstudio.com/products/rstudio/download/). You can use huskydown without RStudio. For example, you can write the Rmd files in your favourite text editor (e.g. [atom](https://atom.io/), [Notepad++](https://notepad-plus-plus.org/)). But RStudio is probably the easiest tools for writing both R code and text in your thesis. 
 
-
-### Using thesisdown from Chester's GitHub
-
-Using **thesisdown** has some prerequisites which are described below. To compile PDF documents using **R**, you are going to need to have LaTeX installed.  It can be downloaded for Windows at <http://http://miktex.org/download> and for Mac at <http://tug.org/mactex/mactex-download.html>.  Follow the instructions to install the necessary packages after downloading the (somewhat large) installer files.  You may need to install a few extra LaTeX packages on your first attempt to knit as well.
-
-To use **thesisdown** from RStudio:
-
-1) Install the latest [RStudio](http://www.rstudio.com/products/rstudio/download/).
-
-2) Install the **bookdown** and **thesisdown** packages: 
+2) Install the **bookdown** and **huskydown** packages: 
 
 ```
-install.packages("devtools")
+if (!require("devtools")) install.packages("devtools", repos = "http://cran.rstudio.org")
 devtools::install_github("rstudio/bookdown")
-devtools::install_github("ismayc/thesisdown")
+devtools::install_github("benmarwick/huskydown")
 ```
 
-3) Use the **New R Markdown** dialog to select **Thesis**:
+3) Use the **New R Markdown** dialog to select **Thesis**, here are the steps, and a screenshot below:
 
-    ![New R Markdown](thesis_rmd.png)
+File -> New File -> R Markdown... then choose 'From template', then choose 'UW-Thesis, and enter `index` as the **Name**. Note that this will currently only **Knit** if you name the directory `index` at this step. 
 
-    Note that this will currently only **Knit** if you name the directory `index` as shown above.
+![](thesis_rmd.png)
 
-4) **Knit** the `index.Rmd` file to get the book in PDF and HTML formats.
-5) Edit the individual chapter R Markdown files as you wish and then re-run step (4) again.
+4) Edit the individual chapter R Markdown files to write your thesis.
+
+## Rendering
+
+To render your thesis, you can open `index.Rmd` in RStudio and then hit the
+"knit" button. Look at the `output:` field in `index.Rmd` to change the output
+formats between PDF, gitbook and Word by commenting-out the formats you don't want.
+
+Alternatively, you can use:
+
+```r
+rmarkdown::render("index.Rmd")
+```
+
+Your thesis will be deposited in the `_book/` directory.
+
+## Components
+
+The following components are ones you should edit to customize your thesis:
+
+### _bookdown.yml
+
+This is the main configuration file for your thesis. Arrange the order of your
+chapters in this file and ensure that the names match the names in your folders. 
+
+### index.Rmd
+
+This file contains all the meta information that goes at the beginning of your
+document. You'll need to edit this to put your name in, the title of your thesis, etc.
+
+### 01-chap1.Rmd, etc.
+
+These are the Rmd files for each chapter in your dissertation. Write your thesis in these.
+
+### bib/
+
+Store your bibliography (as bibtex files) here. we recommend using the [citr addin](https://github.com/crsh/citr) and [Zotero](https://www.zotero.org/) to 
+efficiently manage and insert citations. 
+
+### csl/
+
+Specific style files for bibliographies should be stored here. A good source for
+citation styles is https://github.com/citation-style-language/styles#readme
+
+### figure/ and data/
+
+These should be self explanatory. Store your figures and data here and reference
+them in your document. 
+
+## Contributing
+
+If you would like to contribute to this project, please start by reading our [Guide to Contributing](CONTRIBUTING.md). Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+
