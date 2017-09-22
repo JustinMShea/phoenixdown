@@ -1,10 +1,10 @@
 # huskydown
 
-This project was inspired by the [thesisdown](https://github.com/ismayc/thesisdown) package and uses the [University of Washington Thesis class](http://staff.washington.edu/fox/tex/) to produce PDFs formatted ready for submission.  
+This project was inspired by the [thesisdown](https://github.com/ismayc/thesisdown) package. It uses the [University of Washington Thesis class](http://staff.washington.edu/fox/tex/) to convert R Markdown files into a PDF formatted ready for submission.  
 
 Currently, the PDF and gitbook versions are fully-functional. The word and epub versions are developmental, have no templates behind them, and are essentially calls to the appropriate functions in bookdown.
 
-If you are new to working with `bookdown` and `rmarkdown`, please read over the documentation available in the `gitbook` template at https://thesisdown.netlify.com/. This is also available below at http://ismayc.github.io/thesisdown_book.
+If you are new to working with `bookdown` and `rmarkdown`, please read over the documentation available in the [`gitbook` templat]e](https://thesisdown.netlify.com/) and the [bookdown book](https://bookdown.org/yihui/bookdown/).
 
 Under the hood, the [University of Washington Thesis LaTeX template](https://github.com/UWIT-IAM/UWThesis) is used to ensure that documents conform precisely to submission standards. At the same time, composition and formatting can be done using lightweight [markdown](http://rmarkdown.rstudio.com/authoring_basics.html) syntax, and **R** code and its output can be seamlessly included using [rmarkdown](http://rmarkdown.rstudio.com).
 
@@ -14,7 +14,7 @@ Using **huskydown** has some prerequisites which are described below. To compile
 
 To use **huskydown** from RStudio:
 
-1) Install the latest version of [RStudio](http://www.rstudio.com/products/rstudio/download/). You can use huskydown without RStudio. For example, you can write the Rmd files in your favourite text editor (e.g. [atom](https://atom.io/), [Notepad++](https://notepad-plus-plus.org/)). But RStudio is probably the easiest tools for writing both R code and text in your thesis. 
+1) Install the latest version of [RStudio](http://www.rstudio.com/products/rstudio/download/). You can use huskydown without RStudio. For example, you can write the Rmd files in your favourite text editor (e.g. [atom](https://atom.io/), [Notepad++](https://notepad-plus-plus.org/)). But RStudio is probably the easiest tool for writing both R code and text in your thesis. 
 
 2) Install the **bookdown** and **huskydown** packages: 
 
@@ -28,7 +28,7 @@ devtools::install_github("benmarwick/huskydown")
 
 File -> New File -> R Markdown... then choose 'From template', then choose 'UW-Thesis, and enter `index` as the **Name**. Note that this will currently only **Knit** if you name the directory `index` at this step. 
 
-![](thesis_rmd.png)
+![](uw_thesis_rmd.png)
 
 4) Edit the individual chapter R Markdown files to write your thesis.
 
