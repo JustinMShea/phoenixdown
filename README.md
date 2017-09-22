@@ -12,9 +12,11 @@ Under the hood, the [University of Washington Thesis LaTeX template](https://git
 
 Using **huskydown** has some prerequisites which are described below. To compile PDF documents using **R**, you are going to need to have LaTeX installed.  It can be downloaded for Windows at <http://http://miktex.org/download> and for Mac at <http://tug.org/mactex/mactex-download.html>.  Follow the instructions to install the necessary packages after downloading the (somewhat large) installer files.  You may need to install a few extra LaTeX packages on your first attempt to knit as well.
 
+We use two fonts, EB Garamond and Source Code Pro, both are freely available online. You should install these before proceeding. 
+
 To use **huskydown** from RStudio:
 
-1) Install the latest version of [RStudio](http://www.rstudio.com/products/rstudio/download/). You can use huskydown without RStudio. For example, you can write the Rmd files in your favourite text editor (e.g. [atom](https://atom.io/), [Notepad++](https://notepad-plus-plus.org/)). But RStudio is probably the easiest tool for writing both R code and text in your thesis. 
+1) Assuming you have already installed LaTeX and the fonts described above, install the latest version of [RStudio](http://www.rstudio.com/products/rstudio/download/). You can use huskydown without RStudio. For example, you can write the Rmd files in your favourite text editor (e.g. [atom](https://atom.io/), [Notepad++](https://notepad-plus-plus.org/)). But RStudio is probably the easiest tool for writing both R code and text in your thesis. 
 
 2) Install the **bookdown** and **huskydown** packages: 
 
@@ -34,9 +36,10 @@ File -> New File -> R Markdown... then choose 'From template', then choose 'UW-T
 
 ## Rendering
 
-To render your thesis, you can open `index.Rmd` in RStudio and then hit the
-"knit" button. Look at the `output:` field in `index.Rmd` to change the output
-formats between PDF, gitbook and Word by commenting-out the formats you don't want.
+To render your thesis, open `index.Rmd` in RStudio and then hit the
+"knit" button. To change the output formats between PDF, gitbook and Word ,
+look at the `output:` field in `index.Rmd`and comment-out the formats 
+you don't want.
 
 Alternatively, you can use:
 
