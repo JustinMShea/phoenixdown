@@ -1,3 +1,7 @@
+# huskydown 0.0.2
+
+- Add continuous integration via Docker container
+
 # huskydown 0.0.1
 
 - Replaced Reed College templates with UW templates, tested and debugged.
