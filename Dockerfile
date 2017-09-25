@@ -11,8 +11,8 @@ RUN . /etc/environment \
 
   # Install linux depedendencies here
   # need this because rocker/verse doesn't have xelatex
-  # && sudo apt-get update \
-  # && sudo apt-get install texlive-xetex -y \
+  && sudo apt-get update \
+  && sudo apt-get install texlive-xetex -y \
 
   # build this compendium package
   && R -e "devtools::install('/huskydown', dep=TRUE)" \
