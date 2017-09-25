@@ -13,10 +13,12 @@ RUN . /etc/environment \
   # need this because rocker/verse doesn't have xelatex
   && sudo apt-get update \
   && sudo apt-get install texlive-xetex -y \
+  # install fonts
   && sudo apt-get install fonts-ebgaramond -y \
   && wget https://github.com/adobe-fonts/source-code-pro/archive/1.017R.zip \
   && unzip 1.017R.zip  \
   && sudo cp source-code-pro-1.017R/OTF/*.otf /usr/local/share/fonts/ \
+  && sudo apt-get install fonts-lato -y \
 
   # build this compendium package
   && R -e "devtools::install('/huskydown', dep=TRUE)" \
