@@ -10,9 +10,9 @@ COPY . /huskydown
 RUN . /etc/environment \
 
   # Install linux depedendencies here
-  # e.g. need this for ggforce::geom_sina
+  # need this because rocker/verse doesn't have xelatex
   # && sudo apt-get update \
-  # && sudo apt-get install libudunits2-dev -y \
+  # && sudo apt-get install texlive-xetex -y \
 
   # build this compendium package
   && R -e "devtools::install('/huskydown', dep=TRUE)" \

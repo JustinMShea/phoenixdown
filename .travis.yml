@@ -3,6 +3,7 @@
 env:
   global:
   - REPO=$DOCKER_USER/huskydown
+  # don't forget to set this Environment Variable at https://travis-ci.org!
 
 sudo: required
 
@@ -18,6 +19,7 @@ before_install:
   - docker build -t $REPO .
 
 # push our custom docker container to docker hub, env vars stored on travis-ci.org
+# don't forget to set these at https://travis-ci.org/.../...settings
 after_success:
   - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
   - export REPO=$DOCKER_USER/huskydown
