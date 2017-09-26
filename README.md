@@ -94,6 +94,12 @@ This project has drawn directly on code and ideas in the following:
 - https://github.com/SeungkiKwak/Kwak_S_PhD_thesis    
 - https://github.com/dhalperi/uwthesis-tweaked     
 
+Other relevant projects:
+
+- Ed Berry's blog post ['Writing your thesis with bookdown'](https://eddjberry.netlify.com/post/writing-your-thesis-with-bookdown/), Posted on September 25, 2017    
+- [thesisdowndss](https://github.com/mine-cetinkaya-rundel/thesisdowndss) by Mine Cetinkaya-Rundel at Duke University    
+- [beaverdown](https://github.com/zkamvar/beaverdown) by Zhian Kamvar at Oregon State University
+
 ## Contributing
 
 If you would like to contribute to this project, please start by reading our [Guide to Contributing](CONTRIBUTING.md). Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
