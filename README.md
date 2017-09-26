@@ -2,7 +2,7 @@
 
 [![Travis-CI Build Status](https://travis-ci.org/benmarwick/huskydown.svg?branch=master)](https://travis-ci.org/benmarwick/huskydown)
 
-This project provides a template for writing a PhD thesis in R Markdown, and rendering those files into a PDF suitable for submittion at the University of Washington.  It uses the [University of Washington Thesis class](http://staff.washington.edu/fox/tex/) to convert R Markdown files into a PDF formatted ready for submission at UW. This project was inspired by the [thesisdown](https://github.com/ismayc/thesisdown) and [bookdown](https://github.com/rstudio/bookdown) packages.
+This project provides a template for writing a PhD thesis in R Markdown, and rendering those files into a PDF suitable for submission at the University of Washington.  It uses the [University of Washington Thesis class](http://staff.washington.edu/fox/tex/) to convert R Markdown files into a PDF formatted ready for submission at UW. This project was inspired by the [thesisdown](https://github.com/ismayc/thesisdown) and [bookdown](https://github.com/rstudio/bookdown) packages.
 
 Currently, the PDF and gitbook versions are fully-functional. The word and epub versions are developmental, have no templates behind them, and are essentially calls to the appropriate functions in bookdown.
 
