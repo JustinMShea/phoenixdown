@@ -4,7 +4,7 @@
 
 [![Travis-CI Build Status](https://travis-ci.org/benmarwick/huskydown.svg?branch=master)](https://travis-ci.org/benmarwick/huskydown)
 
-This project provides a template for writing a PhD thesis in R Markdown, and rendering those files into a PDF suitable for submission at the University of Washington.  It uses the [University of Washington Thesis class](http://staff.washington.edu/fox/tex/) to convert R Markdown files into a PDF formatted ready for submission at UW. This project was inspired by the [thesisdown](https://github.com/ismayc/thesisdown) and [bookdown](https://github.com/rstudio/bookdown) packages.
+This project provides a template for writing a PhD thesis in R Markdown, and rendering those files into a PDF formatted according to [the requiremnts of the University of Washington](https://grad.uw.edu/for-students-and-post-docs/thesisdissertation/final-submission-of-your-thesisdissertation/). It uses the [University of Washington Thesis class](http://staff.washington.edu/fox/tex/) to convert R Markdown files into a PDF formatted ready for submission at UW. This project was inspired by the [thesisdown](https://github.com/ismayc/thesisdown) and [bookdown](https://github.com/rstudio/bookdown) packages.
 
 Currently, the PDF and gitbook versions are fully-functional. The word and epub versions are developmental, have no templates behind them, and are essentially calls to the appropriate functions in bookdown.
 
@@ -39,7 +39,7 @@ File -> New File -> R Markdown... then choose 'From template', then choose 'UW-T
 Or if you're not using RStudio, run this line to create a new PhD thesis from the template:
 
 ```r
-rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE, edit = FALSE)
+rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE)
 ```
 
 
@@ -68,7 +68,6 @@ The following components are ones you should edit to customize your thesis:
 
 This is the main configuration file for your thesis. Arrange the order of your
 chapters in this file and ensure that the names match the names in your folders. 
-
 ### `index.Rmd`
 
 This file contains all the meta information that goes at the beginning of your
@@ -76,11 +75,11 @@ document. You'll need to edit this to put your name in, the title of your thesis
 
 ### `01-chap1.Rmd`, etc.
 
-These are the Rmd files for each chapter in your dissertation. Write your thesis in these.
+These are the Rmd files for each chapter in your dissertation. Write your thesis in these. If you're writing in RStudio, you may find the [wordcount addin](https://github.com/benmarwick/wordcountaddin) useful for getting word counts and readability statistics in R markdown documents. 
 
 ### `bib/`
 
-Store your bibliography (as bibtex files) here. we recommend using the [citr addin](https://github.com/crsh/citr) and [Zotero](https://www.zotero.org/) to 
+Store your bibliography (as bibtex files) here. We recommend using the [citr addin](https://github.com/crsh/citr) and [Zotero](https://www.zotero.org/) to 
 efficiently manage and insert citations. 
 
 ### `csl/`
@@ -90,8 +89,7 @@ citation styles is https://github.com/citation-style-language/styles#readme
 
 ### `figure/` and `data/`
 
-These should be self explanatory. Store your figures and data here and reference
-them in your document. 
+Store your figures and data here and reference them in your R Markdown files. 
 
 ## Related projects
 
@@ -114,9 +112,12 @@ Other relevant projects:
 If you would like to contribute to this project, please start by reading our [Guide to Contributing](CONTRIBUTING.md). Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 <!--
-To update the PDF template stored in inst/ assuming we are at top level
+To update the PDF template stored in inst/ assuming we are at top level:
+
 rmarkdown::draft('inst/index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE, edit = FALSE)
+
 setwd('inst/index')
+
 bookdown::render_book('index.Rmd', huskydown::thesis_pdf(latex_engine = 'xelatex'))
 
 -->
