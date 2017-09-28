@@ -1,5 +1,8 @@
 # Build on OSX
 
+language: r
+cache: packages
+
 os:
   - osx
 
@@ -7,7 +10,7 @@ before_install:
     # get fonts
   - brew update
   - brew tap caskroom/fonts
-  brew cask install \
+  - brew cask install \
     font-ebgaramond \
     font-source-code-pro \
     font-lato
