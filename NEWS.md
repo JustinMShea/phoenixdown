@@ -1,3 +1,7 @@
+# huskydown 0.0.3
+
+- Add example output files
+
 # huskydown 0.0.2
 
 - Add continuous integration via Docker container
