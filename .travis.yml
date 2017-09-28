@@ -10,10 +10,7 @@ before_install:
     # get fonts
   - brew update
   - brew tap caskroom/fonts
-  - brew cask install \
-    font-eb-garamond \
-    font-source-code-pro \
-    font-lato
+  - brew cask install font-eb-garamond font-source-code-pro font-lato
     # get LaTeX
   - brew install caskroom/cask
   - brew cask install mactex
