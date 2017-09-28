@@ -8,7 +8,7 @@ This project provides a template for writing a PhD thesis in R Markdown, and ren
 
 Currently, the PDF and gitbook versions are fully-functional. The word and epub versions are developmental, have no templates behind them, and are essentially calls to the appropriate functions in bookdown.
 
-If you are new to working with `bookdown` and `rmarkdown`, please read over the documentation available in huskydown [PDF template](inst/index/_book/thesis.pdf) and the [bookdown book](https://bookdown.org/yihui/bookdown/).
+If you are new to working with `bookdown` and `rmarkdown`, please read over the documentation available in huskydown [PDF template](index/_book/thesis.pdf) and the [bookdown book](https://bookdown.org/yihui/bookdown/).
 
 Under the hood, the [University of Washington Thesis LaTeX template](https://github.com/UWIT-IAM/UWThesis) is used to ensure that documents conform precisely to submission standards. At the same time, composition and formatting can be done using lightweight [markdown](http://rmarkdown.rstudio.com/authoring_basics.html) syntax, and **R** code and its output can be seamlessly included using [rmarkdown](http://rmarkdown.rstudio.com).
 
@@ -114,9 +114,9 @@ If you would like to contribute to this project, please start by reading our [Gu
 <!--
 To update the PDF template stored in inst/ assuming we are at top level:
 
-rmarkdown::draft('inst/index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE, edit = FALSE)
+rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE, edit = FALSE)
 
-setwd('inst/index')
+setwd('index')
 
 bookdown::render_book('index.Rmd', huskydown::thesis_pdf(latex_engine = 'xelatex'))
 
