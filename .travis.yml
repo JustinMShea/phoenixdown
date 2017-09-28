@@ -1,30 +1,60 @@
-# Build our Docker container and R pkg on Travis
+# Build on OSX
 
-env:
-  global:
-  - REPO=$DOCKER_USER/huskydown
-  # don't forget to set this Environment Variable at https://travis-ci.org!
-
-sudo: required
-
-warnings_are_errors: false
-
-language: generic
-
-services:
-  - docker
+os:
+  - osx
 
 before_install:
-    # create & run container using our dockerfile, i.e. compile pkg and render Rmd to Word doc
-  - docker build -t $REPO .
+    # get fonts
+  - brew update
+  - brew tap caskroom/fonts
+  brew cask install \
+    font-ebgaramond \
+    font-source-code-pro \
+    font-lato
+    # get LaTeX
+  - brew install caskroom/cask/brew-cask
+  - brew cask install mactex
+    # get biber
+  - sudo tlmgr update --self
+  - sudo tlmgr install biblatex
+    # build this  package
+  - R -e "devtools::install('/huskydown', dep=TRUE)"
+   # make a PhD thesis from the template, remove pre-built PDF,
+   # then render new thesis into a PDF, then check it could work:
+  - R -e "rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE, edit = FALSE); setwd('index'); file.remove('_book/thesis.pdf'); bookdown::render_book('index.Rmd', huskydown::thesis_pdf(latex_engine = 'xelatex')); file.exists('_book/thesis.pdf')"
 
-# push our custom docker container to docker hub, env vars stored on travis-ci.org
-# don't forget to set these at https://travis-ci.org/.../...settings
-after_success:
-  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-  - export REPO=$DOCKER_USER/huskydown
-  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - docker build -f Dockerfile -t $REPO:$COMMIT .
-  - docker tag $REPO:$COMMIT $REPO:$TAG
-  - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
-  - docker push $REPO
+
+
+
+
+
+## Build our Docker container and R pkg on Travis
+#env:
+#  global:
+#  - REPO=$DOCKER_USER/huskydown
+#  # don't forget to set this Environment Variable at https://travis-ci.org!
+#
+#sudo: required
+#
+#warnings_are_errors: false
+#
+#language: generic
+#
+#services:
+#  - docker
+#
+#before_install:
+#    # create & run container using our dockerfile, i.e. compile pkg and render Rmd to Word doc
+#  - docker build -t $REPO .
+#
+## push our custom docker container to docker hub, env vars stored on travis-ci.org
+## don't forget to set these at https://travis-ci.org/.../...settings
+#after_success:
+#  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+#  - export REPO=$DOCKER_USER/huskydown
+#  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+#  - docker build -f Dockerfile -t $REPO:$COMMIT .
+#  - docker tag $REPO:$COMMIT $REPO:$TAG
+#  - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+#  - docker push $REPO
+#
