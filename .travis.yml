@@ -5,11 +5,9 @@ cache: packages
 
 os:
   - osx
-  
-r_packages: 
-  - devtools
 
 before_install:
+  - R -e 'install.packages("devtools")'
     # get fonts
   - brew update
   - brew tap caskroom/fonts
