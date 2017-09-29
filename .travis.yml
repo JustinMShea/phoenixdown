@@ -5,60 +5,44 @@ cache: packages
 
 warnings_are_errors: false
 
+env:
+  global:
+  - REPO=$DOCKER_USER/huskydown
+
 os:
   - osx
+  - linux
   
 pandoc_version: 1.17.2
 
+services:
+  - docker
+
 before_install:
-  - brew tap caskroom/fonts
-  - brew cask install font-eb-garamond font-source-code-pro font-lato
-  - sudo tlmgr update --self
-  - sudo tlmgr install biblatex titling titlesec quotchap lettrine appendix units tocloft draftwatermark everypage wasysym logreq xstring collection-fontsrecommended texliveonfly 
-  - R -e 'install.packages("devtools")'
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew tap caskroom/fonts          ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install graphviz; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew cask install font-eb-garamond font-source-code-pro font-lato          ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo tlmgr install biblatex titling titlesec quotchap lettrine appendix units tocloft draftwatermark everypage wasysym logreq xstring collection-fontsrecommended texliveonfly 
+; fi
+   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker build -t $REPO . ; fi
+
   
 after_script:
   # remove pre-built PDF,
-  - R -e "unlink('index', recursive = TRUE)"
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "unlink('index', recursive = TRUE)"  ; fi
   # make a PhD thesis from the template
-  - R -e "rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE, edit = FALSE)"
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE, edit = FALSE)" : fi
   #  render new thesis into a PDF
-  - R -e "setwd('index'); bookdown::render_book('index.Rmd', huskydown::thesis_pdf(latex_engine = 'xelatex'))"
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "setwd('index'); bookdown::render_book('index.Rmd', huskydown::thesis_pdf(latex_engine = 'xelatex'))" ; fi
   #  check that we got a PDF
-  - R -e "file.exists('index/_book/thesis.pdf')"
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "file.exists('index/_book/thesis.pdf')" ; fi
+  
+after_success:
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then  export REPO=$DOCKER_USER/huskydown ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then  export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then  docker build -f Dockerfile -t $REPO:$COMMIT . ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then  docker tag $REPO:$COMMIT $REPO:$TAG ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then  docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then  docker push $REPO ; fi
 
-
-
-
-
-
-## Build our Docker container and R pkg on Travis
-#env:
-#  global:
-#  - REPO=$DOCKER_USER/huskydown
-#  # don't forget to set this Environment Variable at https://travis-ci.org!
-#
-#sudo: required
-#
-#warnings_are_errors: false
-#
-#language: generic
-#
-#services:
-#  - docker
-#
-#before_install:
-#    # create & run container using our dockerfile, i.e. compile pkg and render Rmd to Word doc
-#  - docker build -t $REPO .
-#
-## push our custom docker container to docker hub, env vars stored on travis-ci.org
-## don't forget to set these at https://travis-ci.org/.../...settings
-#after_success:
-#  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-#  - export REPO=$DOCKER_USER/huskydown
-#  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-#  - docker build -f Dockerfile -t $REPO:$COMMIT .
-#  - docker tag $REPO:$COMMIT $REPO:$TAG
-#  - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
-#  - docker push $REPO
-#
