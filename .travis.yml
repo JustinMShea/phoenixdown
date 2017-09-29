@@ -11,11 +11,9 @@ pandoc_version: 1.17.2
 before_install:
   - brew tap caskroom/fonts
   - brew cask install font-eb-garamond font-source-code-pro font-lato
-    # get biber
   - sudo tlmgr update --self
   - sudo tlmgr install biblatex titling titlesec
-  # install devtools
-   - R -e 'install.packages("devtools")'
+  - R -e 'install.packages("devtools")'
   
 install:
   - R -e "devtools::install_github('benmarwick/huskydown')"
