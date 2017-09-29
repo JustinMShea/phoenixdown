@@ -18,12 +18,13 @@ before_install:
   
 install:
   - R -e "devtools::install_github('benmarwick/huskydown')"
-   # make a PhD thesis from the template, remove pre-built PDF,
-   # then render new thesis into a PDF, then check it could work:
+  # remove pre-built PDF,
   - R -e "unlink('index', recursive = TRUE)"
+  # make a PhD thesis from the template
   - R -e "rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE, edit = FALSE)"
-  - R -e "setwd('index')"
-  - R -e "bookdown::render_book('index.Rmd', huskydown::thesis_pdf(latex_engine = 'xelatex'))"
+  #  render new thesis into a PDF
+  - R -e "setwd('index'); bookdown::render_book('index.Rmd', huskydown::thesis_pdf(latex_engine = 'xelatex'))"
+  #  check that we got a PDF
   - R -e "file.exists('_book/thesis.pdf')"
 
 
