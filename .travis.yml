@@ -27,6 +27,7 @@ after_script:
   - R -e "setwd('index'); bookdown::render_book('index.Rmd', huskydown::thesis_pdf(latex_engine = 'xelatex'))"
   #  check that we got a PDF
   - R -e "file.exists('index/_book/thesis.pdf')"
+  - R -e "file.info('index/_book/thesis.pdf')"
 
 
 
