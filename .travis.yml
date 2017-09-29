@@ -19,9 +19,11 @@ before_install:
 install:
    # make a PhD thesis from the template, remove pre-built PDF,
    # then render new thesis into a PDF, then check it could work:
-  - R -e "rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE, edit = FALSE)
+  - R -e "rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE, edit = FALSE)"
   - R -e "setwd('index')"
-  - R -e "file.remove('_book/thesis.pdf'); bookdown::render_book('index.Rmd', huskydown::thesis_pdf(latex_engine = 'xelatex')); file.exists('_book/thesis.pdf')"
+  - R -e "file.remove('_book/thesis.pdf')"
+  - R -e "bookdown::render_book('index.Rmd', huskydown::thesis_pdf(latex_engine = 'xelatex'))"
+  - R -e "file.exists('_book/thesis.pdf')"
 
 
 
