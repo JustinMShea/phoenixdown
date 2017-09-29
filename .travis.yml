@@ -15,8 +15,7 @@ before_install:
   - sudo tlmgr install biblatex titling titlesec quotchap lettrine appendix units tocloft draftwatermark everypage wasysym logreq xstring collection-fontsrecommended texliveonfly 
   - R -e 'install.packages("devtools")'
   
-install:
-  - R -e "devtools::install_github('benmarwick/huskydown')"
+after_script:
   # remove pre-built PDF,
   - R -e "unlink('index', recursive = TRUE)"
   # make a PhD thesis from the template
@@ -24,7 +23,7 @@ install:
   #  render new thesis into a PDF
   - R -e "setwd('index'); bookdown::render_book('index.Rmd', huskydown::thesis_pdf(latex_engine = 'xelatex'))"
   #  check that we got a PDF
-  - R -e "file.exists('_book/thesis.pdf')"
+  - R -e "file.exists('index/_book/thesis.pdf')"
 
 
 
