@@ -9,14 +9,23 @@ os:
 pandoc_version: 1.17.2
 
 before_install:
-  - R -e 'install.packages("devtools")'
-    # get fonts
+  # install macports
+   - export COLUMNS=80
+   - wget https://raw.githubusercontent.com/GiovanniBussi/macports-ci/master/macports-ci
+   - chmod +x ./macports-ci
+   - ./macports-ci install
+   - PATH="/opt/local/bin:$PATH"
+  # install texlive
+  - sudo port install texlive texlive-latex-extra
+  # get fonts
   - brew update
   - brew tap caskroom/fonts
   - brew cask install font-eb-garamond font-source-code-pro font-lato
     # get biber
   - sudo tlmgr update --self
-  - sudo tlmgr install biblatex titlesec  
+  - sudo tlmgr install biblatex
+  # install devtools
+   - R -e 'install.packages("devtools")'
   
 install:
   - R -e "devtools::install_github('benmarwick/huskydown')"
