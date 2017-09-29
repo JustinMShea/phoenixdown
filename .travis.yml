@@ -5,6 +5,8 @@ cache: packages
 
 os:
   - osx
+  
+pandoc_version: 1.17.2
 
 before_install:
   - R -e 'install.packages("devtools")'
@@ -14,7 +16,7 @@ before_install:
   - brew cask install font-eb-garamond font-source-code-pro font-lato
     # get biber
   - sudo tlmgr update --self
-  - sudo tlmgr install biblatex
+  - sudo tlmgr install biblatex latex-extra
   
 install:
   - R -e "devtools::install_github('benmarwick/huskydown')"
