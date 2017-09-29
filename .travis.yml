@@ -17,6 +17,7 @@ before_install:
   - sudo tlmgr install biblatex
   
 install:
+  - R -e "devtools::install_github('benmarwick/huskydown')"
    # make a PhD thesis from the template, remove pre-built PDF,
    # then render new thesis into a PDF, then check it could work:
   - R -e "rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE, edit = FALSE)"
