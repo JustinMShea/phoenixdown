@@ -5,6 +5,8 @@ cache: packages
 
 os:
   - osx
+  
+r_packages: devtools
 
 before_install:
     # get fonts
