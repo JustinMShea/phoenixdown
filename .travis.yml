@@ -9,8 +9,6 @@ os:
 pandoc_version: 1.17.2
 
 before_install:
-  # get fonts
-  - brew update
   - brew tap caskroom/fonts
   - brew cask install font-eb-garamond font-source-code-pro font-lato
     # get biber
