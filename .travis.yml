@@ -12,7 +12,7 @@ before_install:
   - brew tap caskroom/fonts
   - brew cask install font-eb-garamond font-source-code-pro font-lato
   - sudo tlmgr update --self
-  - sudo tlmgr install biblatex titling titlesec quotchap lettrine
+  - sudo tlmgr install biblatex titling titlesec quotchap lettrine appendix
   - R -e 'install.packages("devtools")'
   
 install:
