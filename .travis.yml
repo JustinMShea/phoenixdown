@@ -10,19 +10,17 @@ env:
  global:
   - REPO=$DOCKER_USER/huskydown
   
-
- 
 language: if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then r ; fi
 cache: if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then packages ; fi 
 
 pandoc_version: 1.17.2
 
 before_install:
-  - brew tap caskroom/fonts
-  - brew cask install font-eb-garamond font-source-code-pro font-lato
-  - sudo tlmgr update --self
-  - sudo tlmgr install biblatex titling titlesec quotchap lettrine appendix units tocloft draftwatermark everypage wasysym logreq xstring collection-fontsrecommended texliveonfly 
-  - R -e 'install.packages("devtools")'
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew tap caskroom/fonts  ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew cask install font-eb-garamond font-source-code-pro font-lato  ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo tlmgr update --self  ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo tlmgr install biblatex titling titlesec quotchap lettrine appendix units tocloft draftwatermark everypage wasysym logreq xstring collection-fontsrecommended texliveonfly   ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e 'install.packages("devtools")'  ; fi
   
 after_script:
   - R -e "devtools::install_github('benmarwick/huskydown')"
