@@ -51,7 +51,13 @@ after_success:
  
 
 
-  
+  deploy:
+  provider: releases
+  api_key: $GITHUB_TOKEN
+  file: "index/_book/thesis.pdf"
+  skip_cleanup: true
+  on:
+    tags: true
 
 
 
