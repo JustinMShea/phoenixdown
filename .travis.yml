@@ -10,16 +10,15 @@ env:
   
 language: r
   
- warnings_are_errors:  if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then false  ; fi
+ warnings_are_errors:  false  
 
- sudo:     
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then required ; fi
+ sudo: required 
    
  services:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker ; fi
+  -  docker 
   
 cache:    
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then packages ; fi 
+  - packages 
 
 pandoc_version: 1.17.2
 
