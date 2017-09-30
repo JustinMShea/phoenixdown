@@ -10,7 +10,7 @@ env:
  global:
   - REPO=$DOCKER_USER/huskydown
   
- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
  
 language: r
 cache: packages
