@@ -14,9 +14,33 @@ Under the hood, the [University of Washington Thesis LaTeX template](https://git
 
 ## Using huskydown to write your PhD thesis
 
-Using **huskydown** has some prerequisites which are described below. To compile PDF documents using **R**, you need to have LaTeX installed. It can be downloaded for Windows at <http://http://miktex.org/download> and for Mac at <http://tug.org/mactex/mactex-download.html>.  Follow the instructions to install the necessary packages after downloading the (somewhat large) installer files. You may need to install a few extra LaTeX packages on your first attempt to knit as well.
+Using **huskydown** has some prerequisites which are described below. To compile PDF documents using **R**, you need to have LaTeX installed. It can be downloaded for Windows at <http://http://miktex.org/download> and for OSX at <http://tug.org/mactex/mactex-download.html>.  Follow the instructions to install the necessary packages after downloading the (somewhat large) installer files. You may need to install a few extra LaTeX packages on your first attempt to knit as well.
 
-We use some fonts, EB Garamond, Source Code Pro and Lato, that all are freely available online if you don't have them already. You should install these before proceeding. 
+We use some fonts, [EB Garamond](https://github.com/georgd/EB-Garamond), [Source Code Pro](https://github.com/adobe-fonts/source-code-pro/) and [Lato](http://www.latofonts.com/lato-free-fonts/), that all are freely available online if you don't have them already. You should install these before proceeding. 
+
+On a Linux system, this should give you what you need:
+
+```
+sudo apt-get update 
+sudo apt-get install texlive-xetex -y 
+sudo apt-get install texlive-bibtex-extra biber -y 
+sudo apt-get install fonts-ebgaramond -y 
+wget https://github.com/adobe-fonts/source-code-pro/archive/1.017R.zip 
+unzip 1.017R.zip  
+sudo cp source-code-pro-1.017R/OTF/*.otf /usr/local/share/fonts/ 
+sudo apt-get install fonts-lato -y 
+```
+
+And this will do the same for OSX, assuming MacTeX and homebrew are installed and updated:
+
+```
+brew tap caskroom/fonts
+brew cask install font-eb-garamond font-source-code-pro font-lato
+sudo tlmgr update --self
+sudo tlmgr install biblatex titling titlesec quotchap lettrine appendix units tocloft draftwatermark everypage wasysym logreq xstring collection-fontsrecommended texliveonfly 
+```
+
+On Windows the usual pointing and clicking is required to download and install [LaTeX](http://http://miktex.org/download) and the fonts listed above. 
 
 To use **huskydown** from RStudio:
 
