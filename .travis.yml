@@ -4,25 +4,18 @@ matrix:
   include:
     - os: linux
       sudo: required
+      language: generic
+      services: docker
     - os: osx
+      language: r
+      cache: packages
+      pandoc_version: 1.17.2
   
 env:
  global:
   - REPO=$DOCKER_USER/huskydown
   
-language: r
-  
 warnings_are_errors:  false  
-
-sudo: required 
-   
-services:
-  -  docker 
-  
-cache:    
-  - packages 
-
-pandoc_version: 1.17.2
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew tap caskroom/fonts  ; fi
