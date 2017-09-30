@@ -19,4 +19,3 @@ to specify the creation of a Microsoft Word version of the thesis.
  output: thesisdown::thesis_word
 }
 }
-

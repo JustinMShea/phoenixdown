@@ -18,4 +18,3 @@ to specify the creation of a epub version of the thesis.
  output: thesisdown::thesis_epub
 }
 }
-

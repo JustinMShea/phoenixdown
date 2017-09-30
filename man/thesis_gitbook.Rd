@@ -18,4 +18,3 @@ to specify the creation of a webpage version of the thesis.
  output: thesisdown::thesis_gitbook
 }
 }
-
