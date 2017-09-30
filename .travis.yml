@@ -4,6 +4,12 @@ os:
   - osx
   - linux
   
+matrix:
+  include:
+    - os: linux
+      sudo: required
+    - os: osx
+  
 env:
  global:
   - REPO=$DOCKER_USER/huskydown
