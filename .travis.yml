@@ -10,8 +10,18 @@ env:
  global:
   - REPO=$DOCKER_USER/huskydown
   
-language: if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then r ; fi
-cache: if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then packages ; fi 
+language: 
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then r ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then generic ; fi
+  
+ sudo:     
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then required ; fi
+   
+ services:
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker ; fi
+  
+cache:    
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then packages ; fi 
 
 pandoc_version: 1.17.2
 
@@ -21,33 +31,21 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo tlmgr update --self  ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo tlmgr install biblatex titling titlesec quotchap lettrine appendix units tocloft draftwatermark everypage wasysym logreq xstring collection-fontsrecommended texliveonfly   ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e 'install.packages("devtools")'  ; fi
-  
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker build -t $REPO . ; fi
+
 after_script:
-  - R -e "devtools::install_github('benmarwick/huskydown')"
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "devtools::install_github('benmarwick/huskydown')" ; fi
   # remove pre-built PDF,
-  - R -e "unlink('index', recursive = TRUE)"
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "unlink('index', recursive = TRUE)" ; fi
   # make a PhD thesis from the template
-  - R -e "rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE, edit = FALSE)"
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE, edit = FALSE)"  ; fi 
   #  render new thesis into a PDF
-  - R -e "setwd('index'); bookdown::render_book('index.Rmd', huskydown::thesis_pdf(latex_engine = 'xelatex'))"
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "setwd('index'); bookdown::render_book('index.Rmd', huskydown::thesis_pdf(latex_engine = 'xelatex'))"  ; fi
   #  check that we got a PDF
-  - R -e "file.exists('index/_book/thesis.pdf')"
-  - R -e "file.info('index/_book/thesis.pdf')"
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "file.exists('index/_book/thesis.pdf')"  ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "file.info('index/_book/thesis.pdf')"  ; fi
  
- ; fi
- 
- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then 
- 
- language: generic
- 
- sudo: required    
- services:
-  - docker
-  
-before_install:
-   # create & run container using our dockerfile, i.e. compile pkg and render Rmd to Word doc
-  - docker build -t $REPO .
-  
+
 # push our custom docker container to docker hub, env vars stored on travis-ci.org
 # don't forget to set these at https://travis-ci.org/.../...settings
 after_success:
@@ -59,7 +57,7 @@ after_success:
   - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
   - docker push $REPO
  
- ; fi
+
 
   
 
