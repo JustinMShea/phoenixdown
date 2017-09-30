@@ -1,8 +1,4 @@
 # Build on OSX and linux (use our docker container)
-
-os:
-  - osx
-  - linux
   
 matrix:
   include:
