@@ -49,13 +49,13 @@ after_script:
 # push our custom docker container to docker hub, env vars stored on travis-ci.org
 # don't forget to set these at https://travis-ci.org/.../...settings
 after_success:
-  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-  - export REPO=$DOCKER_USER/huskydown
-  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - docker build -f Dockerfile -t $REPO:$COMMIT .
-  - docker tag $REPO:$COMMIT $REPO:$TAG
-  - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
-  - docker push $REPO
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export REPO=$DOCKER_USER/huskydown ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`  ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker build -f Dockerfile -t $REPO:$COMMIT . ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker tag $REPO:$COMMIT $REPO:$TAG ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker push $REPO ; fi
  
 
 
