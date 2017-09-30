@@ -1,5 +1,5 @@
 # Build on OSX and linux (use our docker container)
-  
+
 matrix:
   include:
     - os: linux
@@ -10,12 +10,12 @@ matrix:
       language: r
       cache: packages
       pandoc_version: 1.17.2
-  
+
 env:
  global:
   - REPO=$DOCKER_USER/huskydown
-  
-warnings_are_errors:  false  
+
+warnings_are_errors:  false
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew tap caskroom/fonts  ; fi
@@ -30,13 +30,13 @@ after_script:
   # remove pre-built PDF,
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "unlink('index', recursive = TRUE)" ; fi
   # make a PhD thesis from the template
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE, edit = FALSE)"  ; fi 
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE, edit = FALSE)"  ; fi
   #  render new thesis into a PDF
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "setwd('index'); bookdown::render_book('index.Rmd', huskydown::thesis_pdf(latex_engine = 'xelatex'))"  ; fi
   #  check that we got a PDF
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "file.exists('index/_book/thesis.pdf')"  ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "file.info('index/_book/thesis.pdf')"  ; fi
- 
+
 
 # push our custom docker container to docker hub, env vars stored on travis-ci.org
 # don't forget to set these at https://travis-ci.org/.../...settings
@@ -48,12 +48,12 @@ after_success:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker tag $REPO:$COMMIT $REPO:$TAG ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker push $REPO ; fi
- 
+
 
 deploy:
   provider: releases
   api_key: "$GITHUB_TOKEN"
-  file: "index/_book/thesis.pdf"
+  file: "index"
   skip_cleanup: true
   on:
     tags: true
