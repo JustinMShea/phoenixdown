@@ -1,7 +1,5 @@
 # Build on OSX and linux (use our docker container)
 
-warnings_are_errors: false
-
 os:
   - osx
   - linux
@@ -14,6 +12,9 @@ language:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then r ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then generic ; fi
   
+ warnings_are_errors: 
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then false  ; fi
+
  sudo:     
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then required ; fi
    
