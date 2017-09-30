@@ -8,8 +8,7 @@ env:
  global:
   - REPO=$DOCKER_USER/huskydown
   
-language: 
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then r else generic ; fi
+language: r
   
  warnings_are_errors: 
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then false  ; fi
