@@ -53,8 +53,8 @@ after_success:
 deploy:
   provider: releases
   api_key: "$GITHUB_TOKEN"
-  file: if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then "index/_book/thesis.pdf" ; fi
-  skip_cleanup:  if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then true ; fi
+  file: "index/_book/thesis.pdf"
+  skip_cleanup: true
   on:
     tags: true
 
