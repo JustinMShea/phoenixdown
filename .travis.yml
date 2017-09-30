@@ -10,8 +10,7 @@ env:
   
 language: r
   
- warnings_are_errors: 
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then false  ; fi
+ warnings_are_errors:  if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then false  ; fi
 
  sudo:     
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then required ; fi
