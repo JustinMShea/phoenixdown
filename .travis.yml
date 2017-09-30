@@ -53,7 +53,7 @@ after_success:
 deploy:
   provider: releases
   api_key: "$GITHUB_TOKEN"
-  file: "index"
+  file: "index/"
   skip_cleanup: true
   on:
     tags: true
