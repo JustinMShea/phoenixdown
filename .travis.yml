@@ -10,10 +10,10 @@ env:
  global:
   - REPO=$DOCKER_USER/huskydown
   
-if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+
  
-language: r
-cache: packages
+language: if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then r ; fi
+cache: if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then packages ; fi 
 
 pandoc_version: 1.17.2
 
