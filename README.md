@@ -31,9 +31,10 @@ sudo cp source-code-pro-1.017R/OTF/*.otf /usr/local/share/fonts/
 sudo apt-get install fonts-lato -y 
 ```
 
-And this will do the same for OSX, assuming MacTeX and homebrew are installed and updated:
+On an OSX system, assuming [MacTeX](http://tug.org/mactex/mactex-download.html) and [homebrew](https://brew.sh/) are installed and updated, this will get you the fonts and other LaTeX packages needed for this template:
 
 ```
+brew update
 brew tap caskroom/fonts
 brew cask install font-eb-garamond font-source-code-pro font-lato
 sudo tlmgr update --self
