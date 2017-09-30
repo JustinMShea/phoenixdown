@@ -11,8 +11,7 @@ Description: Using the bookdown package and LaTeX and Word thesis templates from
     and analyses as well. Based on Chester Ismay's thesisdown.
 Maintainer: Ben Marwick <bmarwick@uw.edu>
 Depends:     
-    R (>= 3.2.0)
-Imports:
+    R (>= 3.2.0),
     devtools,
     dplyr,
     ggplot2,
