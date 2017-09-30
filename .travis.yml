@@ -1,13 +1,20 @@
-# Build on OSX
-
-language: r
-cache: packages
+# Build on OSX and linux (use our docker container)
 
 warnings_are_errors: false
 
 os:
   - osx
+  - linux
   
+env:
+ global:
+  - REPO=$DOCKER_USER/huskydown
+  
+ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+ 
+language: r
+cache: packages
+
 pandoc_version: 1.17.2
 
 before_install:
@@ -28,39 +35,35 @@ after_script:
   #  check that we got a PDF
   - R -e "file.exists('index/_book/thesis.pdf')"
   - R -e "file.info('index/_book/thesis.pdf')"
+ 
+ ; fi
+ 
+ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then 
+ 
+ language: generic
+ 
+ sudo: required    
+ services:
+  - docker
+  
+before_install:
+   # create & run container using our dockerfile, i.e. compile pkg and render Rmd to Word doc
+  - docker build -t $REPO .
+  
+# push our custom docker container to docker hub, env vars stored on travis-ci.org
+# don't forget to set these at https://travis-ci.org/.../...settings
+after_success:
+  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+  - export REPO=$DOCKER_USER/huskydown
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+  - docker build -f Dockerfile -t $REPO:$COMMIT .
+  - docker tag $REPO:$COMMIT $REPO:$TAG
+  - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+  - docker push $REPO
+ 
+ ; fi
+
+  
 
 
 
-
-
-
-## Build our Docker container and R pkg on Travis
-#env:
-#  global:
-#  - REPO=$DOCKER_USER/huskydown
-#  # don't forget to set this Environment Variable at https://travis-ci.org!
-#
-#sudo: required
-#
-#warnings_are_errors: false
-#
-#language: generic
-#
-#services:
-#  - docker
-#
-#before_install:
-#    # create & run container using our dockerfile, i.e. compile pkg and render Rmd to Word doc
-#  - docker build -t $REPO .
-#
-## push our custom docker container to docker hub, env vars stored on travis-ci.org
-## don't forget to set these at https://travis-ci.org/.../...settings
-#after_success:
-#  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-#  - export REPO=$DOCKER_USER/huskydown
-#  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-#  - docker build -f Dockerfile -t $REPO:$COMMIT .
-#  - docker tag $REPO:$COMMIT $REPO:$TAG
-#  - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
-#  - docker push $REPO
-#
