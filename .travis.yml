@@ -10,6 +10,14 @@ matrix:
       language: r
       cache: packages
       pandoc_version: 1.17.2
+      deploy:
+        provider: releases
+        api_key: "$GITHUB_TOKEN"
+        file: "index/_book/thesis.pdf"
+        skip_cleanup: true
+        on:
+          tags: true
+
 
 env:
  global:
@@ -50,13 +58,6 @@ after_success:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker push $REPO ; fi
 
 
-deploy:
-  provider: releases
-  api_key: "$GITHUB_TOKEN"
-  file: "index/_book/thesis.pdf"
-  skip_cleanup: true
-  on:
-    tags: true
 
 
 
