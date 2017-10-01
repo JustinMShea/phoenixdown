@@ -4,7 +4,7 @@ Version: 0.1.0
 Authors@R: c(
     person("Chester", "Ismay", email = "chester.ismay@gmail.com", role = "cre"),
     person("Nick", "Solomon", email = "nick@nicksolomon.me", role = "aut"),
-    person("Ben", "Marwick", email = "nick@nicksolomon.me", role = "aut"))
+    person("Ben", "Marwick", email = "benmarwick@gmail.com", role = "aut"))
 Description: Using the bookdown package and LaTeX and Word thesis templates from
     UW, this package aims to encourage reproducible research using
     simple Markdown syntax while embedding all of the R code to produce plots
