@@ -26,16 +26,10 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo tlmgr install biblatex titling titlesec quotchap lettrine appendix units tocloft draftwatermark everypage wasysym logreq xstring collection-fontsrecommended texliveonfly   ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e 'install.packages("devtools")'  ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker build -t $REPO . ; fi
-
-after_script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "devtools::install_github('benmarwick/huskydown')" ; fi
-  # remove pre-built PDF,
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "unlink('index', recursive = TRUE)" ; fi
-  # make a PhD thesis from the template
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE, edit = FALSE)"  ; fi
-  #  render new thesis into a PDF
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "setwd('index'); bookdown::render_book('index.Rmd', huskydown::thesis_pdf(latex_engine = 'xelatex'))"  ; fi
-  #  check that we got a PDF
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "file.exists('index/_book/thesis.pdf')"  ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "file.info('index/_book/thesis.pdf')"  ; fi
 
