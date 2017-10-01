@@ -10,7 +10,9 @@ The source files for this thesis, along with all the data files, have been organ
 
 This version of the thesis was generated on `r Sys.time()`. The repository is currently at this commit:
 
-```{r echo = FALSE}
+```{r echo = FALSE, eval = FALSE}
+# I've set eval=FALSE to ensure Travis-CI can run
+# if you're not using Travis-CI, then eval=TRUE will be fine
 library(git2r)
 if ( in_repository() ) {
        summary(commits()[[1]]) 
