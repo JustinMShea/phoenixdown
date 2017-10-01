@@ -10,15 +10,7 @@ matrix:
       language: r
       cache: packages
       pandoc_version: 1.17.2
-      deploy:
-        provider: releases
-        api_key: "$GITHUB_TOKEN"
-        file: "index/_book/thesis.pdf"
-        skip_cleanup: true
-        overwrite: true
-        on:
-          tags: true
-          condition: $TRAVIS_OS_NAME = osx
+
 
 
 env:
@@ -58,6 +50,16 @@ after_success:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker tag $REPO:$COMMIT $REPO:$TAG ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker push $REPO ; fi
+
+deploy:
+  provider: releases
+  api_key: "$GITHUB_TOKEN"
+  file: "index/_book/thesis.pdf"
+  skip_cleanup: true
+  overwrite: true
+  on:
+    tags: true
+    condition: $TRAVIS_OS_NAME = osx
 
 
 

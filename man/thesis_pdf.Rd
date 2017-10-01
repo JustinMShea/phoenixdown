@@ -12,6 +12,8 @@ thesis_pdf(toc = TRUE, toc_depth = 3, highlight = "default", ...)
 \item{toc_depth}{A positive integer}
 
 \item{highlight}{Syntax highlighting style. Supported styles include "default", "tango", "pygments", "kate", "monochrome", "espresso", "zenburn", and "haddock". Pass NULL to prevent syntax highlighting.}
+
+\item{...}{other arguments to bookdown::pdf_book}
 }
 \value{
 A modified \code{pdf_document} based on the Reed Senior Thesis LaTeX
@@ -23,6 +25,6 @@ to specify using the Reed College Senior Thesis LaTeX template and cls files.
 }
 \examples{
 \dontrun{
- output: thesisdown::thesis_pdf
+ output: huskydown::thesis_pdf
 }
 }

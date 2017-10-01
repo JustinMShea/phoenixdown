@@ -10,14 +10,14 @@ Description: Using the bookdown package and LaTeX and Word thesis templates from
     simple Markdown syntax while embedding all of the R code to produce plots
     and analyses as well. Based on Chester Ismay's thesisdown.
 Maintainer: Ben Marwick <bmarwick@uw.edu>
-Depends:     
+Depends: 
     R (>= 3.2.0),
     devtools,
     dplyr,
     ggplot2,
     bookdown,
     knitr
-License: MIT
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
