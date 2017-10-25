@@ -26,6 +26,9 @@
 %% for the per mil symbol
 \usepackage[nointegrals]{wasysym}
 
+%% for copyright symbol
+\usepackage{textcomp}
+
 %% to allow to rotate pages to landscape
 \usepackage{lscape}
 %% to adjust table column width
@@ -133,6 +136,9 @@
 \newcommand{\RegionMarkerTok}[1]{{#1}}
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
 \newcommand{\NormalTok}[1]{{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
 
 
 \ifxetex
@@ -430,10 +436,10 @@ then we load them into our current working environment:
 \NormalTok{pkg <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{, }\StringTok{"ggplot2"}\NormalTok{, }\StringTok{"knitr"}\NormalTok{, }\StringTok{"bookdown"}\NormalTok{, }\StringTok{"devtools"}\NormalTok{)}
 \CommentTok{# Check if packages are not installed and assign the}
 \CommentTok{# names of the packages not installed to the variable new.pkg}
-\NormalTok{new.pkg <-}\StringTok{ }\NormalTok{pkg[!(pkg %in%}\StringTok{ }\KeywordTok{installed.packages}\NormalTok{())]}
+\NormalTok{new.pkg <-}\StringTok{ }\NormalTok{pkg[}\OperatorTok{!}\NormalTok{(pkg }\OperatorTok{%in%}\StringTok{ }\KeywordTok{installed.packages}\NormalTok{())]}
 \CommentTok{# If there are any packages in the list that aren't installed,}
 \CommentTok{# install them}
-\NormalTok{if (}\KeywordTok{length}\NormalTok{(new.pkg))}
+\ControlFlowTok{if}\NormalTok{ (}\KeywordTok{length}\NormalTok{(new.pkg))}
   \KeywordTok{install.packages}\NormalTok{(new.pkg, }\DataTypeTok{repos =} \StringTok{"http://cran.rstudio.com"}\NormalTok{)}
 \CommentTok{# Load packages (huskydown will load all of the packages as well)}
 \KeywordTok{library}\NormalTok{(huskydown)}
@@ -453,10 +459,10 @@ The example we show here does the following:
 \end{itemize}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{flights2 <-}\StringTok{ }\NormalTok{flights %>%}\StringTok{ }
+\NormalTok{flights2 <-}\StringTok{ }\NormalTok{flights }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(carrier_name, arr_delay)}
-\NormalTok{max_delays <-}\StringTok{ }\NormalTok{flights2 %>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(carrier_name) %>%}
+\NormalTok{max_delays <-}\StringTok{ }\NormalTok{flights2 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(carrier_name) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{max_arr_delay =} \KeywordTok{max}\NormalTok{(arr_delay, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
@@ -505,10 +511,10 @@ the arrival delay of 1539 minutes for American in our original
 \texttt{flights} dataset.
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{flights %>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(arr_delay ==}\StringTok{ }\DecValTok{1539}\NormalTok{, }
-                  \NormalTok{carrier_name ==}\StringTok{ "American Airlines Inc."}\NormalTok{) %>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(-}\KeywordTok{c}\NormalTok{(month, day, carrier, dest_name, hour, }
-            \NormalTok{minute, carrier_name, arr_delay))}
+\NormalTok{flights }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(arr_delay }\OperatorTok{==}\StringTok{ }\DecValTok{1539}\NormalTok{, }
+\NormalTok{                  carrier_name }\OperatorTok{==}\StringTok{ "American Airlines Inc."}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\KeywordTok{c}\NormalTok{(month, day, carrier, dest_name, hour, }
+\NormalTok{            minute, carrier_name, arr_delay))}
 \end{Highlighting}
 \end{Shaded}
 \begin{verbatim}
@@ -521,8 +527,8 @@ visualize the arrival delay of all departing flights from Portland on
 March 3rd against time of departure.
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{flights %>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(month ==}\StringTok{ }\DecValTok{3}\NormalTok{, day ==}\StringTok{ }\DecValTok{3}\NormalTok{) %>%}
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \NormalTok{dep_time, }\DataTypeTok{y =} \NormalTok{arr_delay)) +}\StringTok{ }\KeywordTok{geom_point}\NormalTok{()}
+\NormalTok{flights }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(month }\OperatorTok{==}\StringTok{ }\DecValTok{3}\NormalTok{, day }\OperatorTok{==}\StringTok{ }\DecValTok{3}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ dep_time, }\DataTypeTok{y =}\NormalTok{ arr_delay)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 \includegraphics{thesis_files/figure-latex/march3plot-1.pdf}
@@ -759,13 +765,13 @@ airline from Portland for 2014. Note also the use of the \texttt{scale}
 parameter which is discussed on the next page.
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{flights %>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(carrier) %>%}
-\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{mean_dep_delay =} \KeywordTok{mean}\NormalTok{(dep_delay)) %>%}
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \NormalTok{carrier, }\DataTypeTok{y =} \NormalTok{mean_dep_delay)) +}
+\NormalTok{flights }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(carrier) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{mean_dep_delay =} \KeywordTok{mean}\NormalTok{(dep_delay)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ carrier, }\DataTypeTok{y =}\NormalTok{ mean_dep_delay)) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{position =} \StringTok{"identity"}\NormalTok{, }\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{, }\DataTypeTok{fill =} \StringTok{"red"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-\begin{figure}[htbp]
+\begin{figure}
 \centering
 \includegraphics{thesis_files/figure-latex/delaysboxplot-1.pdf}
 \caption{\label{fig:delaysboxplot}Mean Delays by Airline}
@@ -904,10 +910,10 @@ chunk tag) to help with readibility and/or setup.
 \CommentTok{# This chunk ensures that the huskydown package is}
 \CommentTok{# installed and loaded. This huskydown package includes}
 \CommentTok{# the template files for the thesis.}
-\NormalTok{if(!}\KeywordTok{require}\NormalTok{(devtools))}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(devtools))}
   \KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.rstudio.com"}\NormalTok{)}
-\NormalTok{if(!}\KeywordTok{require}\NormalTok{(huskydown))}
-  \NormalTok{devtools::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"benmarwick/huskydown"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(huskydown))}
+\NormalTok{  devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"benmarwick/huskydown"}\NormalTok{)}
 \KeywordTok{library}\NormalTok{(huskydown)}
 \end{Highlighting}
 \end{Shaded}
@@ -918,18 +924,18 @@ chunk tag) to help with readibility and/or setup.
 \CommentTok{# installed and loaded. This huskydown package includes}
 \CommentTok{# the template files for the thesis and also two functions}
 \CommentTok{# used for labeling and referencing}
-\NormalTok{if(!}\KeywordTok{require}\NormalTok{(devtools))}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(devtools))}
   \KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.rstudio.com"}\NormalTok{)}
-\NormalTok{if(!}\KeywordTok{require}\NormalTok{(dplyr))}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(dplyr))}
     \KeywordTok{install.packages}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.rstudio.com"}\NormalTok{)}
-\NormalTok{if(!}\KeywordTok{require}\NormalTok{(ggplot2))}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(ggplot2))}
     \KeywordTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.rstudio.com"}\NormalTok{)}
-\NormalTok{if(!}\KeywordTok{require}\NormalTok{(ggplot2))}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(ggplot2))}
     \KeywordTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.rstudio.com"}\NormalTok{)}
-\NormalTok{if(!}\KeywordTok{require}\NormalTok{(huskydown))\{}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(huskydown))\{}
   \KeywordTok{library}\NormalTok{(devtools)}
-  \NormalTok{devtools::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"benmarwick/huskydown"}\NormalTok{)}
-  \NormalTok{\}}
+\NormalTok{  devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"benmarwick/huskydown"}\NormalTok{)}
+\NormalTok{  \}}
 \KeywordTok{library}\NormalTok{(huskydown)}
 \NormalTok{flights <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data/flights.csv"}\NormalTok{)}
 \end{Highlighting}
@@ -967,18 +973,9 @@ been organised into an R package, xxx, which is available at
 \url{https://github.com/xxx/xxx}. A hard copy of the thesis can be found
 in the University of Washington library.
 
-This version of the thesis was generated on 2017-09-30 23:04:27. The
+This version of the thesis was generated on 2017-10-25 01:03:40. The
 repository is currently at this commit:
-\begin{verbatim}
-Commit:  eb49872679add7a7d0d8245665592fabf4722c0b
-Author:  Ben Marwick <benmarwick@gmail.com>
-When:    2017-09-30 22:54:37
 
-     if in repo
-     
-1 file changed, 3 insertions, 1 deletions
-index/98-colophon.Rmd | -1 +3  in 1 hunk
-\end{verbatim}
 The computational environment that was used to generate this version is
 as follows:
 \begin{verbatim}
@@ -988,11 +985,11 @@ Session info -------------------------------------------------------------
  setting  value                       
  version  R version 3.4.1 (2017-06-30)
  system   x86_64, mingw32             
- ui       RStudio (1.0.153)           
+ ui       RTerm                       
  language (EN)                        
  collate  English_Australia.1252      
  tz       America/Los_Angeles         
- date     2017-09-30                  
+ date     2017-10-25                  
 \end{verbatim}
 \begin{verbatim}
 Packages -----------------------------------------------------------------
@@ -1011,9 +1008,9 @@ Packages -----------------------------------------------------------------
  datasets   * 3.4.1      2017-06-30 local                              
  devtools   * 1.13.3     2017-08-02 CRAN (R 3.4.1)                     
  digest       0.6.12     2017-01-27 CRAN (R 3.4.0)                     
- dplyr      * 0.7.3      2017-09-07 local                              
+ dplyr      * 0.7.4      2017-09-28 CRAN (R 3.4.2)                     
  evaluate     0.10.1     2017-06-24 CRAN (R 3.4.0)                     
- ggplot2    * 2.2.1.9000 2017-09-07 Github (tidyverse/ggplot2@c592e32) 
+ ggplot2    * 2.2.1.9000 2017-10-24 Github (tidyverse/ggplot2@ffb40f3) 
  git2r      * 0.19.0     2017-07-19 CRAN (R 3.4.0)                     
  glue         1.1.1      2017-06-21 CRAN (R 3.4.0)                     
  graphics   * 3.4.1      2017-06-30 local                              
@@ -1022,7 +1019,7 @@ Packages -----------------------------------------------------------------
  gtable       0.2.0      2016-02-26 CRAN (R 3.4.0)                     
  highr        0.6        2016-05-09 CRAN (R 3.4.0)                     
  htmltools    0.3.6      2017-04-28 CRAN (R 3.4.0)                     
- huskydown  * 0.1.0      2017-10-01 local                              
+ huskydown  * 0.1.0      2017-10-25 local                              
  knitr      * 1.17       2017-08-10 CRAN (R 3.4.1)                     
  labeling     0.3        2014-08-23 CRAN (R 3.4.0)                     
  lazyeval     0.2.0      2016-06-12 CRAN (R 3.4.0)                     
@@ -1038,7 +1035,7 @@ Packages -----------------------------------------------------------------
  rlang        0.1.2      2017-08-09 CRAN (R 3.4.1)                     
  rmarkdown    1.6        2017-06-15 CRAN (R 3.4.0)                     
  rprojroot    1.2        2017-01-16 CRAN (R 3.4.0)                     
- rstudioapi   0.7.0-9000 2017-09-19 Github (rstudio/rstudioapi@8e8bfb0)
+ rstudioapi   0.7.0-9000 2017-10-09 Github (rstudio/rstudioapi@335f257)
  scales       0.5.0.9000 2017-09-07 Github (hadley/scales@d767915)     
  stats      * 3.4.1      2017-06-30 local                              
  stringi      1.1.5      2017-04-07 CRAN (R 3.4.0)                     
@@ -1046,7 +1043,7 @@ Packages -----------------------------------------------------------------
  tibble       1.3.4      2017-08-22 CRAN (R 3.4.1)                     
  tools        3.4.1      2017-06-30 local                              
  utils      * 3.4.1      2017-06-30 local                              
- withr        2.0.0      2017-09-05 Github (jimhester/withr@eff4818)   
+ withr        2.0.0      2017-10-24 Github (jimhester/withr@a43df66)   
  yaml         2.1.14     2016-11-12 CRAN (R 3.4.0)                     
 \end{verbatim}
 \backmatter
@@ -1081,6 +1078,6 @@ In G. C. L. Davey \& F. Tallis (Eds.), \emph{Worrying: Perspectives on
 theory, assessment and treatment} (pp. 265--283). New York: Wiley.
 
 \hypertarget{ref-reedweb2007}{}
-Reed~College. (2007, march). LaTeX your document. Retrieved from
+Reed~College. (2007, March). LaTeX your document. Retrieved from
 \url{http://web.reed.edu/cis/help/LaTeX/index.html}
 \end{document}
