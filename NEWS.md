@@ -5,6 +5,7 @@
 git commit -am 0.0.4
 git tag -m 0.0.4 0.0.4
 git push origin --tags
+- or is this really necessary?
 
 
 # huskydown 0.0.3
