@@ -1,3 +1,12 @@
+# huskydown 0.0.4
+
+- CI on OSX and Linux, collect artefacts and issue PDF
+- use:
+git commit -m 0.0.4
+git tag -m 1.0 1.0
+git push --tags
+
+
 # huskydown 0.0.3
 
 - Add example output files

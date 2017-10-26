@@ -1,6 +1,6 @@
 Package: huskydown
 Title: A R Markdown thesis template for the University of Washingtone
-Version: 0.1.0
+Version: 0.0.4
 Authors@R: c(
     person("Chester", "Ismay", email = "chester.ismay@gmail.com", role = "cre"),
     person("Nick", "Solomon", email = "nick@nicksolomon.me", role = "aut"),
