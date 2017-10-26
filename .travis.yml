@@ -52,6 +52,7 @@ deploy:
   skip_cleanup: true
   overwrite: true
   on:
+    tags: true
     condition: $TRAVIS_OS_NAME = osx
 
 
