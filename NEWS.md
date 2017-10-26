@@ -1,10 +1,10 @@
 # huskydown 0.0.4
 
 - CI on OSX and Linux, collect artefacts and issue PDF
-- use:
-git commit -m 0.0.4
-git tag -m 1.0 1.0
-git push --tags
+- use this to ensure the builds succeed and we get artefacts:
+git commit -am 0.0.4
+git tag -m 0.0.4 0.0.4
+git push origin --tags
 
 
 # huskydown 0.0.3
