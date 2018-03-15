@@ -5,7 +5,8 @@
 git commit -am 0.0.4
 git tag -m 0.0.4 0.0.4
 git push origin --tags
-- or is this really necessary?
+- or is this really necessary? no we have a build that produced artefacts without tags
+- do check the GITHUB_TOKEN on Travis-CI since I regenerate this often
 
 
 # huskydown 0.0.3
