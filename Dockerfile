@@ -12,10 +12,10 @@ RUN . /etc/environment \
   # Install linux depedendencies here
   # need this because rocker/verse doesn't have xelatex - really?
   && sudo apt-get update \
-  && sudo apt-get install texlive-base \
-  && sudo apt-get install texlive-binaries \
-  && sudo apt-get install texlive-latex-base \
-  && sudo apt-get install texlive-latex-extra \
+  && sudo apt-get install texlive-base -y \
+  && sudo apt-get install texlive-binaries -y \
+  && sudo apt-get install texlive-latex-base -y \
+  && sudo apt-get install texlive-latex-extra -y \
   && sudo apt-get install texlive-xetex -y \
   && sudo apt-get install texlive-bibtex-extra biber -y \
   # install fonts
