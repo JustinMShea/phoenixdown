@@ -10,14 +10,8 @@ COPY . /huskydown
 RUN . /etc/environment \
 
   # Install linux depedendencies here
-  # need this because rocker/verse doesn't have xelatex - really?
+  #  rocker/verse has xelatex 
   && sudo apt-get update \
-  # && sudo apt-get install texlive-base -y \
-  # && sudo apt-get install texlive-binaries -y \
-  # && sudo apt-get install texlive-latex-base -y \
-  # && sudo apt-get install texlive-latex-extra -y \
-  # && sudo apt-get install texlive-xetex -y \
-  # && sudo apt-get install texlive-bibtex-extra biber -y \
   # install fonts
   && sudo apt-get install fonts-ebgaramond -y \
   && sudo git clone --depth 1 --branch release https://github.com/adobe-fonts/source-code-pro.git /usr/share/fonts/source-code-pro \
@@ -29,6 +23,6 @@ RUN . /etc/environment \
 
  # make a PhD thesis from the template, remove pre-built PDF,
  # then render new thesis into a PDF, then check it could work:
-  && R -e "setwd('index'); if (file.exists('_book/thesis.pdf')) file.remove('_book/thesis.pdf')"
+  && R -e "setwd('index'); if (file.exists('_book/thesis.pdf')) file.remove('_book/thesis.pdf')" \
   && R -e "rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE, edit = FALSE) \
   && R -e "bookdown::render_book('index.Rmd', huskydown::thesis_pdf(latex_engine = 'xelatex')); file.exists('_book/thesis.pdf')"
