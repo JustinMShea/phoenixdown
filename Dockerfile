@@ -29,4 +29,6 @@ RUN . /etc/environment \
 
  # make a PhD thesis from the template, remove pre-built PDF,
  # then render new thesis into a PDF, then check it could work:
-  && R -e "rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE, edit = FALSE); setwd('index'); file.remove('_book/thesis.pdf'); bookdown::render_book('index.Rmd', huskydown::thesis_pdf(latex_engine = 'xelatex')); file.exists('_book/thesis.pdf')"
+  && R -e "setwd('index'); if (file.exists('_book/thesis.pdf')) file.remove('_book/thesis.pdf')"
+  && R -e "rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE, edit = FALSE) \
+  && R -e "bookdown::render_book('index.Rmd', huskydown::thesis_pdf(latex_engine = 'xelatex')); file.exists('_book/thesis.pdf')"
