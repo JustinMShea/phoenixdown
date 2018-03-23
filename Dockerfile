@@ -16,9 +16,8 @@ RUN . /etc/environment \
   && sudo apt-get install texlive-bibtex-extra biber -y \
   # install fonts
   && sudo apt-get install fonts-ebgaramond -y \
-  && wget https://github.com/adobe-fonts/source-code-pro/archive/1.017R.zip \
-  && unzip 1.017R.zip  \
-  && sudo cp source-code-pro-1.017R/OTF/*.otf /usr/local/share/fonts/ \
+  && sudo git clone --depth 1 --branch release https://github.com/adobe-fonts/source-code-pro.git /usr/share/fonts/ \
+  && sudo fc-cache -f -v \
   && sudo apt-get install fonts-lato -y \
 
   # build this compendium package
