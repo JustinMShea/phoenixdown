@@ -16,6 +16,8 @@ RUN . /etc/environment \
   && sudo git clone --depth 1 --branch release https://github.com/adobe-fonts/source-code-pro.git /usr/share/fonts/source-code-pro \
   && sudo fc-cache -f -v \
   && sudo apt-get install fonts-lato -y \
+  # for git2r
+  && sudo apt-get install zlib1g-dev -y \
   
   # get latex & xetex
   && R -e "install.packages('tinytex'); tinytex::install_tinytex(force = TRUE, repository = 'ctan')" \
