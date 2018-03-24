@@ -1,17 +1,19 @@
 #' Creates an R Markdown PDF Thesis document
 #'
 #' This is a function called in output in the YAML of the driver Rmd file
-#' to specify using the Reed College Senior Thesis LaTeX template and cls files.
+#' to specify using the University of Washington Thesis LaTeX template and cls files.
 #'
 #' @export
 #' @param toc A Boolean (TRUE or FALSE) specifying whether table of contents should be created
 #' @param toc_depth A positive integer
 #' @param highlight Syntax highlighting style. Supported styles include "default", "tango", "pygments", "kate", "monochrome", "espresso", "zenburn", and "haddock". Pass NULL to prevent syntax highlighting.
+#' @param ... other arguments to bookdown::pdf_book
 #' @return A modified \code{pdf_document} based on the Reed Senior Thesis LaTeX
 #'   template
+#' @import bookdown
 #' @examples
 #' \dontrun{
-#'  output: thesisdown::thesis_pdf
+#'  output: huskydown::thesis_pdf
 #' }
 thesis_pdf <- function(toc = TRUE, toc_depth = 3, highlight = "default", ...){
 
@@ -20,7 +22,7 @@ thesis_pdf <- function(toc = TRUE, toc_depth = 3, highlight = "default", ...){
     toc_depth = toc_depth,
     highlight = highlight,
     keep_tex = TRUE,
-    pandoc_args = "--chapters",
+    pandoc_args = "--top-level-division=chapter",
     ...)
 
   # Mostly copied from knitr::render_sweave
@@ -40,15 +42,17 @@ thesis_pdf <- function(toc = TRUE, toc_depth = 3, highlight = "default", ...){
 #' This is a function called in output in the YAML of the driver Rmd file
 #' to specify the creation of a webpage version of the thesis.
 #'
+#' @param ... other arguments to bookdown::gitbook
 #' @export
 #' @return A gitbook webpage
+#' @import bookdown
 #' @examples
 #' \dontrun{
-#'  output: thesisdown::thesis_gitbook
+#'  output: huskydown::thesis_gitbook
 #' }
 thesis_gitbook <- function(...){
 
-  base <- bookdown::gitbook(
+  base <- gitbook(
     split_by = "chapter+number",
     config = list(toc = list(collapse = "section",
       before = '<li><a href="./"></a></li>',
@@ -69,17 +73,18 @@ thesis_gitbook <- function(...){
 #'
 #' This is a function called in output in the YAML of the driver Rmd file
 #' to specify the creation of a Microsoft Word version of the thesis.
-#'
+#' @param ... other arguments to  bookdown::word_document2
+#' @import bookdown
 #' @export
 #' @return A Word Document based on (hopefully soon, but not currently)
 #' the Reed Senior Thesis Word template
 #' @examples
 #' \dontrun{
-#'  output: thesisdown::thesis_word
+#'  output: huskydown::thesis_word
 #' }
 thesis_word <- function(...){
 
-  base <- bookdown::word_document2(...)
+  base <- word_document2(...)
 
   # Mostly copied from knitr::render_sweave
   base$knitr$opts_chunk$comment <- NA
@@ -94,15 +99,17 @@ thesis_word <- function(...){
 #' This is a function called in output in the YAML of the driver Rmd file
 #' to specify the creation of a epub version of the thesis.
 #'
+#' @param ... other arguments to bookdown::epub_book
+#' @import bookdown
 #' @export
 #' @return A ebook version of the thesis
 #' @examples
 #' \dontrun{
-#'  output: thesisdown::thesis_epub
+#'  output: huskydown::thesis_epub
 #' }
 thesis_epub <- function(...){
 
-  base <- bookdown::epub_book(...)
+  base <- epub_book(...)
 
   # Mostly copied from knitr::render_sweave
   base$knitr$opts_chunk$comment <- NA
@@ -122,4 +129,15 @@ fix_envs = function(x){
   )
   if (length(i3)) x = x[-i3]
   x
+}
+
+
+#' Makes R CMD check quieter
+#'
+#' This is a function that does nothing
+#'
+#' @import  devtools dplyr  ggplot2 knitr git2r
+hush_notes <- function() {
+
+
 }

@@ -1,4 +1,4 @@
-# get the base image, the rocker/verse has R, RStudio and pandoc
+# get the base image
 FROM rocker/verse:3.4.1
 
 # required
@@ -10,20 +10,23 @@ COPY . /huskydown
 RUN . /etc/environment \
 
   # Install linux depedendencies here
-  # need this because rocker/verse doesn't have xelatex
   && sudo apt-get update \
-  && sudo apt-get install texlive-xetex -y \
-  && sudo apt-get install texlive-bibtex-extra biber -y \
   # install fonts
   && sudo apt-get install fonts-ebgaramond -y \
-  && wget https://github.com/adobe-fonts/source-code-pro/archive/1.017R.zip \
-  && unzip 1.017R.zip  \
-  && sudo cp source-code-pro-1.017R/OTF/*.otf /usr/local/share/fonts/ \
+  && sudo git clone --depth 1 --branch release https://github.com/adobe-fonts/source-code-pro.git /usr/local/share/fonts/source-code-pro \
+  && sudo fc-cache -f -v \
   && sudo apt-get install fonts-lato -y \
+  
+  # get latex & xetex
+  # && R -e "install.packages('tinytex'); tinytex::install_tinytex(force = TRUE, repository = 'ctan')" \
 
   # build this compendium package
   && R -e "devtools::install('/huskydown', dep=TRUE)" \
 
  # make a PhD thesis from the template, remove pre-built PDF,
  # then render new thesis into a PDF, then check it could work:
-  && R -e "rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE, edit = FALSE); setwd('index'); file.remove('_book/thesis.pdf'); bookdown::render_book('index.Rmd', huskydown::thesis_pdf(latex_engine = 'xelatex')); file.exists('_book/thesis.pdf')"
+  && R -e "if (dir.exists('index')) unlink('index', recursive = TRUE)" \
+  && R -e "rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE, edit = FALSE)" \
+  && R -e "if (file.exists('index/_book/thesis.pdf')) file.remove('index/_book/thesis.pdf')" \
+  && R -e "setwd('index');  bookdown::render_book('index.Rmd', huskydown::thesis_pdf(latex_engine = 'xelatex'))" \
+  && R -e "file.exists('index/_book/thesis.pdf')"

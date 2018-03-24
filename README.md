@@ -4,7 +4,7 @@
 
 [![Travis-CI Build Status](https://travis-ci.org/benmarwick/huskydown.svg?branch=master)](https://travis-ci.org/benmarwick/huskydown)
 
-This project provides a template for writing a PhD thesis in R Markdown, and rendering those files into a PDF formatted according to [the requirements of the University of Washington](https://grad.uw.edu/for-students-and-post-docs/thesisdissertation/final-submission-of-your-thesisdissertation/). It uses the [University of Washington Thesis class](http://staff.washington.edu/fox/tex/) to convert R Markdown files into a PDF formatted ready for submission at UW. This project was inspired by the [thesisdown](https://github.com/ismayc/thesisdown) and [bookdown](https://github.com/rstudio/bookdown) packages.
+This project provides a template for writing a PhD thesis in R Markdown, and rendering those files into a PDF formatted according to [the requirements of the University of Washington](https://grad.uw.edu/for-students-and-post-docs/degree-requirements/thesisdissertation/final-submission-of-your-thesisdissertation/). It uses the [University of Washington Thesis class](http://staff.washington.edu/fox/tex/) to convert R Markdown files into a PDF formatted ready for submission at UW. This project was inspired by the [thesisdown](https://github.com/ismayc/thesisdown) and [bookdown](https://github.com/rstudio/bookdown) packages.
 
 Currently, the PDF and gitbook versions are fully-functional. The word and epub versions are developmental, have no templates behind them, and are essentially calls to the appropriate functions in bookdown.
 
@@ -14,9 +14,34 @@ Under the hood, the [University of Washington Thesis LaTeX template](https://git
 
 ## Using huskydown to write your PhD thesis
 
-Using **huskydown** has some prerequisites which are described below. To compile PDF documents using **R**, you need to have LaTeX installed. It can be downloaded for Windows at <http://http://miktex.org/download> and for Mac at <http://tug.org/mactex/mactex-download.html>.  Follow the instructions to install the necessary packages after downloading the (somewhat large) installer files. You may need to install a few extra LaTeX packages on your first attempt to knit as well.
+Using **huskydown** has some prerequisites which are described below. To compile PDF documents using **R**, you need to have LaTeX installed. It can be downloaded for Windows at <http://http://miktex.org/download> and for OSX at <http://tug.org/mactex/mactex-download.html>.  Follow the instructions to install the necessary packages after downloading the (somewhat large) installer files. You may need to install a few extra LaTeX packages on your first attempt to knit as well.
 
-We use some fonts, EB Garamond, Source Code Pro and Lato, that all are freely available online if you don't have them already. You should install these before proceeding. 
+We use some fonts, [EB Garamond](https://github.com/georgd/EB-Garamond), [Source Code Pro](https://github.com/adobe-fonts/source-code-pro/) and [Lato](http://www.latofonts.com/lato-free-fonts/), that all are freely available online if you don't have them already. You should install these before proceeding. 
+
+On a Linux system, this should give you what you need:
+
+```
+sudo apt-get update 
+sudo apt-get install texlive-xetex -y 
+sudo apt-get install texlive-bibtex-extra biber -y 
+sudo apt-get install fonts-ebgaramond -y 
+sudo git clone --depth 1 --branch release https://github.com/adobe-fonts/source-code-pro.git /usr/share/fonts/source-code-pro 
+sudo fc-cache -f -v 
+sudo cp source-code-pro-1.017R/OTF/*.otf /usr/local/share/fonts/ 
+sudo apt-get install fonts-lato -y 
+```
+
+On an OSX system, assuming [MacTeX](http://tug.org/mactex/mactex-download.html) and [homebrew](https://brew.sh/) are installed and updated, this will get you the fonts and other LaTeX packages needed for this template:
+
+```
+brew update
+brew tap caskroom/fonts
+brew cask install font-eb-garamond font-source-code-pro font-lato
+sudo tlmgr update --self
+sudo tlmgr install biblatex titling titlesec quotchap lettrine appendix units tocloft draftwatermark everypage wasysym logreq xstring collection-fontsrecommended texliveonfly 
+```
+
+On Windows the usual pointing and clicking is required to download and install [LaTeX](http://http://miktex.org/download) and the fonts listed above. 
 
 To use **huskydown** from RStudio:
 
@@ -104,6 +129,7 @@ This project has drawn directly on code and ideas in the following:
 Other relevant projects:
 
 - Ed Berry's blog post ['Writing your thesis with bookdown'](https://eddjberry.netlify.com/post/writing-your-thesis-with-bookdown/), Posted on September 25, 2017    
+- Rosanna van Hespen's ([@rosannavhespen](https://twitter.com/rosannavhespen?lang=en)) five blog posts on ['Writing your thesis with R Markdown'](https://rosannavanhespenresearch.wordpress.com/2016/02/03/writing-your-thesis-with-r-markdown-1-getting-started/)
 - [thesisdowndss](https://github.com/mine-cetinkaya-rundel/thesisdowndss) by Mine Cetinkaya-Rundel at Duke University    
 - [beaverdown](https://github.com/zkamvar/beaverdown) by Zhian Kamvar at Oregon State University
 
