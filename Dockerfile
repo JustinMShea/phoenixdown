@@ -1,5 +1,5 @@
 # get the base image
-FROM rocker/verse:3.4.1
+FROM rocker/verse:3.4.4
 
 # required
 MAINTAINER Ben Marwick <bmarwick@uw.edu>
@@ -15,7 +15,6 @@ RUN . /etc/environment \
   # install fonts by moving to system directory
   && sudo cp huskydown/inst/fonts -r /usr/local/share/fonts \
   && sudo fc-cache -f -v \
-
 
   # build this compendium package
   && R -e "devtools::install('/huskydown', dep=TRUE)" \
