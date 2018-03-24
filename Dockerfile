@@ -1,5 +1,5 @@
 # get the base image
-FROM rocker//tidyverse:3.4.4
+FROM rocker/tidyverse:3.4.4
 
 # required
 MAINTAINER Ben Marwick <bmarwick@uw.edu>
