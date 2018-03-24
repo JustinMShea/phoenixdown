@@ -1,5 +1,5 @@
 # get the base image
-FROM rocker/tidyverse:3.4.4
+FROM rocker/verse:3.4.4
 
 # required
 MAINTAINER Ben Marwick <bmarwick@uw.edu>
@@ -18,7 +18,7 @@ RUN . /etc/environment \
   && sudo apt-get install fonts-lato -y \
   
   # get latex & xetex
-  && R -e "install.packages('tinytex'); tinytex::install_tinytex(force = TRUE, repository = 'ctan')" \
+  # && R -e "install.packages('tinytex'); tinytex::install_tinytex(force = TRUE, repository = 'ctan')" \
 
   # build this compendium package
   && R -e "devtools::install('/huskydown', dep=TRUE)" \
