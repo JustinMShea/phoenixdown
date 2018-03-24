@@ -4,6 +4,7 @@ FROM rocker/verse:3.4.1
 # required
 MAINTAINER Ben Marwick <bmarwick@uw.edu>
 
+# get contents of GitHub repo
 COPY . /huskydown
 
 # go into the repo directory
@@ -11,14 +12,9 @@ RUN . /etc/environment \
 
   # Install linux depedendencies here
   && sudo apt-get update \
-  # install fonts
-  && sudo apt-get install fonts-ebgaramond -y \
-  && sudo git clone --depth 1 --branch release https://github.com/adobe-fonts/source-code-pro.git /usr/local/share/fonts/source-code-pro \
+  # install fonts by moving to system directory
+  && sudo cp huskydown/inst/fonts -r /usr/local/share/fonts \
   && sudo fc-cache -f -v \
-  && sudo apt-get install fonts-lato -y \
-  
-  # get latex & xetex
-  # && R -e "install.packages('tinytex'); tinytex::install_tinytex(force = TRUE, repository = 'ctan')" \
 
   # build this compendium package
   && R -e "devtools::install('/huskydown', dep=TRUE)" \

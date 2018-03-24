@@ -7,9 +7,11 @@ matrix:
       language: generic
       services: docker
     - os: osx
-      latex: false
       language: r
       cache: packages
+
+
+
 env:
  global:
   - REPO=$DOCKER_USER/huskydown
@@ -24,13 +26,13 @@ https://github.com/jgm/pandoc/releases/download/2.0/pandoc-2.0-macOS.pkg ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo tlmgr update --self  ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo tlmgr install biblatex titling titlesec quotchap lettrine appendix units tocloft draftwatermark everypage wasysym logreq xstring collection-fontsrecommended texliveonfly   ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e 'install.packages("devtools")'  ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker build -t $REPO . ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "devtools::install_github('benmarwick/huskydown')" ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "unlink('index', recursive = TRUE)" ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE, edit = FALSE)"  ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "setwd('index'); bookdown::render_book('index.Rmd', huskydown::thesis_pdf(latex_engine = 'xelatex'))"  ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "file.exists('index/_book/thesis.pdf')"  ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "file.info('index/_book/thesis.pdf')"  ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker build -t $REPO . ; fi
 
 
 # push our custom docker container to docker hub, env vars stored on travis-ci.org
