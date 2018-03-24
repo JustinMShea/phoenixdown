@@ -1,7 +1,5 @@
 # Build on OSX and linux (use our docker container)
 
-pandoc_version: 2.0
-
 matrix:
   include:
     - os: linux
@@ -10,10 +8,9 @@ matrix:
       services: docker
     - os: osx
       language: r
+      pandoc_version: 2.0
       cache: packages
-      pandoc_version: 1.17.2
-
-
+      
 
 env:
  global:
