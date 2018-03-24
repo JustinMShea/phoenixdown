@@ -21,7 +21,7 @@ RUN . /etc/environment \
   && R -e "install.packages('tinytex'); tinytex::install_tinytex(force = TRUE, repository = 'ctan')" \
 
   # build this compendium package
-  && R -e "install.packages(c('devtools', 'bookdown', 'rmarkdown'), dependencies = TRUE, verbose = TRUE)" \
+  && R -e "install.packages(c('devtools', 'bookdown', 'rmarkdown'), verbose = TRUE)" \
   && R -e "devtools::install('/huskydown', dep=TRUE)" \
 
  # make a PhD thesis from the template, remove pre-built PDF,
