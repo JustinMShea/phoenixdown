@@ -25,9 +25,6 @@ sudo apt-get update
 sudo apt-get install texlive-xetex -y 
 sudo apt-get install texlive-bibtex-extra biber -y 
 sudo apt-get install fonts-ebgaramond -y 
-sudo git clone --depth 1 --branch release https://github.com/adobe-fonts/source-code-pro.git /usr/share/fonts/source-code-pro 
-sudo fc-cache -f -v 
-sudo cp source-code-pro-1.017R/OTF/*.otf /usr/local/share/fonts/ 
 sudo apt-get install fonts-lato -y 
 ```
 

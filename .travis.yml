@@ -7,11 +7,9 @@ matrix:
       language: generic
       services: docker
     - os: osx
+      latex: false
       language: r
       cache: packages
-
-
-
 env:
  global:
   - REPO=$DOCKER_USER/huskydown
@@ -33,6 +31,7 @@ https://github.com/jgm/pandoc/releases/download/2.0/pandoc-2.0-macOS.pkg ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "file.exists('index/_book/thesis.pdf')"  ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R -e "file.info('index/_book/thesis.pdf')"  ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker build -t $REPO . ; fi
+
 
 
 # push our custom docker container to docker hub, env vars stored on travis-ci.org

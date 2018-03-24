@@ -16,6 +16,7 @@ RUN . /etc/environment \
   && sudo cp huskydown/inst/fonts -r /usr/local/share/fonts \
   && sudo fc-cache -f -v \
 
+
   # build this compendium package
   && R -e "devtools::install('/huskydown', dep=TRUE)" \
 
