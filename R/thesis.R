@@ -1,7 +1,7 @@
 #' Creates an R Markdown PDF Thesis document
 #'
 #' This is a function called in output in the YAML of the driver Rmd file
-#' to specify using the Reed College Senior Thesis LaTeX template and cls files.
+#' to specify using the University of Washington Thesis LaTeX template and cls files.
 #'
 #' @export
 #' @param toc A Boolean (TRUE or FALSE) specifying whether table of contents should be created
@@ -22,7 +22,7 @@ thesis_pdf <- function(toc = TRUE, toc_depth = 3, highlight = "default", ...){
     toc_depth = toc_depth,
     highlight = highlight,
     keep_tex = TRUE,
-    pandoc_args = "--chapters",
+    pandoc_args = "--top-level-division=chapter",
     ...)
 
   # Mostly copied from knitr::render_sweave
