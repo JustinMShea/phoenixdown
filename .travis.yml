@@ -8,7 +8,7 @@ matrix:
       services: docker
     - os: osx
       language: r
-      pandoc_version: 2.0
+      pandoc_version: 2.1.3
       cache: packages
       
 
