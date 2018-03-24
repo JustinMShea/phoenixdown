@@ -2,7 +2,7 @@
 
 # huskydown <img src="inst/rmarkdown/templates/thesis/skeleton/figure/uw-100px.png" align="right" />
 
-[![Travis-CI Build Status](https://travis-ci.org/benmarwick/huskydown.svg?branch=master)](https://travis-ci.org/benmarwick/huskydown)
+[![Travis-CI Build Status](https://travis-ci.org/benmarwick/huskydown.svg?branch=master)](https://travis-ci.org/benmarwick/huskydown)  [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/benmarwick/huskydown?branch=master&svg=true)](https://ci.appveyor.com/project/benmarwick/huskydown)
 
 This project provides a template for writing a PhD thesis in R Markdown, and rendering those files into a PDF formatted according to [the requirements of the University of Washington](https://grad.uw.edu/for-students-and-post-docs/degree-requirements/thesisdissertation/final-submission-of-your-thesisdissertation/). It uses the [University of Washington Thesis class](http://staff.washington.edu/fox/tex/) to convert R Markdown files into a PDF formatted ready for submission at UW. This project was inspired by the [thesisdown](https://github.com/ismayc/thesisdown) and [bookdown](https://github.com/rstudio/bookdown) packages.
 

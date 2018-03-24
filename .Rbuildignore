@@ -11,3 +11,4 @@
 ^\.Rhistory$
 ^index$
 ^LICENSE\.md$
+^appveyor\.yml$
