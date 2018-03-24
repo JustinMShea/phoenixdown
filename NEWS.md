@@ -1,3 +1,11 @@
+
+# huskydown 0.0.4
+
+- new version of Pandoc
+- Source-Code-Pro changed location on GitHub, so changed method of getting them
+- tinytex burst onto the scene, simplying LaTeX installs.
+
+
 # huskydown 0.0.4
 
 - CI on OSX and Linux, collect artefacts and issue PDF

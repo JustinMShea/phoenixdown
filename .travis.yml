@@ -7,7 +7,6 @@ matrix:
       language: generic
       services: docker
     - os: osx
-      latex: false
       language: r
       cache: packages
 env:
