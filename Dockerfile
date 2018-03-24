@@ -1,5 +1,5 @@
 # get the base image
-FROM rocker/verse:3.4.4
+FROM rocker/verse:3.4.3
 
 # required
 MAINTAINER Ben Marwick <bmarwick@uw.edu>
