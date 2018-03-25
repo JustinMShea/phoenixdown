@@ -1,7 +1,6 @@
 #' huskydown: A package for creating undergraduate, Masters, and PhD theses
 #'using R Markdown
 #'
-#'
 #' @section thesis_gitbook:
 #' Creates an R Markdown thesis template as a webpage
 #' @section thesis_pdf:
