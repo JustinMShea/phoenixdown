@@ -6,21 +6,19 @@ init:
         $ErrorActionPreference = "Stop"
         Invoke-WebRequest http://raw.github.com/krlmlr/r-appveyor/master/scripts/appveyor-tool.ps1 -OutFile "..\appveyor-tool.ps1"
         Import-Module '..\appveyor-tool.ps1'
-
 install:
-   ps: |
-   - Bootstrap
-  # Install miktex to get pdflatex, if we don't get it from the cache
-  - if not exist c:\miktex\texmfs\install\miktex\bin\pdflatex.exe appveyor DownloadFile http://mirrors.ctan.org/systems/win32/miktex/setup/miktex-portable.exe
-  - if not exist c:\miktex\texmfs\install\miktex\bin\pdflatex.exe 7z x miktex-portable.exe -oC:\miktex >NUL
-  - set "PATH=%PATH%;c:\miktex\texmfs\install\miktex\bin"
-  # autoinstall latex packages (0=no, 1=autoinstall, 2=ask)
-  # this adds this to the registry!
-  - initexmf --set-config-value "[MPM]AutoInstall=1"
-  - mpm --install=cm-super
-  - mpm --update-db
-  - mpm --update=fontspec
-  - initexmf --update-fndb
+  - ps: Bootstrap
+  - ps: choco install -y miktex
+  - cmd:  refreshenv
+
+cache:
+  - C:\RLibrary
+
+# Adapt as necessary starting from here
+
+environment:
+  global:
+    WARNINGS_ARE_ERRORS: 1
 
 before_test:
   - cinst pandoc
