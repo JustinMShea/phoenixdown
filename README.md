@@ -6,9 +6,9 @@
 
 This project provides a template for writing a PhD thesis in R Markdown, and rendering those files into a PDF formatted according to [the requirements of the University of Washington](https://grad.uw.edu/for-students-and-post-docs/degree-requirements/thesisdissertation/final-submission-of-your-thesisdissertation/). It uses the [University of Washington Thesis class](http://staff.washington.edu/fox/tex/) to convert R Markdown files into a PDF formatted ready for submission at UW. This project was inspired by the [thesisdown](https://github.com/ismayc/thesisdown) and [bookdown](https://github.com/rstudio/bookdown) packages.
 
-Currently, the PDF and gitbook versions are fully-functional. The word and epub versions are developmental, have no templates behind them, and are essentially calls to the appropriate functions in bookdown.
+Currently, the PDF and gitbook versions are fully-functional, and are the focus of this package. The word and epub versions are in development, have no templates behind them, and are essentially calls to the appropriate functions in bookdown.
 
-If you are new to working with `bookdown` and `rmarkdown`, please read over the documentation available in huskydown [PDF template](index/_book/thesis.pdf) and the [bookdown book](https://bookdown.org/yihui/bookdown/).
+If you are new to working with `bookdown` and `rmarkdown`, please read over the documentation available in huskydown PDF template (which you can create by following the simple instructions below) and the [bookdown book](https://bookdown.org/yihui/bookdown/).
 
 Under the hood, the [University of Washington Thesis LaTeX template](https://github.com/UWIT-IAM/UWThesis) is used to ensure that documents conform precisely to submission standards. At the same time, composition and formatting can be done using lightweight [markdown](http://rmarkdown.rstudio.com/authoring_basics.html) syntax, and **R** code and its output can be seamlessly included using [rmarkdown](http://rmarkdown.rstudio.com).
 
@@ -25,7 +25,7 @@ tinytex::install_tinytex()
 tinytex:::is_tinytex()
 ```
 
-We use some fonts, [EB Garamond](https://github.com/georgd/EB-Garamond), [Source Code Pro](https://github.com/adobe-fonts/source-code-pro/) and [Lato](http://www.latofonts.com/lato-free-fonts/) that are inlcuded in this repository. You need to install these before proceeding, either use your usual method of installing fonts, or follow these instructions:
+Our PDF template requires some specific fonts, [EB Garamond](https://github.com/georgd/EB-Garamond), [Source Code Pro](https://github.com/adobe-fonts/source-code-pro/) and [Lato](http://www.latofonts.com/lato-free-fonts/). These are inlcuded in this repository. You need to install these before proceeding, either by using your usual method of installing fonts, or following these instructions:
 
 On a Linux system here's the simplest way to install the fonts:
 
@@ -35,7 +35,7 @@ cp huskydown/inst/fonts -r /usr/local/share/fonts
 sudo fc-cache -f -v
 ```
 
-On an OSX system you can download a copy of the fonts in this repository with <https://github.com/benmarwick/huskydown/archive/master.zip>, unzip and look in `inst/` for the `fonts/` directory, and move them to your fonts directory, or, assuming [homebrew](https://brew.sh/) is installed and updated, this will get you the fonts needed for this template:
+On an OSX system you can download a copy of the fonts in this repository with <https://github.com/benmarwick/huskydown/archive/master.zip>, unzip and look in `inst/` for the `fonts.zip` file, unzip and move them to your fonts directory, or, assuming [homebrew](https://brew.sh/) is installed and updated, this will get you the fonts needed for this template:
 
 ```
 brew update
@@ -43,13 +43,13 @@ brew tap caskroom/fonts
 brew cask install font-eb-garamond font-source-code-pro font-lato
 ```
 
-On Windows the usual pointing and clicking is required to install the fonts listed above. You can download a copy of the fonts in this repository at <https://github.com/benmarwick/huskydown/archive/master.zip>, unzip and look in `inst/` for the `fonts/` directory. 
+On Windows the usual pointing and clicking is required to install the fonts listed above. You can download a copy of the fonts in this repository at <https://github.com/benmarwick/huskydown/archive/master.zip>, unzip and look in `inst/` for the `fonts.zip` file, unzip and move them to your fonts directory. 
 
 ### Starting a thesis
 
 To use **huskydown** from [RStudio](http://www.rstudio.com/products/rstudio/download/):
 
-1) Assuming you have already installed LaTeX and the fonts described above, and are using the latest version of [RStudio](http://www.rstudio.com/products/rstudio/download/). You can use huskydown without RStudio. For example, you can write the Rmd files in your favourite text editor (e.g. [Atom](https://atom.io/), [Notepad++](https://notepad-plus-plus.org/)). But RStudio is probably the easiest tool for writing both R code and text in your thesis. 
+1) Ensure that you have already installed LaTeX and the fonts described above, and are using the latest version of [RStudio](http://www.rstudio.com/products/rstudio/download/). You can use huskydown without RStudio. For example, you can write the Rmd files in your favourite text editor (e.g. [Atom](https://atom.io/), [Notepad++](https://notepad-plus-plus.org/)). But RStudio is probably the easiest tool for writing both R code and text in your thesis. 
 
 2) Install the **bookdown** and **huskydown** packages: 
 
@@ -75,18 +75,13 @@ rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create
 
 You need to edit the individual chapter R Markdown files to write your thesis. 
 
-You can write in the Rmd files without RStudio (in fact RStudio lacks some convienences for writing, such as live spell-checking and live word count). 
-
-So you may prefer to do some writing and editing your Rmd files in your favourite text editor. I frequently use [Atom](https://atom.io/), [Notepad++](https://notepad-plus-plus.org/), and [Emacs](https://www.gnu.org/software/emacs/). But I come back to RStudio to create the PDF and work on the R code in my documents. 
+You can write in the Rmd files without RStudio (in fact RStudio lacks some conveniences for writing, such as live spell-checking and live word count). So you may prefer to do some writing and editing your Rmd files in your favourite text editor. I frequently use [Atom](https://atom.io/), [Notepad++](https://notepad-plus-plus.org/), and [Emacs](https://www.gnu.org/software/emacs/). But I come back to RStudio to create the PDF and work on the R code in my documents. 
 
 While writing, you should `git commit` your work frequently, after every major activity on your thesis. For example, every few paragraphs or or section of text, and after major step of analysis development. You should `git push` at the end of each work session before you leave your computer or change task. For gentle novice-friendly guide to getting starting with using Git with R and RStudio, see <http://happygitwithr.com/>.
 
 ## Rendering
 
-To render your thesis into a PDF, open `index.Rmd` in RStudio and then hit the
-"knit" button. To change the output formats between PDF, gitbook and Word ,
-look at the `output:` field in `index.Rmd`and comment-out the formats 
-you don't want.
+To render your thesis into a PDF, open `index.Rmd` in RStudio and then hit the "knit" button. To change the output formats between PDF, gitbook and Word , look at the `output:` field in `index.Rmd`and comment-out the formats you don't want.
 
 Alternatively, if you're not using RStudio, you can use this from the R console, assuming your have set the `'index/` directory as your working directory:
 
@@ -102,7 +97,7 @@ The following components are ones you should edit to customize your thesis:
 
 ### `_bookdown.yml`
 
-This is the main configuration file for your thesis. It deterines what Rmd files are included in the output, and in what order. Arrange the order of your chapters in this file and ensure that the names match the names in your folders. 
+This is the main configuration file for your thesis. It determines what Rmd files are included in the output, and in what order. Arrange the order of your chapters in this file and ensure that the names match the names in your folders. 
 
 ### `index.Rmd`
 
@@ -124,7 +119,7 @@ citation styles is https://github.com/citation-style-language/styles#readme
 
 ### `figure/` and `data/`
 
-Store your figures and data here and reference them in your R Markdown files. 
+Store your figures and data here and reference them in your R Markdown files. See the [bookdown book](https://bookdown.org/yihui/bookdown/) for details on cross-referencing items using R Markdown.
 
 ## Related projects
 
