@@ -11,9 +11,9 @@ install:
 
 # Adapt as necessary starting from here
 
-before_build:
-  - Rscript -e 'install.packages("tinytex"); tinytex::install_tinytex()'
-  - cmd:  refreshenv
+environment:
+  global:
+   WARNINGS_ARE_ERRORS: 0
 
 build_script:
   - travis-tool.sh install_deps
