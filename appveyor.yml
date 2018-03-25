@@ -27,8 +27,6 @@ before_test:
   - cinst pandoc
   - ps: $env:Path += ";C:\Program Files (x86)\Pandoc\"
 
-cache:
-  - C:\RLibrary
 
 # Adapt as necessary starting from here
 
