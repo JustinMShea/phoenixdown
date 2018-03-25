@@ -10,6 +10,10 @@ init:
 install:
   ps: Bootstrap
 
+before_test:
+  - cinst pandoc
+  - ps: $env:Path += ";C:\Program Files (x86)\Pandoc\"
+
 cache:
   - C:\RLibrary
 
