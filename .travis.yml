@@ -16,7 +16,7 @@ env:
 warnings_are_errors:  false
 
 before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then rm -f '/usr/local/bin/pandoc' ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then rm -f '/usr/local/bin/pandoc' '/usr/local/share/man/man1/pandoc.1' ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link --overwrite pandoc; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install --force pandoc; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew tap caskroom/fonts  ; fi
