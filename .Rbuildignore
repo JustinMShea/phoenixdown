@@ -7,9 +7,9 @@
 ^uw_thesis_rmd\.png$
 ^README\.md$
 ^LICENSE$
+^LICENSE\.md$
 ^CONDUCT\.md$
 ^CONTRIBUTING\.md$
-^LICENSE\.md$
 ^\.Rhistory$
 ^\.gitattributes$
 ^\.gitignore$

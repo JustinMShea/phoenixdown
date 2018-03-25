@@ -131,6 +131,7 @@ The example we show here does the following:
 - Using `flights2`, we determine the largest arrival delay for each of the carriers.
 
 ```{r max_delays}
+library(dplyr)
 flights2 <- flights %>% 
   select(carrier_name, arr_delay)
 max_delays <- flights2 %>% 
@@ -141,6 +142,7 @@ max_delays <- flights2 %>%
 A useful function in the `knitr` package for making nice tables in _R Markdown_ is called `kable`.  It is much easier to use than manually entering values into a table by copying and pasting values into Excel or LaTeX.  This again goes to show how nice reproducible documents can be! (Note the use of `results="asis"`, which will produce the table instead of the code to create the table.)  The `caption.short` argument is used to include a shorter title to appear in the List of Tables.
 
 ```{r maxdelays, results="asis"}
+library(knitr)
 kable(max_delays, 
       col.names = c("Airline", "Max Arrival Delay"),
       caption = "Maximum Delays by Airline",
@@ -155,8 +157,9 @@ We can further look into the properties of the largest value here for American A
 
 
 ```{r max_props}
-flights %>% filter(arr_delay == 1539, 
-                  carrier_name == "American Airlines Inc.") %>%
+flights %>% 
+  filter(arr_delay == 1539, 
+         carrier_name == "American Airlines Inc.") %>%
   select(-c(month, day, carrier, dest_name, hour, 
             minute, carrier_name, arr_delay))
 ```
@@ -164,8 +167,12 @@ flights %>% filter(arr_delay == 1539,
 We see that the flight occurred on March 3rd and departed a little after 2 PM on its way to Dallas/Fort Worth.  Lastly, we show how we can visualize the arrival delay of all departing flights from Portland on March 3rd against time of departure.
 
 ```{r march3plot, fig.height=3, fig.width=6}
-flights %>% filter(month == 3, day == 3) %>%
-  ggplot(aes(x = dep_time, y = arr_delay)) + geom_point()
+library(ggplot2)
+flights %>% 
+  filter(month == 3, day == 3) %>%
+  ggplot(aes(x = dep_time, 
+             y = arr_delay)) + 
+  geom_point()
 ```
 
 ## Additional resources
