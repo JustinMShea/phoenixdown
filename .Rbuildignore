@@ -9,6 +9,8 @@
 ^CONDUCT\.md$
 ^CONTRIBUTING\.md$
 ^\.Rhistory$
+^\.gitattributes$
+^\.gitignore$
 ^index$
 ^LICENSE\.md$
 ^appveyor\.yml$
