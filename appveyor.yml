@@ -13,12 +13,15 @@ install:
 
 cache:
   - C:\RLibrary
+  - C:\ProgramData\chocolatey\bin -> appveyor.yml
+  - C:\ProgramData\chocolatey\lib -> appveyor.yml
 
 # Adapt as necessary starting from here
 
 environment:
   global:
-    WARNINGS_ARE_ERRORS: 1
+   WARNINGS_ARE_ERRORS: 0
+   USE_RTOOLS: true
 
 before_test:
   - cinst pandoc
