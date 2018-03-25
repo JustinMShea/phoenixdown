@@ -12,7 +12,7 @@ RUN . /etc/environment \
 
 && sudo apt-get update \
 
-&& sudo cp huskydown/fonts -r /usr/local/share/fonts \
+&& sudo unzip huskydown/inst/fonts.zip && cp huskydown/inst/fonts -r /usr/local/share/fonts \
 && sudo fc-cache -f -v \
 
 && R -e "devtools::install('/huskydown', dep=TRUE)" \
