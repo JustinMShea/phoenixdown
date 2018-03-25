@@ -17,11 +17,11 @@ warnings_are_errors:  false
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then rm -f '/usr/local/bin/pandoc' '/usr/local/share/man/man1/pandoc.1' ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install --force pandoc; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install --force pandoc-citeproc; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install --force pandoc ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install --force pandoc-citeproc ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo chown -R `whoami` /usr/local/share ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link --overwrite pandoc-citeproc; fi
-    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link --overwrite pandoc; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link --overwrite pandoc-citeproc ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link --overwrite pandoc ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew tap caskroom/fonts  ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew cask install font-eb-garamond font-source-code-pro font-lato  ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo tlmgr update --self  ; fi
