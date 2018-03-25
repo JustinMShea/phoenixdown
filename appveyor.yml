@@ -19,7 +19,7 @@ build_script:
 test_script:
   - travis-tool.sh run_tests
 
-before_test:
+after_test:
   - Rscript -e "rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE)"
 
 on_failure:
