@@ -8,7 +8,8 @@ init:
         Import-Module '..\appveyor-tool.ps1'
 
 install:
-  ps: Bootstrap
+   ps: |
+   - Bootstrap
   # Install miktex to get pdflatex, if we don't get it from the cache
   - if not exist c:\miktex\texmfs\install\miktex\bin\pdflatex.exe appveyor DownloadFile http://mirrors.ctan.org/systems/win32/miktex/setup/miktex-portable.exe
   - if not exist c:\miktex\texmfs\install\miktex\bin\pdflatex.exe 7z x miktex-portable.exe -oC:\miktex >NUL
