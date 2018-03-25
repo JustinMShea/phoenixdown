@@ -19,10 +19,8 @@ build_script:
 test_script:
   - travis-tool.sh run_tests
 
-after_build:
+before_package:
   - Rscript -e "rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE)"
-
-
 
 on_failure:
   - 7z a failure.zip *.Rcheck\*

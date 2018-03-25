@@ -11,11 +11,12 @@ Description: Using the bookdown package and LaTeX and Word thesis templates from
     and analyses as well. Based on Chester Ismay's thesisdown.
 Maintainer: Ben Marwick <benmarwick@gmail.com>
 Depends:
-    R (>= 3.2.0),
+    R (>= 3.2.0)
+Imports:
     bookdown,
+    rmarkdown,
     knitr,
-    git2r
-Suggests:
+    git2r,
     tinytex,
     devtools,
     dplyr,
