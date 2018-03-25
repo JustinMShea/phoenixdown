@@ -13,12 +13,16 @@ install:
 
 # Adapt as necessary starting from here
 
-
 build_script:
   - travis-tool.sh install_deps
 
 test_script:
   - travis-tool.sh run_tests
+
+after_build:
+  - Rscript -e "rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE)"
+
+
 
 on_failure:
   - 7z a failure.zip *.Rcheck\*

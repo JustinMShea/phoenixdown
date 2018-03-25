@@ -14,3 +14,5 @@
 ^index$
 ^LICENSE\.md$
 ^appveyor\.yml$
+^inst/index
+^inst/fonts
