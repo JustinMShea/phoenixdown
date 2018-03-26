@@ -8,6 +8,9 @@ dir.create(testing_path, showWarnings = FALSE)
 
 context("check for prerequisites")
 
+if (!require(tinytex)) install.packages("tinytex")
+if (!tinytex:::is_tinytex()) tinytex::install_tinytex()
+
 test_that("LaTeX is installed", {
   expect_true(tinytex:::is_tinytex())
 })
@@ -22,15 +25,17 @@ test_that("Template files are present", {
 
 context("create the thesis directories and files")
 
-#### run function to create the thesis ####
-
 if (getwd() != testing_path) setwd(testing_path)
 if (dir.exists('index')) unlink('index', recursive = TRUE)
 suppressMessages(rmarkdown::draft('index.Rmd',
-                                  template = 'thesis',
-                                  package = 'huskydown',
+                                  system.file("rmarkdown",
+                                              "templates",
+                                              "thesis",
+                                              package = "huskydown"),
                                   create_dir = TRUE,
                                   edit = FALSE))
+
+system.file("rmarkdown", "templates", "thesis", package = "huskydown")
 
 # these are the files that we expect it to make
 the_files <-  c("_bookdown.yml"    , "01-chap1.Rmd"     ,
@@ -52,14 +57,10 @@ test_that("rmarkdown::draft generates the thesis directories and files", {
 
 context("render into a PDF")
 
-#### run function to create the thesis ####
-
-#
 if (getwd() != file.path(testing_path, 'index')) setwd(file.path(testing_path, 'index'))
 bookdown::render_book('index.Rmd',
                       huskydown::thesis_pdf(latex_engine = 'xelatex'),
                       envir = globalenv())
-
 
 test_that("bookdown::render_book generates the PDF of the thesis", {
 
