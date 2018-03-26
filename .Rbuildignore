@@ -12,3 +12,5 @@
 ^\.Rhistory$
 ^\.gitattributes$
 ^\.gitignore$
+^index$
+^fonts\.zip$

@@ -9,7 +9,11 @@ init:
 
 
 install:
-  ps: Bootstrap
+  ps: |
+        Bootstrap
+        choco install -y miktex
+  cmd:  refreshenv
+
 
 # Adapt as necessary starting from here
 
