@@ -13,7 +13,7 @@ env:
  global:
   - REPO=$DOCKER_USER/huskydown
 
-warnings_are_errors:  false   /usr/local/bin/pandoc-citeproc
+warnings_are_errors:  false
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then rm -f '/usr/local/bin/pandoc' '/usr/local/share/man/man1/pandoc.1' ; fi
