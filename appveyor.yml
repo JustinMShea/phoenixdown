@@ -27,10 +27,6 @@ before_test:
 test_script:
   - travis-tool.sh run_tests
 
-after_test:
-  - Rscript -e "devtools::install('C:/projects/huskydown', dep=TRUE)"
-  - Rscript -e "rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE)"
-
 on_failure:
   - 7z a failure.zip *.Rcheck\*
   - appveyor PushArtifact failure.zip
