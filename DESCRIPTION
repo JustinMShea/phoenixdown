@@ -26,4 +26,5 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
 SystemRequirements: pandoc (>= 1.18) - http://pandoc.org
-
+Suggests: 
+    testthat
