@@ -9,7 +9,7 @@ dir.create(testing_path, showWarnings = FALSE)
 context("check for prerequisites")
 
 if (!require(tinytex)) install.packages("tinytex")
-if (!tinytex:::is_tinytex()) tinytex::install_tinytex()
+if (!tinytex:::is_tinytex()  ) tinytex::install_tinytex(force = TRUE)
 
 test_that("LaTeX is installed", {
   expect_true(tinytex:::is_tinytex())
@@ -34,8 +34,6 @@ suppressMessages(rmarkdown::draft('index.Rmd',
                                               package = "huskydown"),
                                   create_dir = TRUE,
                                   edit = FALSE))
-
-system.file("rmarkdown", "templates", "thesis", package = "huskydown")
 
 # these are the files that we expect it to make
 the_files <-  c("_bookdown.yml"    , "01-chap1.Rmd"     ,
