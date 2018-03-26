@@ -13,7 +13,7 @@ dir.create(testing_path, showWarnings = FALSE)
 #
 # test_that("LaTeX is installed", {
 #   expect_true(tinytex:::is_tinytex())
-})
+#})
 
 context("check that the pkg template files are present")
 
