@@ -16,7 +16,9 @@ Under the hood, the [University of Washington Thesis LaTeX template](https://git
 
 ### Initial setup
 
-Using **huskydown** has some prerequisites which are described below. To compile PDF documents using **R**, you need to have LaTeX and several related packages installed. By far the easiest way to install LaTeX on any platform is with the [`tinytex`](https://yihui.name/tinytex/) package:
+Using **huskydown** has some prerequisites, such as Pandoc, LaTeX and some fonts. To compile PDF documents using **R**, you need to have Pandoc, LaTeX and several related packages installed. If you have a recent version of  [RStudio](http://www.rstudio.com/products/rstudio/download/), then you already have Pandoc and don't need to do anything more about that. 
+
+Next is LaTeX. By far the easiest way to install LaTeX on any platform is with the [`tinytex`](https://yihui.name/tinytex/) package:
 
 ```
 install.packages(c('tinytex', 'rmarkdown'))
@@ -35,7 +37,7 @@ cp huskydown/inst/fonts -r /usr/local/share/fonts
 sudo fc-cache -f -v
 ```
 
-On an OSX system you can download a copy of the fonts in this repository with <https://github.com/benmarwick/huskydown/archive/master.zip>, unzip and look in `inst/` for the `fonts.zip` file, unzip and move them to your fonts directory, or, assuming [homebrew](https://brew.sh/) is installed and updated, this will get you the fonts needed for this template:
+On an OSX system you can download a copy of the fonts in this repository with <https://github.com/benmarwick/huskydown/raw/master/fonts.zip>, unzip and move them to your fonts directory, or, assuming [homebrew](https://brew.sh/) is installed and updated, this will get you the fonts needed for this template:
 
 ```
 brew update
@@ -43,9 +45,9 @@ brew tap caskroom/fonts
 brew cask install font-eb-garamond font-source-code-pro font-lato
 ```
 
-On Windows the usual pointing and clicking is required to install the fonts listed above. You can download a copy of the fonts in this repository at <https://github.com/benmarwick/huskydown/archive/master.zip>, unzip and look in `inst/` for the `fonts.zip` file, unzip and move them to your fonts directory. 
+On Windows the usual pointing and clicking is required to install the fonts listed above. You can download a copy of the fonts in this repository at <https://github.com/benmarwick/huskydown/raw/master/fonts.zip>, unzip and move them to your fonts directory. 
 
-### Starting a thesis
+### Starting to write your thesis
 
 To use **huskydown** from [RStudio](http://www.rstudio.com/products/rstudio/download/):
 
@@ -71,13 +73,13 @@ Or if you're not using RStudio, run this line in your R console to create a new 
 rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE)
 ```
 
-### Day-to-day writing of the thesis 
+### Day-to-day writing of your thesis 
 
 You need to edit the individual chapter R Markdown files to write your thesis. 
 
 You can write in the Rmd files without RStudio (in fact RStudio lacks some conveniences for writing, such as live spell-checking and live word count). So you may prefer to do some writing and editing your Rmd files in your favourite text editor. I frequently use [Atom](https://atom.io/), [Notepad++](https://notepad-plus-plus.org/), and [Emacs](https://www.gnu.org/software/emacs/). But I come back to RStudio to create the PDF and work on the R code in my documents. 
 
-While writing, you should `git commit` your work frequently, after every major activity on your thesis. For example, every few paragraphs or or section of text, and after major step of analysis development. You should `git push` at the end of each work session before you leave your computer or change task. For gentle novice-friendly guide to getting starting with using Git with R and RStudio, see <http://happygitwithr.com/>.
+While writing, you should `git commit` your work frequently, after every major activity on your thesis. For example, every few paragraphs or section of text, and after major step of analysis development. You should `git push` at the end of each work session before you leave your computer or change task. For gentle novice-friendly guide to getting starting with using Git with R and RStudio, see <http://happygitwithr.com/>.
 
 ## Rendering
 
@@ -89,7 +91,7 @@ Alternatively, if you're not using RStudio, you can use this from the R console,
 bookdown::render_book('index.Rmd', huskydown::thesis_pdf(latex_engine = 'xelatex'))
 ```
 
-Your thesis will be deposited in the `_book/` directory.
+The PDF file of your thesis will be deposited in the `_book/` directory.
 
 ## Components
 
