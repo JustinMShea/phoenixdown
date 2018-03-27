@@ -6,9 +6,7 @@ matrix:
       sudo: required
       language: generic
       services: docker
-    - os: osx
-      language:
-      cache: packages
+
 env:
  global:
   - REPO=$DOCKER_USER/huskydown
