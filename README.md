@@ -2,7 +2,7 @@
 
 # huskydown <img src="inst/rmarkdown/templates/thesis/skeleton/figure/uw-100px.png" align="right" />
 
-[![Travis-CI Build Status](https://travis-ci.org/benmarwick/huskydown.svg?branch=master)](https://travis-ci.org/benmarwick/huskydown)  [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/benmarwick/huskydown?branch=master&svg=true)](https://ci.appveyor.com/project/benmarwick/huskydown)
+[![Travis-CI Build Status](https://travis-ci.org/benmarwick/huskydown.svg?branch=master)](https://travis-ci.org/benmarwick/huskydown) 
 
 This project provides a template for writing a PhD thesis in R Markdown, and rendering those files into a PDF formatted according to [the requirements of the University of Washington](https://grad.uw.edu/for-students-and-post-docs/degree-requirements/thesisdissertation/final-submission-of-your-thesisdissertation/). It uses the [University of Washington Thesis class](http://staff.washington.edu/fox/tex/) to convert R Markdown files into a PDF formatted ready for submission at UW. This project was inspired by the [thesisdown](https://github.com/ismayc/thesisdown) and [bookdown](https://github.com/rstudio/bookdown) packages.
 
@@ -25,7 +25,7 @@ tinytex::install_tinytex()
 tinytex:::is_tinytex()
 ```
 
-Our PDF template requires some specific fonts, [EB Garamond](https://github.com/georgd/EB-Garamond), [Source Code Pro](https://github.com/adobe-fonts/source-code-pro/) and [Lato](http://www.latofonts.com/lato-free-fonts/). These are inlcuded in this repository. You need to install these before proceeding, either by using your usual method of installing fonts, or following these instructions:
+Our PDF template requires some specific fonts, [EB Garamond](https://github.com/georgd/EB-Garamond), [Source Code Pro](https://github.com/adobe-fonts/source-code-pro/) and [Lato](http://www.latofonts.com/lato-free-fonts/). These are included in this repository. You need to install these before proceeding, either by using your usual method of installing fonts, or following these instructions:
 
 On a Linux system here's the simplest way to install the fonts:
 
@@ -81,7 +81,7 @@ While writing, you should `git commit` your work frequently, after every major a
 
 ## Rendering
 
-To render your thesis into a PDF, open `index.Rmd` in RStudio and then hit the "knit" button. To change the output formats between PDF, gitbook and Word , look at the `output:` field in `index.Rmd`and comment-out the formats you don't want.
+To render your thesis into a PDF, open `index.Rmd` in RStudio and then click the "knit" button. To change the output formats between PDF, gitbook and Word , look at the `output:` field in `index.Rmd`and comment-out the formats you don't want.
 
 Alternatively, if you're not using RStudio, you can use this from the R console, assuming your have set the `'index/` directory as your working directory:
 
@@ -102,7 +102,7 @@ This is the main configuration file for your thesis. It determines what Rmd file
 ### `index.Rmd`
 
 This file contains all the meta information that goes at the beginning of your
-document. You'll need to edit this to put your name in, the title of your thesis, etc.
+document. You'll need to edit this to put your name on the first page, the title of your thesis, etc.
 
 ### `01-chap1.Rmd`, `02-chap2.Rmd`, etc.
 
