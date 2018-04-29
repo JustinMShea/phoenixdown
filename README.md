@@ -33,7 +33,8 @@ On a Linux system here's the simplest way to install the fonts:
 
 ```
 git clone https://github.com/benmarwick/huskydown
-cp huskydown/inst/fonts -r /usr/local/share/fonts
+cd huskydown && unzip inst/fonts.zip
+cp inst/fonts -r ~/usr/local/share/fonts
 sudo fc-cache -f -v
 ```
 
