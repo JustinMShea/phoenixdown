@@ -38,7 +38,7 @@ cp inst/fonts -r ~/usr/local/share/fonts
 sudo fc-cache -f -v
 ```
 
-On an OSX system you can download a copy of the fonts in this repository with <https://github.com/benmarwick/huskydown/raw/master/fonts.zip>, unzip and move them to your fonts directory, or, assuming [homebrew](https://brew.sh/) is installed and updated, this will get you the fonts needed for this template:
+On an OSX system you can download a copy of the fonts in this repository with <https://github.com/benmarwick/huskydown/raw/master/inst/fonts.zip>, unzip and move them to your fonts directory, or, assuming [homebrew](https://brew.sh/) is installed and updated, this will get you the fonts needed for this template:
 
 ```
 brew update
@@ -46,7 +46,7 @@ brew tap caskroom/fonts
 brew cask install font-eb-garamond font-source-code-pro font-lato
 ```
 
-On Windows the usual pointing and clicking is required to install the fonts listed above. You can download a copy of the fonts in this repository at <https://github.com/benmarwick/huskydown/raw/master/fonts.zip>, unzip and move them to your fonts directory. 
+On Windows the usual pointing and clicking is required to install the fonts listed above. You can download a copy of the fonts in this repository at <https://github.com/benmarwick/huskydown/raw/master/inst/fonts.zip>, unzip and move them to your fonts directory. 
 
 ### Starting to write your thesis
 
