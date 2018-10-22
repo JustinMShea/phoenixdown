@@ -2,7 +2,7 @@
 
 # phoenixdown <img src="inst/rmarkdown/templates/capstone/skeleton/figure/phoenix-logo.jpg" align="right" width=150/>
 
-This project provides a template for writing and managing the Master of Science in Analytics Capstone Project in R Markdown, and rendering those files into a PDF formatted according to the requirements of the program.
+This project provides a template for writing and managing the Master of Science in Analytics Capstone Project in R Markdown, and rendering those files into a PDF format according to the general requirements of the program.
 
 Currently, the **PDF** and **gitbook** versions are fully-functional. The word and epub versions are in development, have no templates behind them, and are essentially calls to the default functions in bookdown.
 
