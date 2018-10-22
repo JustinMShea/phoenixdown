@@ -4,11 +4,11 @@
 
 This package provides functions for creating Rmarkdown templates to write and manage the Master of Science in Analytics Capstone Project. Templates are formatted according to the current and general requirements of the program.
 
-Currently, the **PDF** and **gitbook** versions are fully-functional. The word and epub versions are in development, have no templates behind them, and are essentially calls to the default functions in bookdown.
+Currently, the **PDF** and **gitbook** versions are fully-functional. The word and epub versions are in development, have no templates behind them, and are essentially calls to the default functions in the `bookdown` package this depends on.
 
 If you are new to working with `bookdown` and `rmarkdown`, please read over the documentation available in phoenixdown PDF template (which you can create by following the simple instructions below) and the [bookdown book](https://bookdown.org/yihui/bookdown/).
 
-Under the hood, a custom LaTeX template is used to ensure that documents conform precisely to submission standards. At the same time, composition and formatting can be done using lightweight [markdown](http://rmarkdown.rstudio.com/authoring_basics.html) syntax, and **R** code and its output can be seamlessly included using [rmarkdown](http://rmarkdown.rstudio.com).
+Under the hood, a custom LaTeX template is used to ensure that documents conform to submission standards. At the same time, composition and formatting can be done using lightweight [markdown](http://rmarkdown.rstudio.com/authoring_basics.html) syntax, and **R** code and its output can be seamlessly included using [rmarkdown](http://rmarkdown.rstudio.com).
 
 ## Using phoenixdown to complete your Capstone Project
 
