@@ -1,0 +1,5 @@
+book_filename: "UChicago-MScA-Capstone"
+chapter_name: "Chapter "
+rmd_files: ["index.Rmd", "01-background.Rmd", "02-methodology.Rmd", "03-findings.Rmd", "04-conclusion-recommendations.Rmd", "05-appendix.Rmd", "99-references.Rmd"]
+download: [["capstone.pdf", "PDF"], ["capstone.epub", "EPUB"], ["capstone.docx", "Word"]]
+delete_merged_file: true

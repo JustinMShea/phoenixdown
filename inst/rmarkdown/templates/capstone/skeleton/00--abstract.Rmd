@@ -1,0 +1,14 @@
+
+Maximum 40 to 50 words. An abstract is a concise description of your project. It should include very brief description of the problem, purpose, method, key results, and conclusions. Note you may want to write the abstract after writing the report.
+
+\bigskip 
+\bigskip
+\bigskip
+
+**Keywords**: Include 6 to 10 keywords on the same page as the abstract. Select keywords that would help a researcher retrieve your report. 
+
+\bigskip 
+\bigskip
+\bigskip
+
+**NOTE:** Do not use "#" or "##" symbols to start new sections in the abstract section, as one typically would in other r markdown documents. Doing so will result in generating a table of contents entry _prior_ to the Introduction, which is not desirable.

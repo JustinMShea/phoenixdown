@@ -1,0 +1,58 @@
+
+<!--
+The bib chunk below must go last in this document according to how R Markdown renders.  More info is at http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html
+-->
+
+\backmatter
+
+<!-- 
+If you'd like to change the name of the bibliography to something else,
+delete "References" and replace it.
+-->
+
+# References {-}
+<!--
+This manually sets the header for this unnumbered chapter.
+-->
+\markboth{References}{References}
+<!--
+To remove the indentation of the first entry.
+-->
+\noindent
+
+<!--
+To create a hanging indent and spacing between entries.  These three lines may need to be removed for styles that don't require the hanging indent.
+-->
+
+\setlength{\parindent}{-0.20in}
+\setlength{\leftskip}{0.20in}
+\setlength{\parskip}{8pt}
+
+
+<!--
+This is just for testing with more citations for the bibliography at the end.  Add other entries into the list here if you'd like them to appear in the bibliography even if they weren't explicitly cited in the document.
+-->
+
+---
+nocite: | 
+  @angel2000, @angel2001, @angel2002a
+...
+
+
+<!--
+DELETE ALL THAT IS BELOW! THE ABOVE SHOULD GENERATE YOUR REFERENCES PAGE UPON KNITING, PROVIDED YOU SUPPLIED A .bib FILE IN the bib FOLDER.
+-->
+
+
+ There are a variety of tools available for creating a bibliography database (stored with the .bib extension).  In addition to BibTeX suggested below, you may want to consider using the free and easy-to-use tool called [Zotero](https://www.zotero.org/).
+
+_R Markdown_ uses _pandoc_ (<http://pandoc.org/>) to build its bibliographies. To cite references in your thesis (after creating your bibliography database), place the reference name inside square brackets and precede it by the "at" symbol.  For example, here's a reference to a book about worrying:  [@Molina1994].  This `Molina1994` entry appears in a file called `thesis.bib` in the `bib` folder.  This bibliography database file was created by a program called BibTeX.  You can call this file something else if you like (look at the YAML header in the main .Rmd file) and, by default, is to placed in the `bib` folder.  
+
+**Additional Tips**
+
+ - The sooner you start compiling your bibliography for something as large as a capstone, the better. Typing in source after source is mind-numbing enough; do you really want to do it for hours on end at the last minute?
+ - The cite key (a citation's label) needs to be unique from the other entries.
+ - When you have more than one author or editor, you need to separate each author's name by the word "and" e.g. `Author = {Noble, Sam and Youngberg, Jessica},`
+ 
+ 
+**Example output generated from bib file**  

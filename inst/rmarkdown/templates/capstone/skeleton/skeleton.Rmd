@@ -1,0 +1,164 @@
+---
+author: 'Student-t'
+date: 'Month, Year'
+institution: 'University of Chicago'
+division: 'Graham School'
+advisor: 'Advisor Name'
+altadvisor: 'Dr. Sema Barlas'
+department: 'Continueing Liberal and Professional Studies'
+degree: 'Master of Science in Analytics (MScA)'
+title: 'Your Capstone Project Title'
+knit: "bookdown::render_book"
+site: bookdown::bookdown_site
+output: 
+  phoenixdown::capstone_pdf: default
+#  phoenixdown::capstone_gitbook: default
+#  phoenixdown::capstone_word: default
+#  phoenixdown::capstone_epub: default
+#
+# If you are creating a PDF you'll need to write your preliminary content as well as define some other parameters below.
+abstract: | 
+  `r if(knitr:::is_latex_output()) paste(readLines("00--abstract.Rmd"), collapse = '\n  ')` 
+executive: |  
+  `r if(knitr:::is_latex_output()) paste(readLines("00--executive-summary.Rmd"), collapse = '\n  ')` 
+#
+# Longer preliminary content, like the Abstract and Executive Summary above, is best organized in seperate files.
+# The inline r function is used above to paste the contents of those files, instead of requiring you one to type 
+# lengthy text directly into the yaml header. For shorter messages, typing directly into the YAML is easier. See below.
+# VERY IMPORTANT: A tab indent is needed on the line following the | .
+#
+preface: |
+  A preface is OPTIONAL. Use a preface if you want to explain your interest in the report topic and include anything about your experience that readers should keep in mind. If you would rather not include a preface, comment it out or delete it from the YAML header of the index.Rmd file.
+#
+#acknowledgements: |
+#  I want to thank a few people.
+#dedication: |
+#  You can have a dedication here if you wish.
+#
+# Download your specific bibliography database file, place it in the "bib" folder, and refer to it in the line below
+bibliography: bib/thesis.bib
+#
+# To change your Citation Style Language file, you can do so below. Though the default is apa style.
+csl: csl/apa.csl
+lot: true
+lof: true
+#
+# Add a "#" at the beginning of the following line if you'd like remove space between parapgraphs.
+space_between_paragraphs: true
+#
+# Dimensions below correspond to University of Chicago Masters of Science in Analytics requirements.
+geometry: "left=3.8cm, right=2.5cm, top=2.5cm, bottom=2.5cm"
+#
+  #header-includes:
+#- \usepackage{tikz}
+---
+
+
+
+<!--
+Above is the YAML (YAML Ain't Markup Language) header that includes a lot of metadata used to produce the document.  Be careful with spacing in this header!
+
+If you'd prefer to not include a Preface for example, simply delete lines 32-33 above or add a "#"" before them to comment out.  If you have other LaTeX packages you would like to include, delete the # before header-includes and list the packages after hyphens on new lines.
+
+If you'd like to include a comment that won't be produced in your resulting file enclose it in a block like this:
+-->
+
+<!--
+
+If you receive a duplicate label error after knitting, delete the extra .Rmd file and then knit again.
+-->
+
+```{r include_packages, include = FALSE}
+# This chunk ensures that the huskiedown package is installed and loaded. 
+# This huskiedown package includes the template files for the thesis.
+if(!require(devtools))
+  install.packages("devtools", repos = "http://cran.rstudio.com")
+if(!require(phoenixdown))
+  devtools::install_github("JustinMShea/phoenixdown")
+library(phoenixdown)
+```
+
+<!-- You'll need to include the order that you'd like Rmd files to appear in the _bookdown.yml file for PDF files and also delete the # before rmd_files: there. Do not include 00(two-hyphens)prelim.Rmd,  00(two-hyphens)abstract.Rmd and 00(two-hyphens)executive summary.Rmdsince they are handled in the YAML above differently for the PDF version.
+-->
+
+<!-- The {.unnumbered} option here means that the introduction will be "Chapter 0." You can also use {-} for no numbers on chapters, which is the standard for each section.
+-->
+
+# Introduction {.unnumbered}
+
+You may start the section by introducing the **topic** (e.g., real estate pricing), talking about significance of the topic from a practical point for you, and describing the relevant business context, e.g., industry and the company you are working with. Your goal in this section is to inform the reader of the general topic that you will narrow down into a research question that your project will address in later sections.  
+        
+## Problem Statement {.unnumbered}
+
+The capstone project must address a real business problem. The problem statement explains why the research is needed. One way to write this section is to describe the current practice and identify the problems with that practice and the causes of these problems (e.g., current practice might be outdated given the advancements in resources such as new data sources and improved technology). Explain the problem’s significance; if possible, use statistics to substantiate your claims. Describe the desired solution in general terms (e.g., one could improve the predictions substantially by including new sources of data in the analyses) or in terms of business benefits the solution is expected to yield. Make sure that this section describes the problem, not what you are going to do to solve it.
+
+## Research Purpose {.unnumbered}
+
+This section identifies the knowledge research aims to produce. It explains why research is being undertaken. Generally, it starts with “The purpose of this research is …” followed by one of the following verbs: to explain, predict, forecast, monitor, control, discover (facts or relationships), assess, describe, or explore. Make sure the research purpose is consistent with the research problem. In addition, production of the desired knowledge may require multiple steps. For instance, estimation of demand might be a necessary first step for estimating an optimal price for a house given a set of market characteristics. That is, the purpose could be broken down into smaller steps in the form of research objectives. Research objectives are the actual deliverables of a research project.
+
+## Variables and Scope {.unnumbered}
+
+A paragraph with a brief description of important variables and the scope of the project. Make sure to focus on the dependent variables in this section and define or operationalize them appropriately. If your measurements of dependent variable are proxy, provide arguments that using the proxy measures is appropriate and discuss possible limitations. 
+Do not describe the data in this section. You may talk about independent variables under general categories, e.g., demographics, economic variables, etc.
+Scope narrows down the research purpose. For instance, you may develop home pricing models only for the city of Chicago.
+
+## Writing Tips {.unnumbered}
+
+* Develop an outline of what you are going to write for each section before you start writing
+* Good writing follows a general format: introduction, body, and conclusion. This rule applies to the entire project, to each section, and to each paragraph
+* Each paragraph presents only one idea and follows the **MEAL** rule
+    + **M**ain: start the paragraph with the _Main_ idea
+    + **E**xplain the concepts and define the terms
+    + **A**nalyze the idea
+    + **L**ink: conclude the paragraph and _Link_ it to the next paragraph 
+* Make sure to define any concepts or terms that reader might be unfamiliar with right before or after they are used
+
+**More info**
+
+And here's some other random info: the first paragraph after a chapter title or section head _shouldn't be_ indented, because indents are to tell the reader that you're starting a new paragraph. Since that's obvious after a chapter or section title, proper typesetting doesn't add an indent there. 
+
+**Spacing and Markdown**
+
+Be careful with your spacing in _Markdown_ documents.  While white-space largely is ignored, it does at times give _Markdown_ signals as to how to proceed.  As a habit, try to keep everything left aligned whenever possible, especially as you type a new paragraph.  In other words, there is no need to indent basic text in the Rmd document (in fact, it might cause your text to do funny things if you do).
+
+
+
+## R Markdown Basics {#rmd-basics .unnumbered}
+
+### Lists {.unnumbered}
+
+It's easy to create a list.  It can be unordered like
+
+* Item 1
+* Item 2
+
+or it can be ordered like
+
+1. Item 1
+4. Item 2
+
+Notice that I intentionally mislabeled Item 2 as number 4.  _Markdown_ automatically figures this out!  You can put any numbers in the list and it will create the list.  Check it out below.
+
+To create a sub-list, just indent the values a bit (at least four spaces or a tab).  (Here's one case where indentation is key!)
+
+1. Item 1
+1. Item 2
+1. Item 3
+    - Item 3a
+    - Item 3b
+
+### Line breaks {.unnumbered}
+
+Make sure to add white space between lines if you'd like to start a new paragraph.  Look at what happens below in the outputted document if you don't:
+
+Here is the first sentence.  Here is another sentence.  Here is the last sentence to end the paragraph.
+This should be a new paragraph.
+
+*Now for the correct way:* 
+
+Here is the first sentence.  Here is another sentence.  Here is the last sentence to end the paragraph.
+
+This should be a new paragraph.
+
+
+

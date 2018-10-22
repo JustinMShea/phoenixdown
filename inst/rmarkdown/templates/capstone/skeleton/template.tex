@@ -1,0 +1,207 @@
+% This is the University of Chicago Graham School Master of Science in Analytics
+% template. Much of it is based on the Reed College LaTeX thesis template.
+% Most of the work for the Reec College template was done by Sam Noble (SN),
+% Later comments etc. by Ben Salzberg (BTS).
+% Additional restructuring and APA support by Jess Youngberg (JY).
+% Justin M. Shea (JMS) built on their good open source work.
+% Your comments and suggestions are more than welcome:
+% please email, them to justinshea@uchicago.edu.
+%
+% Any line that starts with a percent symbol is a comment.
+% They won't show up in the document, and are useful for notes
+% to yourself and explaining commands.
+% Commenting also removes a line from the document;
+% very handy for troubleshooting problems. -BTS
+%%
+%% Preamble
+%%
+% \documentclass{<something>} must begin each LaTeX document
+% Added by JMS
+\documentclass[12pt,oneside]{chicagocapstone}
+% END of JMS add
+% Packages are extensions to the basic LaTeX functions. Whatever you
+% want to typeset, there is probably a package out there for it.
+% Check out CTAN to see: http://www.ctan.org/
+%%
+\usepackage{graphicx,latexsym}
+\usepackage{amsmath}
+\usepackage{amssymb,amsthm}
+\usepackage{longtable,booktabs,setspace}
+\usepackage[hyphens]{url}
+% Added by CII
+\usepackage{hyperref}
+\usepackage{lmodern}
+\usepackage{float}
+\floatplacement{figure}{H}
+% End of CII addition
+\usepackage{rotating}
+
+
+% Added by CII (Thanks, Hadley!)
+% Use ref for internal links
+\renewcommand{\hyperref}[2][???]{\autoref{#1}}
+\def\chapterautorefname{Chapter}
+\def\sectionautorefname{Section}
+\def\subsectionautorefname{Subsection}
+% End of CII addition
+
+% Added by CII
+\usepackage{caption}
+\captionsetup{width=5in}
+% End of CII addition
+
+% Added by JMS
+\usepackage{mathptmx} % Times New Roman fonts
+% End of add by JMS
+
+% Syntax highlighting #22
+$if(highlighting-macros)$
+  $highlighting-macros$
+$endif$
+
+% To pass between YAML and LaTeX the dollar signs are added by CII
+\title{$title$}
+\author{$author$}
+\date{$date$} % The month and year that you submit your FINAL draft)
+\division{$division$}
+\advisor{$advisor$}
+\institution{$institution$}
+\degree{$degree$}
+$if(altadvisor)$
+\altadvisor{$altadvisor$}
+$endif$
+% End of CII addition
+
+\department{$department$}
+
+% Added by CII
+%%% Copied from knitr
+%% maxwidth is the original width if it's less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\renewcommand{\contentsname}{Table of Contents}
+% End of CII addition
+
+\setlength{\parskip}{0pt}
+
+% Added by CII
+$if(space_between_paragraphs)$
+  %\setlength{\parskip}{\baselineskip}
+  \usepackage[parfill]{parskip}
+$endif$
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+\Abstract{
+$abstract$
+}
+
+% Added by JMS
+\Executive{
+$executive$
+}
+% End of JMS add
+
+\Acknowledgements{
+$acknowledgements$
+}
+
+\Dedication{
+$dedication$
+}
+
+\Preface{
+$preface$
+}
+
+
+$for(header-includes)$
+	$header-includes$
+$endfor$
+% End of CII addition
+%%
+%% End Preamble
+%%
+%
+
+\begin{document}
+
+% Everything below added by CII
+$if(title)$
+  \maketitle
+$endif$
+
+\frontmatter % this stuff will be roman-numbered
+\pagestyle{empty} % this removes page numbers from the frontmatter
+
+
+%% Reorganized by JMS
+$if(abstract)$
+  \begin{abstract}
+    $abstract$
+  \end{abstract}
+$endif$
+
+ % Added by JMS
+$if(executive)$
+  \begin{executive}
+    $executive$
+  \end{executive}
+$endif$
+ % End of JMS
+
+
+$if(acknowledgements)$
+  \begin{acknowledgements}
+    $acknowledgements$
+  \end{acknowledgements}
+$endif$
+
+$if(dedication)$
+  \begin{dedication}
+    $dedication$
+  \end{dedication}
+$endif$
+
+$if(toc)$
+  \hypersetup{linkcolor=$if(toccolor)$$toccolor$$else$black$endif$}
+  \setcounter{tocdepth}{$toc-depth$}
+  \tableofcontents
+$endif$
+
+$if(lof)$
+  \listoffigures
+$endif$
+
+$if(lot)$
+  \listoftables
+$endif$
+
+$if(preface)$
+  \begin{preface}
+    $preface$
+  \end{preface}
+$endif$
+%% END of Reorganization by JMS
+
+\mainmatter % here the regular arabic numbering starts
+\pagestyle{fancyplain} % turns page numbering back on
+
+$body$
+
+
+% Index?
+
+\end{document}
+

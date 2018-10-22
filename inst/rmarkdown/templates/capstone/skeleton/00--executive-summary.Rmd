@@ -1,0 +1,14 @@
+
+The executive summary is a maximum one page, double spaced summary of your report aimed at informing someone, who does not read the entire report, about your project. The executive summary is an extended version of the abstract with more space allocated to the key findings of the project and the conclusions and recommendations. You may want to write this section after writing the report. 
+
+
+Second Paragraph. 
+
+Third Paragraph.
+
+\bigskip
+\bigskip
+\bigskip
+**NOTE:** Like the abstract, do not use "#" or "##" symbols to start new sections in the executive summary section. Doing so will result in generating a table table of contents entry _prior_ to the Introduction, which is not desirable.
+
+
