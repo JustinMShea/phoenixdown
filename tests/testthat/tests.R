@@ -12,7 +12,7 @@ context("check for prerequisites")
  if ( !tinytex:::is_tinytex() ) tinytex::install_tinytex()
 
  test_that("LaTeX is installed", {
-   expect_true(tinytex:::is_tinytex())
+   expect_true(tinytex:::is_tinytex(force = TRUE))
 })
 
 context("check that the pkg template files are present")
