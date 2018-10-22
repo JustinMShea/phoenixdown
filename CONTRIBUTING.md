@@ -15,7 +15,6 @@ agree to abide by our [code of conduct](CONDUCT.md).
 ## Making changes
 
 * Edit the files, save often, and make commits of logical units, where each commit indicates one concept
-* Follow our [style guide](http://adv-r.had.co.nz/Style.html).
 * Make sure you write [good commit messages](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
 * Make sure you have added the necessary tests for your code changes.
 * Run _all_ the tests using `devtools::check()` to assure nothing else was accidentally broken.
@@ -23,18 +22,14 @@ agree to abide by our [code of conduct](CONDUCT.md).
 
 ## Submitting your changes
 
-Push to your fork and [submit a pull request](https://github.com/benmarwick/rrtools/compare/).
-
 At this point you're waiting on us. We like to at least comment on pull requests
 within a few days (and, typically, one business day). We may suggest
 some changes or improvements or alternatives.
 
 Some things you can do that will increase the chance that your pull request is accepted:
 
-* Engage in discussion on [your issue](https://github.com/benmarwick/rrtools/issues/).
 * Be familiar with the background literature cited in the [README](README.Rmd)
 * Write tests that pass `devtools::check()`.
-* Follow our [code style guide](http://adv-r.had.co.nz/Style.html).
 * Write a [good commit message](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
 
 
