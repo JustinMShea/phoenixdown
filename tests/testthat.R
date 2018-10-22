@@ -1,4 +1,4 @@
 library(testthat)
-library(huskydown)
+library(phoenixdown)
 
-test_check("huskydown")
+test_check("phoenixdown")
