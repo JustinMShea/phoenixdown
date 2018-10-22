@@ -1,6 +1,6 @@
  
 
-# phoenixdown <img src="inst/rmarkdown/templates/capstone/skeleton/figure/phoenix-logo.jpg" align="right" />
+# phoenixdown <img src="inst/rmarkdown/templates/capstone/skeleton/figure/phoenix-logo.jpg" align="right" width=100/>
 
 [![Travis-CI Build Status](https://travis-ci.org/JustinMShea/phoenixdown.svg?branch=master)](https://travis-ci.org/JustinMShea/phoenixdown) 
 
@@ -60,9 +60,8 @@ rmarkdown::draft(file='index.Rmd', template = "capstone", package = 'phoenixdown
 
 You need to edit the individual chapter R Markdown files to write your thesis. 
 
-You can write in the Rmd files without RStudio (in fact RStudio lacks some conveniences for writing, such as live spell-checking and live word count). So you may prefer to do some writing and editing your Rmd files in your favourite text editor. I frequently use [Atom](https://atom.io/), [Notepad++](https://notepad-plus-plus.org/), and [Emacs](https://www.gnu.org/software/emacs/). But I come back to RStudio to create the PDF and work on the R code in my documents. 
+You can write in the Rmd files without RStudio (in fact RStudio lacks some conveniences for writing, such as live spell-checking and live word count). One may prefer to do some writing and editing of your Rmd files in their favourite text editor. [Atom](https://atom.io/), [Notepad++](https://notepad-plus-plus.org/) and [Emacs](https://www.gnu.org/software/emacs/) are popular choices, ultimatly returning to R or RStudio to work on code.
 
-While writing, you should `git commit` your work frequently, after every major activity on your thesis. For example, every few paragraphs or section of text, and after major step of analysis development. You should `git push` at the end of each work session before you leave your computer or change task. For gentle novice-friendly guide to getting starting with using Git with R and RStudio, see <http://happygitwithr.com/>.
 
 ## Rendering
 
@@ -109,13 +108,8 @@ Store your figures and data here and reference them in your R Markdown files. Se
 
 This project has drawn directly on code and ideas in the following:
 
-- https://github.com/benmarwick/huskydown    
-- https://github.com/ismayc/thesisdown    
-
-Other relevant projects:
-
-- Ed Berry's blog post ['Writing your thesis with bookdown'](https://eddjberry.netlify.com/post/writing-your-thesis-with-bookdown/), Posted on September 25, 2017    
-- Rosanna van Hespen's ([@rosannavhespen](https://twitter.com/rosannavhespen?lang=en)) five blog posts on ['Writing your thesis with R Markdown'](https://rosannavanhespenresearch.wordpress.com/2016/02/03/writing-your-thesis-with-r-markdown-1-getting-started/)
+- **https://github.com/benmarwick/huskydown**
+- https://github.com/ismayc/thesisdown
 
 ## Contributing
 
