@@ -6,7 +6,7 @@ division: 'Graham School'
 advisor: 'Advisor Name'
 altadvisor: 'Dr. Sema Barlas'
 department: 'Continueing Liberal and Professional Studies'
-degree: 'Master of Science in Analytics (MScA)'
+degree: 'Master of Science in Analytics'
 title: 'Your Capstone Project Title'
 knit: "bookdown::render_book"
 site: bookdown::bookdown_site
