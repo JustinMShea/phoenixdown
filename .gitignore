@@ -4,3 +4,4 @@
 .DS_Store
 inst/rmarkdown/templates/capstone/skeleton/_book/*
 inst/rmarkdown/templates/capstone/skeleton/_bookdown_files/*
+phoenixdown.Rproj
