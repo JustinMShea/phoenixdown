@@ -57,7 +57,7 @@ Or run this line in your R console to create a new Capstone Project from the tem
 rmarkdown::draft(file='index.Rmd', template = "capstone", package = 'phoenixdown', create_dir = TRUE)
 ```
 
-### Day-to-day writing of your thesis 
+### Writing your capstone 
 
 You need to edit the individual chapter R Markdown files to write your thesis. 
 
@@ -75,6 +75,7 @@ bookdown::render_book('index.Rmd', phoenixdown::capstone_pdf())
 ```
 
 The PDF file of your thesis will be deposited in the `_book/` directory.
+
 
 ## Components
 
@@ -99,7 +100,7 @@ Store your bibliography (as bibtex files) here. We recommend using the [citr add
 
 ### `csl/`
 
-Specific style files for bibliographies should be stored here. The default is the APA style required for the Capstone. A good source for citation styles is https://github.com/citation-style-language/styles#readme
+Specific style files for bibliographies should be stored here. The default APA style required for the Capstone is already here.
 
 ### `figure/` and `data/`
 
@@ -107,10 +108,10 @@ Store your figures and data here and reference them in your R Markdown files. Se
 
 ## Related projects
 
-This project has drawn directly on code and ideas in the following:
+This project was forked and modifies the code and ideas in the following:
 
 - **https://github.com/benmarwick/huskydown**
-- https://github.com/ismayc/thesisdown
+- **https://github.com/ismayc/thesisdown**
 
 ## Contributing
 
