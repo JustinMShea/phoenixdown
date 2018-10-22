@@ -1,6 +1,6 @@
  
 
-# phoenixdown <img src="inst/rmarkdown/templates/capstone/skeleton/figure/phoenix-logo.jpg" align="right" width=100/>
+# phoenixdown <img src="inst/rmarkdown/templates/capstone/skeleton/figure/phoenix-logo.jpg" align="right" width=150/>
 
 [![Travis-CI Build Status](https://travis-ci.org/JustinMShea/phoenixdown.svg?branch=master)](https://travis-ci.org/JustinMShea/phoenixdown) 
 
@@ -48,7 +48,8 @@ File -> New File -> R Markdown... then choose 'From template', then choose 'MScA
 
 **VERY IMPORTANT**: You must enter `index` as the **Name**. Your project will only **Knit** if you name the directory `index` at this step. You can name the final .pdf whatever you like later.
 
-![](UofC-capstone-gui.png)
+<img src="UofC-capstone-gui.png" align="right" width=300/>
+
 
 Or run this line in your R console to create a new Capstone Project from the template:
 
