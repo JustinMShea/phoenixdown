@@ -2,7 +2,7 @@
 
 # phoenixdown <img src="inst/rmarkdown/templates/capstone/skeleton/figure/phoenix-logo.jpg" align="right" width=150/>
 
-This package provides functions for creating Rmarkdown and templates to write and manage the Master of Science in Analytics Capstone Project. Templates are formated  formatted according to the current and general requirements of the program.
+This package provides functions for creating Rmarkdown templates to write and manage the Master of Science in Analytics Capstone Project. Templates are formatted according to the current and general requirements of the program.
 
 Currently, the **PDF** and **gitbook** versions are fully-functional. The word and epub versions are in development, have no templates behind them, and are essentially calls to the default functions in bookdown.
 
