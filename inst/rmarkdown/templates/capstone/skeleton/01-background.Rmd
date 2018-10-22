@@ -33,11 +33,3 @@ This section provides a literature review that informs the reader in the followi
   * Summarize why alternative theses are not favored 
   * State the research question and hypotheses
   
-   _Research Question_
-   
-A research question is a more specific formulation of a purpose, where dependent and independent variables (and the relationship between them) are identified. The question is formulated using the operational definitions of the variables. The answer to the question is the knowledge the project aims to produce. The research question also identifies a population and audience of interest the findings will benefit. Make sure the research question is consistent with its purpose but not identical to it.
-
-* Hypotheses are sets of elementary statements that jointly provide an answer to the research question 
-* Hypotheses are contained within the research question—no new idea is introduced 
-* Each hypothesis defines a relationship between dependent and independent variables (if applicable) 
-
