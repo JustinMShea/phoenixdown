@@ -2,11 +2,11 @@
 
 # phoenixdown <img src="inst/rmarkdown/templates/capstone/skeleton/figure/phoenix-logo.jpg" align="right" width=150/>
 
-[![Travis-CI Build Status](https://travis-ci.org/JustinMShea/phoenixdown.svg?branch=master)](https://travis-ci.org/JustinMShea/phoenixdown) 
+[![Travis-CI Build Status](https://travis-ci.org/JustinMShea/phoenixdown.svg?branch=master)](https://travis-ci.org/JustinMShea/phoenixdown)
 
 This project provides a template for writing and managing the Master of Science in Analytics Capstone Project in R Markdown, and rendering those files into a PDF formatted according to the requirements of the program.
 
-Currently, the **PDF** and **gitbook** versions are fully-functional. The word and epub versions are in development, have no templates behind them, and are essentially calls to the deafult functions in bookdown.
+Currently, the **PDF** and **gitbook** versions are fully-functional. The word and epub versions are in development, have no templates behind them, and are essentially calls to the default functions in bookdown.
 
 If you are new to working with `bookdown` and `rmarkdown`, please read over the documentation available in phoenixdown PDF template (which you can create by following the simple instructions below) and the [bookdown book](https://bookdown.org/yihui/bookdown/).
 
@@ -31,7 +31,7 @@ tinytex:::is_tinytex()
 
 To use **phoenixdown** from [RStudio](http://www.rstudio.com/products/rstudio/download/):
 
-1) Ensure that you are using the latest version of [RStudio](http://www.rstudio.com/products/rstudio/download/). You can use phoenixdown without RStudio. For example, you can write the Rmd files in your favourite text editor (e.g. [Atom](https://atom.io/), [Notepad++](https://notepad-plus-plus.org/)). But RStudio is probably the easiest tool for writing both R code and text in your capstone. 
+1) Ensure that you are using the latest version of [RStudio](http://www.rstudio.com/products/rstudio/download/). You can use phoenixdown without RStudio. For example, you can write the Rmd files in your favorite text editor (e.g. [Atom](https://atom.io/), [Notepad++](https://notepad-plus-plus.org/)). But RStudio is probably the easiest tool for writing both R code and text in your capstone. 
 
 2) Install the **bookdown** and **phoenixdown** packages: 
 
@@ -61,7 +61,7 @@ rmarkdown::draft(file='index.Rmd', template = "capstone", package = 'phoenixdown
 
 You need to edit the individual chapter R Markdown files to write your thesis. 
 
-You can write in the Rmd files without RStudio (in fact RStudio lacks some conveniences for writing, such as live spell-checking and live word count). One may prefer to do some writing and editing of your Rmd files in their favourite text editor. [Atom](https://atom.io/), [Notepad++](https://notepad-plus-plus.org/) and [Emacs](https://www.gnu.org/software/emacs/) are popular choices, ultimatly returning to R or RStudio to work on code.
+You can write in the Rmd files without RStudio (in fact RStudio lacks some conveniences for writing, such as live spell-checking and live word count). One may prefer to do some writing and editing of your Rmd files in their favorite text editor. [Atom](https://atom.io/), [Notepad++](https://notepad-plus-plus.org/) and [Emacs](https://www.gnu.org/software/emacs/) are popular choices, ultimately returning to R or RStudio to work on code.
 
 
 ## Rendering
