@@ -119,8 +119,6 @@ if (length(new.pkg))
 
 ```
 
-\clearpage
-
 The example we show here does the following:
 
 - Selects only the `carrier` and `arr_delay` from the `flights` dataset and then determine the largest arrival delay for each of the carriers.
