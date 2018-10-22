@@ -1,22 +1,22 @@
  
 
-# huskydown <img src="inst/rmarkdown/templates/thesis/skeleton/figure/uw-100px.png" align="right" />
+# phoenixdown <img src="inst/rmarkdown/templates/capstone/skeleton/figure/phoenix-logo.jpg" align="right" />
 
-[![Travis-CI Build Status](https://travis-ci.org/benmarwick/huskydown.svg?branch=master)](https://travis-ci.org/benmarwick/huskydown) 
+[![Travis-CI Build Status](https://travis-ci.org/JustinMShea/phoenixdown.svg?branch=master)](https://travis-ci.org/JustinMShea/phoenixdown) 
 
-This project provides a template for writing a PhD thesis in R Markdown, and rendering those files into a PDF formatted according to [the requirements of the University of Washington](https://grad.uw.edu/for-students-and-post-docs/degree-requirements/thesisdissertation/final-submission-of-your-thesisdissertation/). It uses the [University of Washington Thesis class](http://staff.washington.edu/fox/tex/) to convert R Markdown files into a PDF formatted ready for submission at UW. This project was inspired by the [thesisdown](https://github.com/ismayc/thesisdown) and [bookdown](https://github.com/rstudio/bookdown) packages.
+This project provides a template for writing and managing the Master of Science in Analytics Capstone Project in R Markdown, and rendering those files into a PDF formatted according to the requirements of the program.
 
-Currently, the PDF and gitbook versions are fully-functional, and are the focus of this package. The word and epub versions are in development, have no templates behind them, and are essentially calls to the appropriate functions in bookdown.
+Currently, the **PDF** and **gitbook** versions are fully-functional. The word and epub versions are in development, have no templates behind them, and are essentially calls to the deafult functions in bookdown.
 
-If you are new to working with `bookdown` and `rmarkdown`, please read over the documentation available in huskydown PDF template (which you can create by following the simple instructions below) and the [bookdown book](https://bookdown.org/yihui/bookdown/).
+If you are new to working with `bookdown` and `rmarkdown`, please read over the documentation available in phoenixdown PDF template (which you can create by following the simple instructions below) and the [bookdown book](https://bookdown.org/yihui/bookdown/).
 
-Under the hood, the [University of Washington Thesis LaTeX template](https://github.com/UWIT-IAM/UWThesis) is used to ensure that documents conform precisely to submission standards. At the same time, composition and formatting can be done using lightweight [markdown](http://rmarkdown.rstudio.com/authoring_basics.html) syntax, and **R** code and its output can be seamlessly included using [rmarkdown](http://rmarkdown.rstudio.com).
+Under the hood, a custom LaTeX template is used to ensure that documents conform precisely to submission standards. At the same time, composition and formatting can be done using lightweight [markdown](http://rmarkdown.rstudio.com/authoring_basics.html) syntax, and **R** code and its output can be seamlessly included using [rmarkdown](http://rmarkdown.rstudio.com).
 
-## Using huskydown to write your PhD thesis
+## Using phoenixdown to complete your Capstone Project
 
 ### Initial setup
 
-Using **huskydown** has some prerequisites, such as Pandoc, LaTeX and some fonts. To compile PDF documents using **R**, you need to have Pandoc, LaTeX and several related packages installed. If you have a recent version of  [RStudio](http://www.rstudio.com/products/rstudio/download/), then you already have Pandoc and don't need to do anything more about that. 
+Using **phoenixdown** has some prerequisites, such as Pandoc, LaTeX and some fonts. To compile PDF documents using **R**, you need to have Pandoc, LaTeX and several related packages installed. If you have a recent version of  [RStudio](http://www.rstudio.com/products/rstudio/download/), then you already have Pandoc and don't need to do anything more about that. 
 
 Next is LaTeX. By far the easiest way to install LaTeX on any platform is with the [`tinytex`](https://yihui.name/tinytex/) package:
 
@@ -27,51 +27,33 @@ tinytex::install_tinytex()
 tinytex:::is_tinytex()
 ```
 
-Our PDF template requires some specific fonts, [EB Garamond](https://github.com/georgd/EB-Garamond), [Source Code Pro](https://github.com/adobe-fonts/source-code-pro/) and [Lato](http://www.latofonts.com/lato-free-fonts/). These are included in this repository. You need to install these before proceeding, either by using your usual method of installing fonts, or following these instructions:
+### Starting to write your capstone
 
-On a Linux system here's the simplest way to install the fonts:
+To use **phoenixdown** from [RStudio](http://www.rstudio.com/products/rstudio/download/):
 
-```
-git clone https://github.com/benmarwick/huskydown
-cd huskydown && unzip inst/fonts.zip
-cp inst/fonts -r ~/usr/local/share/fonts
-sudo fc-cache -f -v
-```
+1) Ensure that you are using the latest version of [RStudio](http://www.rstudio.com/products/rstudio/download/). You can use phoenixdown without RStudio. For example, you can write the Rmd files in your favourite text editor (e.g. [Atom](https://atom.io/), [Notepad++](https://notepad-plus-plus.org/)). But RStudio is probably the easiest tool for writing both R code and text in your capstone. 
 
-On an OSX system you can download a copy of the fonts in this repository with <https://github.com/benmarwick/huskydown/raw/master/inst/fonts.zip>, unzip and move them to your fonts directory, or, assuming [homebrew](https://brew.sh/) is installed and updated, this will get you the fonts needed for this template:
-
-```
-brew update
-brew tap caskroom/fonts
-brew cask install font-eb-garamond font-source-code-pro font-lato
-```
-
-On Windows the usual pointing and clicking is required to install the fonts listed above. You can download a copy of the fonts in this repository at <https://github.com/benmarwick/huskydown/raw/master/inst/fonts.zip>, unzip and move them to your fonts directory. 
-
-### Starting to write your thesis
-
-To use **huskydown** from [RStudio](http://www.rstudio.com/products/rstudio/download/):
-
-1) Ensure that you have already installed LaTeX and the fonts described above, and are using the latest version of [RStudio](http://www.rstudio.com/products/rstudio/download/). You can use huskydown without RStudio. For example, you can write the Rmd files in your favourite text editor (e.g. [Atom](https://atom.io/), [Notepad++](https://notepad-plus-plus.org/)). But RStudio is probably the easiest tool for writing both R code and text in your thesis. 
-
-2) Install the **bookdown** and **huskydown** packages: 
+2) Install the **bookdown** and **phoenixdown** packages: 
 
 ```
 if (!require("devtools")) install.packages("devtools", repos = "http://cran.rstudio.org")
+
 devtools::install_github("rstudio/bookdown")
-devtools::install_github("benmarwick/huskydown")
+devtools::install_github("JustinMShea/phoenixdown")
 ```
 
-3) Use the **New R Markdown** dialog to select **Thesis**, here are the steps, and a screenshot below:
+3) Use the **New R Markdown** dialog to select **MScA Capstone Project**. Here are the steps, and a screenshot below:
 
-File -> New File -> R Markdown... then choose 'From template', then choose 'UW-Thesis, and enter `index` as the **Name**. Note that this will currently only **Knit** if you name the directory `index` at this step. 
+File -> New File -> R Markdown... then choose 'From template', then choose 'MScA Capstone Project.
 
-![](uw_thesis_rmd.png)
+**VERY IMPORTANT**: You must enter `index` as the **Name**. Your project will only **Knit** if you name the directory `index` at this step. You can name the final .pdf whatever you like later.
 
-Or if you're not using RStudio, run this line in your R console to create a new PhD thesis from the template:
+![](UofC-capstone-gui.png)
+
+Or run this line in your R console to create a new Capstone Project from the template:
 
 ```r
-rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE)
+rmarkdown::draft(file='index.Rmd', template = "capstone", package = 'phoenixdown', create_dir = TRUE, edit=TRUE)
 ```
 
 ### Day-to-day writing of your thesis 
@@ -89,7 +71,7 @@ To render your thesis into a PDF, open `index.Rmd` in RStudio and then click the
 Alternatively, if you're not using RStudio, you can use this from the R console, assuming your have set the `'index/` directory as your working directory:
 
 ```r
-bookdown::render_book('index.Rmd', huskydown::thesis_pdf(latex_engine = 'xelatex'))
+bookdown::render_book('index.Rmd', phoenixdown::capstone_pdf())
 ```
 
 The PDF file of your thesis will be deposited in the `_book/` directory.
@@ -107,9 +89,9 @@ This is the main configuration file for your thesis. It determines what Rmd file
 This file contains all the meta information that goes at the beginning of your
 document. You'll need to edit this to put your name on the first page, the title of your thesis, etc.
 
-### `01-chap1.Rmd`, `02-chap2.Rmd`, etc.
+### `01-background.Rmd`, `02-methodology.Rmd`, etc.
 
-These are the Rmd files for each chapter in your dissertation. Write your thesis in these. If you're writing in RStudio, you may find the [wordcount addin](https://github.com/benmarwick/wordcountaddin) useful for getting word counts and readability statistics in R markdown documents. You might also enjoy writing in these Rmd files with [Atom](https://atom.io/), [Notepad++](https://notepad-plus-plus.org/), [Sublime Text](https://www.sublimetext.com/), and [Emacs](https://www.gnu.org/software/emacs/). 
+These are the Rmd files for each section of your capstone, so write each section in these. If you're writing in RStudio, you may find the [wordcount addin](https://github.com/benmarwick/wordcountaddin) useful for getting word counts and readability statistics in R markdown documents. You might also enjoy writing in these Rmd files with [Atom](https://atom.io/), [Notepad++](https://notepad-plus-plus.org/), [Sublime Text](https://www.sublimetext.com/), and [Emacs](https://www.gnu.org/software/emacs/). 
 
 ### `bib/`
 
@@ -117,8 +99,7 @@ Store your bibliography (as bibtex files) here. We recommend using the [citr add
 
 ### `csl/`
 
-Specific style files for bibliographies should be stored here. A good source for
-citation styles is https://github.com/citation-style-language/styles#readme
+Specific style files for bibliographies should be stored here. The default is the APA style required for the Capstone. A good source for citation styles is https://github.com/citation-style-language/styles#readme
 
 ### `figure/` and `data/`
 
@@ -128,18 +109,13 @@ Store your figures and data here and reference them in your R Markdown files. Se
 
 This project has drawn directly on code and ideas in the following:
 
-- https://github.com/UWIT-IAM/UWThesis    
-- https://github.com/stevenpollack/ucbthesis  
-- https://github.com/suchow/Dissertate    
-- https://github.com/SeungkiKwak/Kwak_S_PhD_thesis    
-- https://github.com/dhalperi/uwthesis-tweaked     
+- https://github.com/benmarwick/huskydown    
+- https://github.com/ismayc/thesisdown    
 
 Other relevant projects:
 
 - Ed Berry's blog post ['Writing your thesis with bookdown'](https://eddjberry.netlify.com/post/writing-your-thesis-with-bookdown/), Posted on September 25, 2017    
 - Rosanna van Hespen's ([@rosannavhespen](https://twitter.com/rosannavhespen?lang=en)) five blog posts on ['Writing your thesis with R Markdown'](https://rosannavanhespenresearch.wordpress.com/2016/02/03/writing-your-thesis-with-r-markdown-1-getting-started/)
-- [thesisdowndss](https://github.com/mine-cetinkaya-rundel/thesisdowndss) by Mine Cetinkaya-Rundel at Duke University    
-- [beaverdown](https://github.com/zkamvar/beaverdown) by Zhian Kamvar at Oregon State University
 
 ## Contributing
 
@@ -148,11 +124,11 @@ If you would like to contribute to this project, please start by reading our [Gu
 <!--
 To update the PDF template stored in inst/ assuming we are at top level:
 
-rmarkdown::draft('index.Rmd', template = 'thesis', package = 'huskydown', create_dir = TRUE, edit = FALSE)
+rmarkdown::draft('index.Rmd', template = 'capstone', package = 'phoenixdown', create_dir = TRUE, edit = FALSE)
 
 setwd('index')
 
-bookdown::render_book('index.Rmd', huskydown::thesis_pdf(latex_engine = 'xelatex'))
+bookdown::render_book('index.Rmd', phoenixdown::capstone_pdf())
 
 -->
 
