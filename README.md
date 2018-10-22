@@ -48,13 +48,13 @@ File -> New File -> R Markdown... then choose 'From template', then choose 'MScA
 
 **VERY IMPORTANT**: You must enter `index` as the **Name**. Your project will only **Knit** if you name the directory `index` at this step. You can name the final .pdf whatever you like later.
 
-<img src="UofC-capstone-gui.png" align="right" width=300/>
+<img src="UofC-capstone-gui.PNG" width=500/>
 
 
 Or run this line in your R console to create a new Capstone Project from the template:
 
 ```r
-rmarkdown::draft(file='index.Rmd', template = "capstone", package = 'phoenixdown', create_dir = TRUE, edit=TRUE)
+rmarkdown::draft(file='index.Rmd', template = "capstone", package = 'phoenixdown', create_dir = TRUE)
 ```
 
 ### Day-to-day writing of your thesis 
