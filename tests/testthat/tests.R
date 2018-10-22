@@ -20,7 +20,7 @@ context("check that the pkg template files are present")
 template_files <- list.files(system.file('rmarkdown', package='phoenixdown'), recursive = TRUE)
 
 test_that("Template files are present", {
-  expect_true(length(template_files) == 19)
+  expect_true(length(template_files) == 18)
 })
 
 context("create the thesis directories and files")
