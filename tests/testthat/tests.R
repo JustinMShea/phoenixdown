@@ -6,14 +6,14 @@
 testing_path <- paste0(tempdir(), "/testing_directory")
 dir.create(testing_path, showWarnings = FALSE)
 
-context("check for prerequisites")
-
- if (!require(tinytex)) install.packages("tinytex")
- if ( !tinytex:::is_tinytex() ) tinytex::install_tinytex()
-
- test_that("LaTeX is installed", {
-   expect_true(tinytex:::is_tinytex())
-})
+#context("check for prerequisites")
+#
+# if (!require(tinytex)) install.packages("tinytex")
+# if ( !tinytex:::is_tinytex() ) tinytex::install_tinytex()
+#
+# test_that("LaTeX is installed", {
+#   expect_true(tinytex:::is_tinytex())
+#})
 
 context("check that the pkg template files are present")
 
