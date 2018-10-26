@@ -19,12 +19,58 @@ Justification of model(s) selected. Identification of dependent and independent 
 
 \newpage 
 
-### R chunks {.unnumbered}
+### Code chunks {.unnumbered}
 
-When you click the **Knit** button above a document will be generated that includes both content as well as the output of any embedded **R** code chunks within the document. You can embed an **R** code chunk like this (`cars` is a built-in **R** dataset):
+When you click the **Knit** button above a document will be generated that includes both content as well as the output of any embedded code chunks within the document. You can embed a code chunk like this (`cars` is a built-in **R** dataset):
 
 ```{r cars}
 summary(cars)
+```
+
+However, one is not restricted to R and can use the following languages:
+
+```{r}
+names(knitr::knit_engines$get())
+```
+
+Of these, if you _must_ use `python`, you can do that too!
+First load reticulate and then find what python you path resides on.
+
+```{r load-recticulate}
+library(reticulate)
+
+py_discover_config()
+```
+
+Pass the relevant path to the `use_python` function.
+```{r python-setup}
+use_python("ProgramData/Anaconda3/python.exe")
+```
+
+Install some packages, but create a `conda` envioronment to store them in
+```{r}
+# create a new environment 
+conda_create("r-reticulate")
+```
+Install some packages:
+
+```{r}
+# install matplotlib
+conda_install("r-reticulate", "matplotlib")
+```
+
+```{r}
+# import matplotlib (it will be automatically discovered in "r-reticulate")
+matplotlib <- import("matplotlib")
+```
+
+```{python}
+y = 3+4
+print(y)
+
+import matplotlib.pyplot as plt
+plt.plot([0, 2, 1, 4])
+plt.show()
 ```
 
 ### Inline code {.unnumbered}
