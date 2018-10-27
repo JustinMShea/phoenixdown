@@ -127,7 +127,8 @@ You can also embed plots.  For example, here is a way to use the base **R** grap
 plot(pressure, type = "l", col="cornflowerblue", lwd = 2,
                xlab = "Temperature (deg C)",
                ylab = "Pressure (mm of Hg)",
-               main = "pressure data: Vapor Pressure of Mercury")
+               main = "pressure data: Vapor Pressure of Mercury",
+               frame = FALSE)
 ```
 
 Note that the `echo=FALSE` parameter was added to the code chunk to prevent printing of the **R** code that generated the plot. However, we also labeled the code chunk `pressure` so we can call its contents and print them in the Appendex.  There are plenty of other ways to add chunk options.  More information is available at <http://yihui.name/knitr/options/>.  
@@ -135,7 +136,7 @@ Note that the `echo=FALSE` parameter was added to the code chunk to prevent prin
 
 ### Loading and exploring data {.unnumbered}
 
-From the description file (`?ToothGrwoth`): 
+From the description file (`?ToothGrowth`): 
 
 >The response is the length of odontoblasts (cells responsible for tooth growth) in 60 guinea pigs. Each animal received one of three dose levels of vitamin C (0.5, 1, and 2 mg/day) by one of two delivery methods, orange juice or ascorbic acid (a form of vitamin C and coded as VC).
 
@@ -160,9 +161,11 @@ Use the `kable` function to create convenient, decent looking tables. Another pa
 ```{r toothGrowth-table}
 library(knitr)
 kable(head(ToothGrowth, 5), align = "r")
+
 kable(tail(ToothGrowth, 5), align = "r")
 ```
 
+\newpage 
 
 The `aggregate` function can be used to compute the mean tooth `length` by`supplement` and `dose`. 
 
@@ -178,6 +181,7 @@ kable(groupedTooth, align = "r")
 
 - _R Markdown_ Reference Guide - <https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf>
 
+\newpage
 
 ## Math and Science notation  {#math-sci .unnumbered}
 <!-- Required to number equations in HTML files -->
