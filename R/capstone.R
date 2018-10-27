@@ -136,8 +136,7 @@ fix_envs = function(x){
 #'
 #' This is a function that does nothing
 #'
-#' @import  knitr git2r
+#' @import  knitr
 hush_notes <- function() {
-
 
 }
