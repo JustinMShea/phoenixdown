@@ -57,24 +57,31 @@ Here is a reference to the Phoenix logo: Figure \@ref(fig:phoenixlogo).  Note th
 
 <!-- starts a new page and stops trying to place floats such as tables and figures -->
 
-Below we will investigate how to save the output of an **R** plot and label it in a way similar to that done above.  Recall the `flights` dataset, we will next explore a bar graph with the mean flight departure delays by airline from Portland for 2014.  Note also the use of the `scale` parameter which is discussed on the next page.
+Below we will investigate how to save the output of an **R** plot and label it in a way similar to that done above.  Recall the `ToothGrowth` dataset, we will next explore a boxplot graph exploring differences.
 
-```{r delaysboxplot, echo=FALSE, warnings=FALSE, messages=FALSE, fig.cap="Mean Delays by Airline", fig.width=6}
-library(pnwflights14)
-library(dplyr)
+While the code is not displayed here and is produced in the Appendix, the `aggregate` function is called to compute the mean tooth `length` by  `supplement` and `dose`. ggplot2 is loaded to compare factors by box-plot and facet wrapping allows one to visualize and hypothesize.
+
+```{r GroupedTooth-boxplot, echo=FALSE, warnings=FALSE, messages=FALSE, fig.cap="Mean tooth length by  supplement and dosage", fig.width=6}
+data(ToothGrowth)
+colnames(ToothGrowth) <- c("length", "supplement", "dose")
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+
+groupedTooth <- aggregate(ToothGrowth, by=ToothGrowth[,2:3], FUN=mean)[,1:3]
+
 library(ggplot2)
-data(flights)
-flights %>% group_by(carrier) %>%
-  summarize(mean_dep_delay = mean(dep_delay, na.rm = TRUE)) %>%
-  ggplot(aes(x = carrier, y = mean_dep_delay)) +
-  geom_bar(position = "identity", stat = "identity", fill = "cornflowerblue") +
-  ggtitle("Avgerage departure delay from Portlandia, by carrier") +
-  theme_classic() 
+ ggplot(ToothGrowth, aes(x = supplement, y = length)) + 
+                     geom_boxplot(aes(fill=supplement)) + 
+                     facet_wrap(~dose) + 
+                     guides(colour = guide_legend("Color = Supplement")) + 
+                     labs(x="Orange Juice or Vitamin C, grouped by dose", 
+                          y="Odontoblast Growth (microns)")  +
+                     theme_bw()
 ```
 
-Here is a reference to this image: Figure \@ref(fig:delaysboxplot).
+While increasing the dosage seems to lead to larger incisor length, the delivery mechanism between Orange Juice and Vitamin C might not make a large difference. However, at very low levels, Orange Juice seems more effective, displaying both a higher mean, but more formal hypothesis testing must be done. 
 
-A table linking these carrier codes to airline names is available at <https://github.com/ismayc/pnwflights14/blob/master/data/airlines.csv>.
+Here is a reference to this image: Figure \@ref(fig:GroupedTooth-boxplot).
+
 
 \clearpage
 
