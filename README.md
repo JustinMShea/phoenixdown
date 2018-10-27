@@ -16,7 +16,7 @@ Under the hood, a custom LaTeX template is used to ensure that documents conform
 
 Using **phoenixdown** has some prerequisites, such as Pandoc, LaTeX and some fonts. To compile PDF documents using **R**, you need to have Pandoc, LaTeX and several related packages installed. If you have a recent version of  [RStudio](http://www.rstudio.com/products/rstudio/download/), then you already have Pandoc and don't need to do anything more about that. 
 
-Next is LaTeX. By far the easiest way to install LaTeX on any platform is with the [`tinytex`](https://yihui.name/tinytex/) package:
+Next is LaTeX. An easy way to install LaTeX on any platform is with the [`tinytex`](https://yihui.name/tinytex/) package:
 
 ```
 install.packages(c('tinytex', 'rmarkdown'))
@@ -29,7 +29,7 @@ tinytex:::is_tinytex()
 
 To use **phoenixdown** from [RStudio](http://www.rstudio.com/products/rstudio/download/):
 
-1) Ensure that you are using the latest version of [RStudio](http://www.rstudio.com/products/rstudio/download/). You can use phoenixdown without RStudio. For example, you can write the Rmd files in your favorite text editor (e.g. [Atom](https://atom.io/), [Notepad++](https://notepad-plus-plus.org/)). But RStudio is probably the easiest tool for writing both R code and text in your capstone. 
+1) Ensure that you are using the latest version of RStudio. You can use phoenixdown without RStudio. For example, you can write the Rmd files in your favorite text editor (e.g. [Atom](https://atom.io/), [Notepad++](https://notepad-plus-plus.org/)).
 
 2) Install the **bookdown** and **phoenixdown** packages: 
 
@@ -37,6 +37,7 @@ To use **phoenixdown** from [RStudio](http://www.rstudio.com/products/rstudio/do
 if (!require("devtools")) install.packages("devtools", repos = "http://cran.rstudio.org")
 
 devtools::install_github("rstudio/bookdown")
+
 devtools::install_github("JustinMShea/phoenixdown")
 ```
 
