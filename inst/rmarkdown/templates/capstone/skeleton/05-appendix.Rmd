@@ -13,12 +13,12 @@ This first appendix includes all of the R chunks of code that were hidden throug
 
 **In section \@ref(ref-labels):**
 
-```{r ref.label='include_packages_2', results='hide', echo = TRUE}
+```{r ref.label='pressure', results='hide', echo = TRUE, eval=FALSE}
 ```
 
 **In section \@ref(ref-labels):**
 
-```{r ref.label='delaysboxplot', results='hide', echo = TRUE, eval=FALSE}
+```{r ref.label='GroupedTooth-boxplot', results='hide', echo = TRUE, eval=FALSE}
 ```
 
 # A Second Appendix, for example
