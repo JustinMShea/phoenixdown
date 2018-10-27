@@ -68,7 +68,6 @@ Import packages:
 numpy <- import("numpy")
 ```
 
-
 ```{python}
 import numpy as np
 print(np.reshape(np.arange(1,25), (4,3,2), "F"))
