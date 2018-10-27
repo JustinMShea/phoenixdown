@@ -28,7 +28,7 @@ data(sleep)
 summary(sleep)
 ```
 
-However, one is not restricted to R and can use the following languages:
+However, one is not restricted to R and R Markdown supports the following languages:
 
 ```{r languages}
 names(knitr::knit_engines$get())
@@ -37,45 +37,46 @@ names(knitr::knit_engines$get())
 Of these, if you _must_ use `python`, you can do that too!
 First load reticulate and then find what path your python resides on.
 
-```{r load-recticulate}
+```{r load-recticulate, eval=FALSE}
 library(reticulate)
-
 pyPath <- py_discover_config()
 pyPath 
 ```
 
 Pass the relevant path to the `use_python` function.
 
-```{r python-setup}
+```{r python-setup, eval=FALSE}
 use_python(pyPath$python_versions[1])
 ```
 
-Before we install some packages, we need to create a `conda` envioronment to store them in.
-```{r}
+Before we install some packages, we need to create a `conda` environment to store them in.
+```{r python-conda, eval=FALSE}
 # create a new environment 
 conda_create("r-reticulate")
 ```
 
 Install  packages:
 
-```{r}
+```{r python-install, eval=FALSE}
 py_install("numpy")
 ```
 
 Import packages:
 
-```{r}
+```{r r-python-import, eval=FALSE}
 numpy <- import("numpy")
 ```
 
-```{python}
+```{python python-import, eval=FALSE}
 import numpy as np
 print(np.reshape(np.arange(1,25), (4,3,2), "F"))
 ```
 
+See the [Reticulate: R interface to Python](https://rstudio.github.io/reticulate/) for more specifics.
+
 Or you can use C++. Rcpp enables compilation of C++ into R functions.
 
-```{Rcpp}
+```{Rcpp Rcpp-function, eval=FALSE}
 #include <Rcpp.h>
 using namespace Rcpp;
 
@@ -87,9 +88,11 @@ NumericVector humanPercent(NumericVector x) {
 
 Now, `humanPercent` is available to call from R.
 
-```{r}
+```{r r-Rcpp, eval=FALSE}
 humanPercent(x=0.0274)
 ```
+
+Please see [Rcpp for Seamless R and C++ Integration](http://www.rcpp.org/), which provides many examples. 
 
 
 ### Inline code {.unnumbered}
@@ -121,129 +124,60 @@ As you see with `$2 \pi$` above, mathematics can be added by surrounding the mat
 You can also embed plots.  For example, here is a way to use the base **R** graphics package to produce a plot using the built-in `pressure` dataset:
 
 ```{r pressure, echo=FALSE}
-plot(pressure)
+plot(pressure, type = "l", col="cornflowerblue", lwd = 2,
+               xlab = "Temperature (deg C)",
+               ylab = "Pressure (mm of Hg)",
+               main = "pressure data: Vapor Pressure of Mercury")
 ```
 
-Note that the `echo=FALSE` parameter was added to the code chunk to prevent printing of the **R** code that generated the plot.  There are plenty of other ways to add chunk options.  More information is available at <http://yihui.name/knitr/options/>.  
+Note that the `echo=FALSE` parameter was added to the code chunk to prevent printing of the **R** code that generated the plot. However, we also labeled the code chunk `pressure` so we can call its contents and print them in the Appendex.  There are plenty of other ways to add chunk options.  More information is available at <http://yihui.name/knitr/options/>.  
 
 
 ### Loading and exploring data {.unnumbered}
 
-Next, we need to download the package `pnewflights14` for all flights that departed from Seattle and Portland in 2014. More information about this dataset and the **R** package is available at <http://github.com/ismayc/pnwflights14>.  This subset includes only Portland flights and only rows that were complete with no missing values.  Merges were also done with the `airports` and `airlines` data sets in the `pnwflights14` package to get more descriptive airport and airline names.
+From the description file (`?ToothGrwoth`): 
 
-We can load in this data set using the following command:
+>The response is the length of odontoblasts (cells responsible for tooth growth) in 60 guinea pigs. Each animal received one of three dose levels of vitamin C (0.5, 1, and 2 mg/day) by one of two delivery methods, orange juice or ascorbic acid (a form of vitamin C and coded as VC).
 
-```{r load_data}
-if(!require(pnwflights14)){ devtools::install_github("ismayc/pnwflights14")
-}
-library(pnwflights14)
-data(flights)
+Variables:
+
+ - *len*:	_numeric_.	Tooth length
+ -	*supp*:	_factor_.	Supplement type (VC or OJ).
+ - *dose*:	_numeric_.	Dose in milligrams/day
+
+
+First load some data, clean up the variable names, and do some exploratory data analysis through the use of plots and tables. Also, transform `dose` into a `factor` as there exists only three dosage levels.
+
+
+```{r toothGrowth-data}
+data(ToothGrowth)
+colnames(ToothGrowth) <- c("length", "supplement", "dose")
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 ```
 
-The data is now stored in the data frame called `flights` in **R**.  To get a better feel for the variables included in this dataset we can use a variety of functions. Here we can see the dimensions (rows by columns) and also the names of the columns.
+Use the `kable` function to create convenient, decent looking tables. Another package which creates higher quality tables is the venerable [xtable](https://cran.r-project.org/web/packages/xtable/index.html) package, which is highly recommended for \LaTeX\ PDFs.
 
-```{r str}
-dim(flights)
-names(flights)
+```{r toothGrowth-table}
+library(knitr)
+kable(head(ToothGrowth, 5), align = "r")
+kable(tail(ToothGrowth, 5), align = "r")
 ```
 
-Another good idea is to take a look at the dataset in table form. With this dataset has `r dim(flights)[1]` rows, we won't explicitly show the results of the command here.  I recommend you enter the command into the Console **_after_** you have run the **R** chunks above to load the data into **R**.
 
-```{r view_flights, eval=FALSE}
-View(flights)
-```
+The `aggregate` function can be used to compute the mean tooth `length` by`supplement` and `dose`. 
 
-While not required, it is highly recommended you use the `dplyr` package to manipulate and summarize your data set as needed.  It uses a syntax that is easy to understand using chaining operations.  Below I've created a few examples of using `dplyr` to get information about the Portland flights in 2014.  You will also see the use of the `ggplot2` package, which produces beautiful, high-quality academic visuals.
+```{r groupedTooth, warning=FALSE}
+groupedTooth <- aggregate(ToothGrowth, by=ToothGrowth[,2:3], FUN=mean)[,1:3]
 
-We begin by checking to ensure that needed packages are installed and then we load them into our current working environment:
+kable(groupedTooth, align = "r")
+```                   
 
-```{r include_packages_2, include = FALSE}
-# makes sure additional packages are included.
-if(!require(dplyr))
-    install.packages("dplyr", repos = "http://cran.rstudio.com")
-if(!require(ggplot2))
-    install.packages("ggplot2", repos = "http://cran.rstudio.com")
-if(!require(knitr))
-    install.packages("knitr", repos = "http://cran.rstudio.com")
-```
-
-```{r load_pkgs, message=FALSE}
-# Load packages (phoenixdown will load all of the packages as well)
-library(phoenixdown)
-# List of packages required for this analysis
-pkg <- c("dplyr", "ggplot2", "knitr", "bookdown", "devtools")
-# Check if packages are not installed and assign the
-# names of the packages not installed to the variable new.pkg
-new.pkg <- pkg[!(pkg %in% installed.packages())]
-
-# If there are any packages in the list that aren't installed,
-# install them
-if (length(new.pkg))
-  install.packages(new.pkg, repos = "http://cran.rstudio.com")
-
-
-```
-
-The example we show here does the following:
-
-- Selects only the `carrier` and `arr_delay` from the `flights` dataset and then determine the largest arrival delay for each of the carriers.
-
-- merges with the airlines data set to match airlines names with carrier codes.
-
-```{r max_delays}
-data(flights)
-data(airlines)
-
-max_delays <- flights[,c("carrier", "arr_delay")] %>% 
-              group_by(carrier) %>%
-              summarize(max_arr_delay = max(arr_delay, na.rm = TRUE))
-
-max_delays <- merge(airlines, max_delays, by = "carrier")[,-1]
- 
-```
-
-A useful function in the `knitr` package for making nice tables in _R Markdown_ is called `kable`.  It is much easier to use than manually entering values into a table by copying and pasting values into Excel or LaTeX.  This again goes to show how nice reproducible documents can be! (Note the use of `results="asis"`, which will produce the table instead of the code to create the table.)  The `caption.short` argument is used to include a shorter title to appear in the List of Tables.
-
-```{r maxdelays, results="asis"}
-data("airlines")
-
-kable(max_delays,
-      col.names = c("Airline", "Max Arrival Delay"),
-      caption = "Maximum Delays by Airline",
-      caption.short = "Max Delays by Airline",
-      longtable = TRUE,
-      booktabs = TRUE)
-```
-
-The last two options make the table a little easier-to-read.
-
-We can further look into the properties of the largest value here for American Airlines Inc.  To do so, we can isolate the row corresponding to the arrival delay of 1539 minutes for American in our original `flights` dataset.
-
-
-```{r max_props}
- kable(flights %>% filter(arr_delay == 1539, carrier == "AA") %>%
-                   select(-c(month, day, carrier, hour, minute, arr_delay))
-                   )
-```
-
-We see that the flight occurred on March 3rd and departed a little after 2 PM on its way to Dallas/Fort Worth.  Lastly, we show how we can visualize the arrival delay of all departing flights from Portland on March 3rd against time of departure.
-
-```{r march3plot, fig.height=3, fig.width=6}
-flights %>% filter(month == 3, day == 3) %>%
-            ggplot(aes(x = dep_time, y = arr_delay)) + 
-            geom_point()
-```
-
-### Additional resources {.unnumbered}
+### Additional R Markdown resources {.unnumbered}
 
 - _Markdown_ Info Sheet - <https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet>
 
 - _R Markdown_ Reference Guide - <https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf>
 
-- _R Markdown _ Web Site -
-<https://rmarkdown.rstudio.com/index.html>
-
-\clearpage
 
 ## Math and Science notation  {#math-sci .unnumbered}
 <!-- Required to number equations in HTML files -->
@@ -253,7 +187,7 @@ MathJax.Hub.Config({
 });
 </script>
 
-\TeX\ is the best way to typeset mathematics. Donald Knuth designed \TeX\ when he got frustrated at how long it was taking the typesetters to finish his book, which contained a lot of mathematics.  One nice feature of _R Markdown_ is its ability to read LaTeX code directly.
+\TeX\ is the best way to typeset mathematics. Donald Knuth designed \TeX\ when he got frustrated at how long it was taking the typesetters to finish his book, which contained a lot of mathematics.  One nice feature of _R Markdown_ is its ability to read \LaTeX\ code directly.
 
 Get around math mode's automatic italicizing in LaTeX by using the argument `$\mathrm{formula here}$`, with your formula inside the curly brackets.  (Notice the use of the backticks here which enclose text that acts as code.)
 
