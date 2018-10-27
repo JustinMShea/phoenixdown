@@ -1,21 +1,21 @@
 Package: phoenixdown
 Title: A template for the University of Chicago Master of Science in Analytics Capstone Project
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
     person("Justin M.", "Shea", email = "justinshea@uchicago.edu", role = c("aut","cre")),
     person("Chester", "Ismay", email = "chester.ismay@gmail.com", role = "aut"),
     person("Nick", "Solomon", email = "nick@nicksolomon.me", role = "aut"),
     person("Ben", "Marwick", email = "benmarwick@gmail.com", role = "aut"))
 Description: Using the bookdown package and a custom LaTeX capstone template, 
-    this package aims to encourage reproducible research using R Markdown for
-    reproducible research. Forked form Ben Marwicks huskeydown, which was forked from Chester Ismay's thesis down.
+    this package aims to encourage reproducible research using R Markdown. 
+    Forked form Ben Marwick's huskeydown, which was forked from Chester Ismay's thesisdown.
 Maintainer: Justin M. Shea <justinshea@uchicago.edu>
 Depends:
     R (>= 3.4.0)
 Imports:
     bookdown,
-    rmarkdown,
     knitr
+    rmarkdown
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
