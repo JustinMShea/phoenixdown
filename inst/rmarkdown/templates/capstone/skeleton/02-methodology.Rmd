@@ -21,57 +21,77 @@ Justification of model(s) selected. Identification of dependent and independent 
 
 ### Code chunks {.unnumbered}
 
-When you click the **Knit** button above a document will be generated that includes both content as well as the output of any embedded code chunks within the document. You can embed a code chunk like this (`cars` is a built-in **R** dataset):
+When you click the **Knit** button above a document will be generated that includes both content as well as the output of any embedded code chunks within the document. You can embed a code chunk like this (`sleep` is a built-in **R** dataset. Student (1908) _The probable error of the mean_. Biometrika, 6, 20).
 
-```{r cars}
-summary(cars)
+```{r cars-summary}
+data(sleep)
+summary(sleep)
 ```
 
 However, one is not restricted to R and can use the following languages:
 
-```{r}
+```{r languages}
 names(knitr::knit_engines$get())
 ```
 
 Of these, if you _must_ use `python`, you can do that too!
-First load reticulate and then find what python you path resides on.
+First load reticulate and then find what path your python resides on.
 
 ```{r load-recticulate}
 library(reticulate)
 
-py_discover_config()
+pyPath <- py_discover_config()
+pyPath 
 ```
 
 Pass the relevant path to the `use_python` function.
+
 ```{r python-setup}
-use_python("ProgramData/Anaconda3/python.exe")
+use_python(pyPath$python_versions[1])
 ```
 
-Install some packages, but create a `conda` envioronment to store them in
+Before we install some packages, we need to create a `conda` envioronment to store them in.
 ```{r}
 # create a new environment 
 conda_create("r-reticulate")
 ```
-Install some packages:
+
+Install  packages:
 
 ```{r}
-# install matplotlib
-conda_install("r-reticulate", "matplotlib")
+py_install("numpy")
 ```
 
+Import packages:
+
 ```{r}
-# import matplotlib (it will be automatically discovered in "r-reticulate")
-matplotlib <- import("matplotlib")
+numpy <- import("numpy")
 ```
+
 
 ```{python}
-y = 3+4
-print(y)
-
-import matplotlib.pyplot as plt
-plt.plot([0, 2, 1, 4])
-plt.show()
+import numpy as np
+print(np.reshape(np.arange(1,25), (4,3,2), "F"))
 ```
+
+Or you can use C++. Rcpp enables compilation of C++ into R functions.
+
+```{Rcpp}
+#include <Rcpp.h>
+using namespace Rcpp;
+
+// [[Rcpp::export]]
+NumericVector humanPercent(NumericVector x) {
+  return x * 100;
+}
+```
+
+Now, `humanPercent` is available to call from R.
+
+```{r}
+humanPercent(x=0.0274)
+```
+
 
 ### Inline code {.unnumbered}
 
@@ -110,25 +130,25 @@ Note that the `echo=FALSE` parameter was added to the code chunk to prevent prin
 
 ### Loading and exploring data {.unnumbered}
 
-Next, we need to download the package `pnewflights14` for all flights that departed from Seattle and Portland in 2014.  More information about this dataset and the **R** package is available at <http://github.com/ismayc/pnwflights14>.  This subset includes only Portland flights and only rows that were complete with no missing values.  Merges were also done with the `airports` and `airlines` data sets in the `pnwflights14` package to get more descriptive airport and airline names.
+Next, we need to download the package `pnewflights14` for all flights that departed from Seattle and Portland in 2014. More information about this dataset and the **R** package is available at <http://github.com/ismayc/pnwflights14>.  This subset includes only Portland flights and only rows that were complete with no missing values.  Merges were also done with the `airports` and `airlines` data sets in the `pnwflights14` package to get more descriptive airport and airline names.
 
 We can load in this data set using the following command:
 
 ```{r load_data}
-if(!require(nycflights13)){ devtools::install_github("ismayc/pnwflights14")
+if(!require(pnwflights14)){ devtools::install_github("ismayc/pnwflights14")
 }
 library(pnwflights14)
 data(flights)
 ```
 
-The data is now stored in the data frame called `flights` in **R**.  To get a better feel for the variables included in this dataset we can use a variety of functions.  Here we can see the dimensions (rows by columns) and also the names of the columns.
+The data is now stored in the data frame called `flights` in **R**.  To get a better feel for the variables included in this dataset we can use a variety of functions. Here we can see the dimensions (rows by columns) and also the names of the columns.
 
 ```{r str}
 dim(flights)
 names(flights)
 ```
 
-Another good idea is to take a look at the dataset in table form.  With this dataset has `r dim(flights)[1]` rows, we won't explicitly show the results of the command here.  I recommend you enter the command into the Console **_after_** you have run the **R** chunks above to load the data into **R**.
+Another good idea is to take a look at the dataset in table form. With this dataset has `r dim(flights)[1]` rows, we won't explicitly show the results of the command here.  I recommend you enter the command into the Console **_after_** you have run the **R** chunks above to load the data into **R**.
 
 ```{r view_flights, eval=FALSE}
 View(flights)
