@@ -68,16 +68,6 @@ If you'd like to include a comment that won't be produced in your resulting file
 If you receive a duplicate label error after knitting, delete the extra .Rmd file and then knit again.
 -->
 
-```{r include_packages, include = FALSE}
-# This chunk ensures that the huskiedown package is installed and loaded. 
-# This huskiedown package includes the template files for the thesis.
-if(!require(devtools))
-  install.packages("devtools", repos = "http://cran.rstudio.com")
-if(!require(phoenixdown))
-  devtools::install_github("JustinMShea/phoenixdown")
-library(phoenixdown)
-```
-
 <!-- You'll need to include the order that you'd like Rmd files to appear in the _bookdown.yml file for PDF files and also delete the # before rmd_files: there. Do not include 00(two-hyphens)prelim.Rmd,  00(two-hyphens)abstract.Rmd and 00(two-hyphens)executive summary.Rmdsince they are handled in the YAML above differently for the PDF version.
 -->
 
