@@ -32,4 +32,187 @@ This section provides a literature review that informs the reader in the followi
   * Summarize the evidence in support of your thesis 
   * Summarize why alternative theses are not favored 
   * State the research question and hypotheses
+
+\newpage
+
+### Code chunks {.unnumbered} 
+
+When you click the **Knit** button above a document will be generated that includes both content as well as the output of any embedded code chunks within the document. You can embed a code chunk as demonstrated below.
+
+The `sleep` data is a built-in **R** dataset (`Student-t` (1908) _The probable error of the mean_. Biometrika, 6, 20). It shows the effect of two soporific drugs (increase in hours of sleep compared to control) on 10 patients.
+
+Use the `kable` function to create quick, decent looking tables. Other packages for higher quality tables are [xtable](https://cran.r-project.org/web/packages/xtable/index.html) and [stargazar](https://cran.r-project.org/web/packages/stargazer/index.html). These are especially recommended for working with \LaTeX\ output.
+
+```{r sleep, echo=TRUE, fig.align='left'}
+data(sleep)
+sleep2 <- data.frame(sleep[1:10, 1], sleep[11:20, 1])
+colnames(sleep2) <- c("extra_sleep_drug1", "extra_sleep_drug2")
+kable(sleep2, row.names = TRUE, caption = "Sleep Data", 
+              format = "latex", longtable = TRUE)
+```
+
+### Linked tables and List of Tables {.unnumbered} 
+
+We linked Table \@ref(tab:sleep) above to the `List of Tables` section following the table of contents. For this to work properly, two steps are required.
+
+ 1. The code chunk of the table must be given a label argument. ie; `{r sleep, args}`. 
+ 2. Define a caption in the `kable` function (`caption = "Sleep Data"`) call. The caption will be passed to the **`List of Tables`** section and is required for an entry to appear.
+
+### More than R: Other Languages {.unnumbered} 
+
+R Markdown supports the following languages:
+
+```{r languages}
+names(knitr::knit_engines$get())
+```
+
+Of these, if you use **`python`**, first load `reticulate`.
+
+```{r load-recticulate, eval=FALSE}
+library(reticulate)
+pyPath <- py_discover_config()
+use_python(pyPath$python_versions[1])
+```
+
+Create a `conda` environment to store packages, install, and load one.
+
+```{r python-import, eval=FALSE}
+conda_create("r-reticulate")
+py_install("numpy")
+numpy <- import("numpy")
+```
+
+Define a python code chunk with arguments and run code: `{python, eval=FALSE, etc}`
+```{python python-use, eval=FALSE}
+import numpy as np
+print(np.reshape(np.arange(1,25), (4,3,2), "F"))
+```
+
+Please see the [Reticulate: R interface to Python](https://rstudio.github.io/reticulate/) for more specifics.
+
+Let's not forget about C++/Rcpp enables compilation of C++ into R functions.
+
+```{Rcpp Rcpp-function, eval=FALSE}
+#include <Rcpp.h>
+using namespace Rcpp;
+// [[Rcpp::export]]
+NumericVector humanPercent(NumericVector x) {
+  return x * 100;
+}
+```
+
+```{r r-Rcpp, eval=FALSE}
+humanPercent(x=0.0274)
+```
+
+Please see [Rcpp for Seamless R and C++ Integration](http://www.rcpp.org/), which is a very mature project and provides many examples. 
+
+\newpage
+
+### Including plots {#pressure-plot .unnumbered}
+
+You can also embed plots.  For example, here is a way to use the base **R** graphics package to produce a plot using the built-in `pressure` dataset. In this case, the **`echo=FALSE`** parameter was added to the code chunk to prevent printing the code.
+
+```{r pressureplot, echo=FALSE, fig.cap="Pressure Plot"}
+plot(pressure, type = "l", col="cornflowerblue", lwd = 2,
+               xlab = "Temperature (deg C)",
+               ylab = "Pressure (mm of Hg)",
+               main = "pressure data: Vapor Pressure of Mercury",
+               frame = FALSE)
+```
+
+
+ This is Figure \@ref(fig:pressureplot): pressure data. Internally, we also labeled the code chunk `pressureplot` so we can call its contents and print them in the Appendix. see Appendix for the code that generated this plot. There are many arguments which govern the behavior of your code chunks. The creator of `knitr` has a many notes on this <http://yihui.name/knitr/options/>.
+
+\newpage
+
+### R Markdown Tables, Graphics, References, and Labels {#ref-labels .unnumbered}
+
+In addition to the tables that can be automatically generated from a data frame in **R** that you saw in [R Markdown Basics] using the `kable` function, you can also create tables using _pandoc_. (More information is available at <http://pandoc.org/README.html#tables>.)  This might be useful if you don't have values specifically stored in **R**, but you'd like to display them in table form.  Below is an example.  Pay careful attention to the alignment in the table and hyphens to create the rows and columns.
+
+----------------------------------------------------------------------------------
+  Factors                    Correlation between Parents & Child      Inherited
+------------------------- ----------------------------------------- --------------
+  Education                                -0.49                         Yes
   
+  Socio-Economic Status                     0.28                        Slight   
+  
+  Income                                    0.08                          No
+  
+  Family Size                               0.18                        Slight
+------------------------- ----------------------------------------- --------------
+Table: (\#tab:inher) Correlation of Inheritance Factors for Parents and Child 
+
+We can also create a link to the table like so: Table \@ref(tab:inher).  
+To create the link, place "Table `\@ref(tab:sleep)`", using the label argument defined in step 1. This can be helpful to reference in other parts of the document.
+
+<!-- We will next explore ways to create this label-ref link using figures. -->
+
+### Inline code {.unnumbered}
+
+If you'd like to put the results of your analysis directly into your discussion, add inline code like this:
+
+> The `cos` of $2 \pi$ is "r cos(2*pi)".
+
+> The `cos` of $2 \pi$ is `r cos(2*pi)`. 
+
+Another example would be the direct calculation of the standard deviation:
+
+> The standard deviation of `speed` in `cars` is "r sd(cars$speed)".
+
+> The standard deviation of `speed` in `cars` is `r sd(cars$speed)`.
+
+One last neat feature is the use of the `ifelse` conditional statement which can be used to output text depending on the result of an **R** calculation:
+
+> r ifelse(sd(cars$speed) < 6, "The standard deviation is less than 6.", "The standard deviation is equal to or greater than 6.")
+
+> `r ifelse(sd(cars$speed) < 6, "The standard deviation is less than 6.", "The standard deviation is equal to or greater than 6.")`
+
+Note the use of `>` here, which signifies a quotation environment that will be indented.
+
+As you see with `$2 \pi$` above, mathematics can be added by surrounding the mathematical text with dollar signs.  More examples of this are in [Math Examples].  
+
+<!-- clearpage ends the page, and also dumps out all floats.
+  Floats are things like tables and figures. -->
+
+
+### Figures {.unnumbered}
+
+If your capstone has a lot of figures, _R Markdown_ might behave better for you than that other word processor.  One perk is that it will automatically number the figures accordingly in each chapter.    You'll also be able to create a label for each figure, add a caption, and then reference the figure in a way similar to what we saw with tables earlier.  If you label your figures, you can move the figures around and _R Markdown_ will automatically adjust the numbering for you.  No need for you to remember!  So that you don't have to get too far into LaTeX to do this, a couple **R** functions have been created for you to assist.  You'll see their use below.
+
+<!--
+One thing that may be annoying is the way _R Markdown_ handles "floats" like tables and figures (it's really \LaTeX's fault). \LaTeX\ will try to find the best place to put your object based on the text around it and until you're really, truly done writing you should just leave it where it lies. There are some optional arguments specified in the options parameter of the `label` function.  If you need to shift your figure around, it might be good to look here on tweaking the options argument:  <https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions>
+
+If you need a graphic or tabular material to be part of the text, you can just put it inline. If you need it to appear in the list of figures or tables, it should be placed in a code chunk.
+-->
+
+
+In the **R** chunk below, we will load in a picture stored as `phoenix-logo.png` in our main directory.  We then give it the caption of "Phoenix logo", the label of "phoenixlogo", and specify that this is a figure.  Make note of the different **R** chunk options that are given in the R Markdown file (not shown in the knitted document).
+
+```{r phoenixlogo, out.width="200px", fig.align="center", fig.cap="Phoenix logo"}
+include_graphics(path = "figure/phoenix-logo.jpg")
+```
+
+Here is a reference to the Phoenix logo: Figure \@ref(fig:phoenixlogo).  Note the use of the `fig:` code here.  By naming the **R** chunk that contains the figure, we can then reference that figure later as done in the first sentence here.  We can also specify the caption for the figure via the R chunk option `fig.cap`.
+
+Next, we will explore the use of the `out.extra` chunk option, which can be used to shrink or expand an image loaded from a file by specifying `"scale= "`. Here we use the mathematical graph stored in the "subdivision.pdf" file.
+
+```{r subd, results="asis", echo=FALSE, fig.cap="Subdiv. graph", out.extra="scale=0.75"}
+include_graphics("figure/subdivision.pdf")
+```
+
+Here is a reference to this image: Figure \@ref(fig:subd).  Note that `echo=FALSE` is specified so that the **R** code is hidden in the document.
+
+**More Figure Stuff**
+
+Lastly, we will explore how to rotate and enlarge figures using the `out.extra` chunk option.  (Currently this only works in the PDF version of the book.)
+
+```{r subd2, results="asis", echo=FALSE, out.extra="angle=180, scale=1.1", fig.cap="A Larger Figure, Flipped Upside Down"}
+include_graphics("figure/subdivision.pdf")
+```
+
+As another example, here is a reference: Figure \@ref(fig:subd2).  
+
+### Footnotes and Endnotes  {.unnumbered}
+
+You might want to footnote something. ^[footnote text] The footnote will be in a smaller font and placed appropriately. Endnotes work in much the same way. 
