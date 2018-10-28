@@ -2,143 +2,19 @@
 
 The methodology section may include the following subsections:
 
+ - Data 
+ - Descriptive analyses
+ - Modeling Framework
 
 ## Data {#methodology-data .unnumbered}
 
-General description of the data and source(s). This includes limitations and delimitations; units of analysis; time window for aggregation and modeling (if applicable); and validation and development samples.
+**General description of the data and source(s). This includes limitations and delimitations; units of analysis; time window for aggregation and modeling (if applicable); and validation and development samples.**
 
-
-## Descriptive analyses {#methodology-descriptive .unnumbered} 
-
-Identification of the methodologies that would provide a view into the data. These may include highlighting the relationships that are important for the research, validating assumptions with respect to important metrics, and providing evidence that substantiates the way data is analyzed.
-
-
-## Modeling Framework {#methodology-modeling .unnumbered}
-
-Justification of model(s) selected. Identification of dependent and independent variables (whenever applicable), per model if applicable. Variable transformations (if applicable). Future extraction (if applicable). Discussion of model(s) functional form. Assumptions of model(s) and ways of insuring that assumptions are observed or tested. Assessing model(s) performance and validation.
-
-\newpage 
-
-### Code chunks {.unnumbered}
-
-When you click the **Knit** button above a document will be generated that includes both content as well as the output of any embedded code chunks within the document. You can embed a code chunk like this (`sleep` is a built-in **R** dataset. Student (1908) _The probable error of the mean_. Biometrika, 6, 20).
-
-```{r cars-summary}
-data(sleep)
-summary(sleep)
-```
-
-However, one is not restricted to R and R Markdown supports the following languages:
-
-```{r languages}
-names(knitr::knit_engines$get())
-```
-
-Of these, if you _must_ use `python`, you can do that too!
-First load reticulate and then find what path your python resides on.
-
-```{r load-recticulate, eval=FALSE}
-library(reticulate)
-pyPath <- py_discover_config()
-pyPath 
-```
-
-Pass the relevant path to the `use_python` function.
-
-```{r python-setup, eval=FALSE}
-use_python(pyPath$python_versions[1])
-```
-
-Before we install some packages, we need to create a `conda` environment to store them in.
-```{r python-conda, eval=FALSE}
-# create a new environment 
-conda_create("r-reticulate")
-```
-
-Install  packages:
-
-```{r python-install, eval=FALSE}
-py_install("numpy")
-```
-
-Import packages:
-
-```{r r-python-import, eval=FALSE}
-numpy <- import("numpy")
-```
-
-```{python python-import, eval=FALSE}
-import numpy as np
-print(np.reshape(np.arange(1,25), (4,3,2), "F"))
-```
-
-See the [Reticulate: R interface to Python](https://rstudio.github.io/reticulate/) for more specifics.
-
-Or you can use C++. Rcpp enables compilation of C++ into R functions.
-
-```{Rcpp Rcpp-function, eval=FALSE}
-#include <Rcpp.h>
-using namespace Rcpp;
-
-// [[Rcpp::export]]
-NumericVector humanPercent(NumericVector x) {
-  return x * 100;
-}
-```
-
-Now, `humanPercent` is available to call from R.
-
-```{r r-Rcpp, eval=FALSE}
-humanPercent(x=0.0274)
-```
-
-Please see [Rcpp for Seamless R and C++ Integration](http://www.rcpp.org/), which provides many examples. 
-
-
-### Inline code {.unnumbered}
-
-If you'd like to put the results of your analysis directly into your discussion, add inline code like this:
-
-> The `cos` of $2 \pi$ is "r cos(2*pi)". To execute, replace quotes with backticks (`).
-
-> The `cos` of $2 \pi$ is `r cos(2*pi)`. 
-
-Another example would be the direct calculation of the standard deviation:
-
-> The standard deviation of `speed` in `cars` is "r sd(cars$speed)".
-
-> The standard deviation of `speed` in `cars` is `r sd(cars$speed)`.
-
-One last neat feature is the use of the `ifelse` conditional statement which can be used to output text depending on the result of an **R** calculation:
-
-> r ifelse(sd(cars$speed) < 6, "The standard deviation is less than 6.", "The standard deviation is equal to or greater than 6.")
-
-> `r ifelse(sd(cars$speed) < 6, "The standard deviation is less than 6.", "The standard deviation is equal to or greater than 6.")`
-
-Note the use of `>` here, which signifies a quotation environment that will be indented.
-
-As you see with `$2 \pi$` above, mathematics can be added by surrounding the mathematical text with dollar signs.  More examples of this are in [Mathematics and Science] if you uncomment the code in [Math].  
-
-### Including plots {.unnumbered}
-
-You can also embed plots.  For example, here is a way to use the base **R** graphics package to produce a plot using the built-in `pressure` dataset:
-
-```{r pressure, echo=FALSE}
-plot(pressure, type = "l", col="cornflowerblue", lwd = 2,
-               xlab = "Temperature (deg C)",
-               ylab = "Pressure (mm of Hg)",
-               main = "pressure data: Vapor Pressure of Mercury",
-               frame = FALSE)
-```
-
-Note that the `echo=FALSE` parameter was added to the code chunk to prevent printing of the **R** code that generated the plot. However, we also labeled the code chunk `pressure` so we can call its contents and print them in the Appendex.  There are plenty of other ways to add chunk options.  More information is available at <http://yihui.name/knitr/options/>.  
-
-
-### Loading and exploring data {.unnumbered}
+Let's revisit the work of E.W. Crampton’s November 22, 1946 paper titled _The Growth of the Odontoblasts of the Incisor Tooth as a Criterion of the Vitamin C Intake of the Guinea Pig_. It is one of the data sets available within in the R statistical programming environment.
 
 From the description file (`?ToothGrowth`): 
 
->The response is the length of odontoblasts (cells responsible for tooth growth) in 60 guinea pigs. Each animal received one of three dose levels of vitamin C (0.5, 1, and 2 mg/day) by one of two delivery methods, orange juice or ascorbic acid (a form of vitamin C and coded as VC).
+>The response is the length of odontoblasts (cells responsible for tooth growth) in 60 guinea pigs. Each animal received one of three dose levels of vitamin C (0.5, 1, and 2 mg/day) by one of two delivery methods, orange juice (OJ) or ascorbic acid (a form of vitamin C, coded VC).
 
 Variables:
 
@@ -147,39 +23,51 @@ Variables:
  - *dose*:	_numeric_.	Dose in milligrams/day
 
 
-First load some data, clean up the variable names, and do some exploratory data analysis through the use of plots and tables. Also, transform `dose` into a `factor` as there exists only three dosage levels.
+```{r data}
+data(ToothGrowth)
+```
+
+## Descriptive analyses {#methodology-descriptive .unnumbered} 
+
+**Identification of the methodologies that would provide a view into the data. These may include highlighting the relationships that are important for the research, validating assumptions with respect to important metrics, and providing evidence that substantiates the way data is analyzed.**
 
 
-```{r toothGrowth-data}
+
+```{r datatable, echo=TRUE}
+growth_short <- rbind(ToothGrowth[1:7,], ToothGrowth[26:34,], ToothGrowth[53:60,])
+kable(growth_short, align = "r", format = "latex", 
+      longtable = TRUE, caption = "Tooth Growth")
+```
+
+Table: \@ref(tab:datatable): Head, center, and tail of _Tooth Growth_ data.
+
+
+\newpage
+
+## Modeling Framework {#methodology-modeling .unnumbered}
+
+**Justification of model(s) selected. Identification of dependent and independent variables, per model as well as variable transformations. Feature extraction (if applicable). Discussion of model(s) functional form. Assumptions of model(s) and ways of insuring that assumptions are observed or tested. Assessing model(s) performance and validation.**
+
+Transform `dose` into a `factor`. Only three dosage levels are present.
+
+```{r transform}
 data(ToothGrowth)
 colnames(ToothGrowth) <- c("length", "supplement", "dose")
 ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 ```
+ 
+We are most interested in discovering which treatment leads to the optimal tooth growth.
+In this vein, we use `aggregate` function to transform our data and compute the average tooth `length` by both `supplement` type  and `dose` size.
 
-Use the `kable` function to create convenient, decent looking tables. Another package which creates higher quality tables is the venerable [xtable](https://cran.r-project.org/web/packages/xtable/index.html) package, which is highly recommended for \LaTeX\ PDFs.
 
-```{r toothGrowth-table}
-library(knitr)
-kable(head(ToothGrowth, 5), align = "r")
-
-kable(tail(ToothGrowth, 5), align = "r")
-```
-
-\newpage 
-
-The `aggregate` function can be used to compute the mean tooth `length` by`supplement` and `dose`. 
-
-```{r groupedTooth, warning=FALSE}
+```{r group, warning=FALSE}
 groupedTooth <- aggregate(ToothGrowth, by=ToothGrowth[,2:3], FUN=mean)[,1:3]
 
-kable(groupedTooth, align = "r")
+kable(groupedTooth, align = "r", caption = "Average tooth length",
+      format = "latex", longtable = TRUE)
 ```                   
 
-### Additional R Markdown resources {.unnumbered}
 
-- _Markdown_ Info Sheet - <https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet>
-
-- _R Markdown_ Reference Guide - <https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf>
 
 \newpage
 
@@ -262,3 +150,11 @@ From Lapidus and Pindar, page 145.
 $$\int_{-1}^1\!\int_{-1}^1\!\int_{-1}^1 f\big(\xi,\eta,\zeta\big) = \sum_{k=1}^n\sum_{j=1}^n\sum_{i=1}^n w_i w_j w_k f\big( \xi,\eta,\zeta\big).$$ 
 
 
+
+### Additional R Markdown and bookdown resources {.unnumbered}
+
+- _Bookdown_ Online Book - <https://bookdown.org/yihui/bookdown/>
+
+- _Markdown_ Info Sheet - <https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet>
+
+- _R Markdown_ Reference Guide - <https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf>
