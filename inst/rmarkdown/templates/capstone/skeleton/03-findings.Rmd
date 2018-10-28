@@ -1,67 +1,24 @@
 # Findings {#findings .unnumbered}
 
- * Results of descriptive analyses
- * Modeling results. You may organize this section either by research objectives or hypotheses
- * Results of the validation of model assumptions
- * Results of the model performance and validation
+Should be organized as follows:
 
-## R Markdown Tables, Graphics, References, and Labels {#ref-labels .unnumbered}
+ - Results of descriptive analyses
+ - Modeling results
+ - Results of model performance and validation
 
-In addition to the tables that can be automatically generated from a data frame in **R** that you saw in [R Markdown Basics] using the `kable` function, you can also create tables using _pandoc_. (More information is available at <http://pandoc.org/README.html#tables>.)  This might be useful if you don't have values specifically stored in **R**, but you'd like to display them in table form.  Below is an example.  Pay careful attention to the alignment in the table and hyphens to create the rows and columns.
-
-----------------------------------------------------------------------------------
-  Factors                    Correlation between Parents & Child      Inherited
-------------------------- ----------------------------------------- --------------
-  Education                                -0.49                         Yes
-  
-  Socio-Economic Status                     0.28                        Slight   
-  
-  Income                                    0.08                          No
-  
-  Family Size                               0.18                        Slight
-  
-  Occupational Prestige                     0.21                        Slight
-------------------------- ----------------------------------------- --------------
-Table: (\#tab:inher) Correlation of Inheritance Factors for Parents and Child 
-
-We can also create a link to the table by doing the following: Table \@ref(tab:inher).  If you go back to [Loading and exploring data] and look at the `kable` table, we can create a reference to this max delays table too: Table \@ref(tab:maxdelays). The addition of the `(\#tab:inher)` option to the end of the table caption allows us to then make a reference to Table `\@ref(tab:label)`. Note that this reference could appear anywhere throughout the document after the table has appeared.  
-
-<!-- We will next explore ways to create this label-ref link using figures. -->
-
-\clearpage
+## Results of descriptive analyses  {#findings-descriptive .unnumbered}
  
-<!-- clearpage ends the page, and also dumps out all floats.
-  Floats are things like tables and figures. -->
 
-
-### Figures {.unnumbered}
-
-If your capstone has a lot of figures, _R Markdown_ might behave better for you than that other word processor.  One perk is that it will automatically number the figures accordingly in each chapter.    You'll also be able to create a label for each figure, add a caption, and then reference the figure in a way similar to what we saw with tables earlier.  If you label your figures, you can move the figures around and _R Markdown_ will automatically adjust the numbering for you.  No need for you to remember!  So that you don't have to get too far into LaTeX to do this, a couple **R** functions have been created for you to assist.  You'll see their use below.
-
-<!--
-One thing that may be annoying is the way _R Markdown_ handles "floats" like tables and figures (it's really \LaTeX's fault). \LaTeX\ will try to find the best place to put your object based on the text around it and until you're really, truly done writing you should just leave it where it lies. There are some optional arguments specified in the options parameter of the `label` function.  If you need to shift your figure around, it might be good to look here on tweaking the options argument:  <https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions>
-
-If you need a graphic or tabular material to be part of the text, you can just put it inline. If you need it to appear in the list of figures or tables, it should be placed in a code chunk.
--->
-
-
-In the **R** chunk below, we will load in a picture stored as `phoenix-logo.png` in our main directory.  We then give it the caption of "Phoenix logo", the label of "phoenixlogo", and specify that this is a figure.  Make note of the different **R** chunk options that are given in the R Markdown file (not shown in the knitted document).
-
-```{r phoenixlogo, out.width="300px", fig.cap="Phoenix logo"}
-include_graphics(path = "figure/phoenix-logo.jpg")
+```{r summary}
+kable(summary(ToothGrowth), align = "r", caption = "Summary of ToothGrowth data",
+      format = "latex", longtable = TRUE)
 ```
 
-Here is a reference to the Phoenix logo: Figure \@ref(fig:phoenixlogo).  Note the use of the `fig:` code here.  By naming the **R** chunk that contains the figure, we can then reference that figure later as done in the first sentence here.  We can also specify the caption for the figure via the R chunk option `fig.cap`.
+Table \@ref(tab:summary) above contains summary statistics of the _Tooth Growth_ data.
 
-\clearpage 
+While the code is not displayed to create the graph below (`echo=FALSE`), it is displayed in the Appendix by referencing the `boxplot` chunk name..
 
-<!-- starts a new page and stops trying to place floats such as tables and figures -->
-
-Below we will investigate how to save the output of an **R** plot and label it in a way similar to that done above.  Recall the `ToothGrowth` dataset, we will next explore a boxplot graph exploring differences.
-
-While the code is not displayed here and is produced in the Appendix, the `aggregate` function is called to compute the mean tooth `length` by  `supplement` and `dose`. ggplot2 is loaded to compare factors by box-plot and facet wrapping allows one to visualize and hypothesize.
-
-```{r GroupedTooth-boxplot, echo=FALSE, warnings=FALSE, messages=FALSE, fig.cap="Mean tooth length by  supplement and dosage", fig.width=6}
+```{r boxplot, echo=FALSE, warning=FALSE,  message=FALSE, fig.cap="Avg. length by  supplement and dose", fig.width=6}
 data(ToothGrowth)
 colnames(ToothGrowth) <- c("length", "supplement", "dose")
 ToothGrowth$dose <- as.factor(ToothGrowth$dose)
@@ -78,32 +35,50 @@ library(ggplot2)
                      theme_bw()
 ```
 
-While increasing the dosage seems to lead to larger incisor length, the delivery mechanism between Orange Juice and Vitamin C might not make a large difference. However, at very low levels, Orange Juice seems more effective, displaying both a higher mean, but more formal hypothesis testing must be done. 
+Figure \@ref(fig:boxplot) was created with the `ggplot2` package. We can visually compare the average tooth growth by `supplement` and `dose`.
 
-Here is a reference to this image: Figure \@ref(fig:GroupedTooth-boxplot).
+## Modeling results  {.unnumbered}
 
+First, use a `t.test()` to test _if_ dosage leads to growth of incisor length. From the results below, it appears every test rejects the null hypothesis.
 
-\clearpage
+```{r t-test}
+test1 <- t.test(length ~ dose, ToothGrowth, dose %in% c(0.5,1)) 
+test2 <- t.test(length ~ dose, ToothGrowth, dose %in% c(0.5,2))
+test3 <- t.test(length ~ dose, ToothGrowth, dose %in% c(1,2)) 
 
-Next, we will explore the use of the `out.extra` chunk option, which can be used to shrink or expand an image loaded from a file by specifying `"scale= "`. Here we use the mathematical graph stored in the "subdivision.pdf" file.
+testAgg <- data.frame(Name = c("Test 0.5-1", "Test 0.5-2", "Test 1-2"),
+                  Method = c(test1$method, test2$method, test3$method), 
+               Pvalue = c(test1$p.value, test2$p.value, test3$p.value), 
+          Tstat = c(test1$statistic, test2$statistic, test3$statistic))
 
-```{r subd, results="asis", echo=FALSE, fig.cap="Subdiv. graph", out.extra="scale=0.75"}
-include_graphics("figure/subdivision.pdf")
+kable(testAgg, digit = 7, align = "r", caption = "t-test results", 
+      format = "latex", longtable = TRUE)
 ```
 
-Here is a reference to this image: Figure \@ref(fig:subd).  Note that `echo=FALSE` is specified so that the **R** code is hidden in the document.
+Table \@ref(tab:t-test)
 
-**More Figure Stuff**
+## Results of model performance and validation  {.unnumbered}
 
-Lastly, we will explore how to rotate and enlarge figures using the `out.extra` chunk option.  (Currently this only works in the PDF version of the book.)
+Next, subset the `ToothGrowth` data into seperate data sets defined by supplement dose of 0.5, 1, and 2 mg. This allow us to controlling for dose increases of _economic_ significance.
 
-```{r subd2, results="asis", echo=FALSE, out.extra="angle=180, scale=1.1", fig.cap="A Larger Figure, Flipped Upside Down"}
-include_graphics("figure/subdivision.pdf")
+Subset tooth data into a separate `data.frame` for each dosage level. Then Execute the `t.test()` function for the dosage of 0.5 mg and display the results. 
+
+```{r}
+dose05 <- ToothGrowth[ToothGrowth$dose == 0.5, ] 
+ dose1 <- ToothGrowth[ToothGrowth$dose == 1, ]
+ dose2 <- ToothGrowth[ToothGrowth$dose == 2, ]
+
+ test4 <- t.test(length ~ supplement, data = dose05)
+ test5 <- t.test(length ~ supplement, data = dose1)
+ test6 <- t.test(length ~ supplement, data = dose2)
 ```
 
-As another example, here is a reference: Figure \@ref(fig:subd2).  
+Place the results of the analysis directly into your content with ***inline code*** functions:
 
-### Footnotes and Endnotes  {.unnumbered}
+With a very low p-value of `r round(test4$p.value, 4)` and a corresponding t-statistic of `r round(test4$statistic, 4)`, it appears that at low doses, _Orange Juice_ is the preferable delivery mechanism to _Vitamin C_ for Ascorbic Acid delivery.
 
-You might want to footnote something. ^[footnote text] The footnote will be in a smaller font and placed appropriately. Endnotes work in much the same way. 
+The p-value and t-statistic above have been directly extracted from the model object and printed inline. using the 'r foo' syntax with quotes(') replaced by back-ticks (`).
+
+
+
 
