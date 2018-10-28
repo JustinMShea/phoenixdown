@@ -74,6 +74,10 @@ If you receive a duplicate label error after knitting, delete the extra .Rmd fil
 <!-- The {.unnumbered} option here means that the introduction will be "Chapter 0." You can also use {-} for no numbers on chapters, which is the standard for each section.
 -->
 
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(knitr)
+```
+
 # Introduction {.unnumbered}
 
 You may start the section by introducing the **topic** (e.g., real estate pricing), talking about significance of the topic from a practical point for you, and describing the relevant business context, e.g., industry and the company you are working with. Your goal in this section is to inform the reader of the general topic that you will narrow down into a research question that your project will address in later sections.  
