@@ -2,6 +2,10 @@
 
 This section includes a concise summary of the findings. Your summary might be organized by the research objectives or hypotheses. Make sure you address the extent to which research objectives are achieved, and if they are not achieved, explain why. Make sure to interpret your findings in a way that acknowledges the limitations of the research. That is, do not extrapolate the insights derived from your research to situations you have not examined.
 
+_While increasing dosage leads to larger incisor length, the choice of delivery mechanism  between Orange Juice and Vitamin C does not seem to make a difference. However, at very low levels, Orange Juice appears more effective, displaying higher average growth._
+
+
+
 
 # Recommendations {.unnumbered}
 
